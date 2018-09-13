@@ -1,4 +1,10 @@
-import { PortfolioActionTypes } from './portfolioActions';
+import { ActionType } from 'typesafe-actions';
+import * as p from './portfolioActions';
+
+export type PortfolioAction = ActionType<typeof p>;
 
 export type RootAction =
-  | PortfolioActionTypes;
+  | PortfolioAction
+  | p.PortfolioActionTypes;
+
+export const portfolio = p;

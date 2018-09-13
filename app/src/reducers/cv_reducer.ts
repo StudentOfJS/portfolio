@@ -1,5 +1,5 @@
-import { RootAction } from '../actions';
-import { ADD_PROJECTS } from '../actions/portfolioActions';
+import { portfolio, RootAction } from '../actions';
+import { getType } from 'typesafe-actions';
 import { Project } from '../proto/portfolio_pb';
 
 export type ProjectState = {
@@ -10,6 +10,10 @@ export type ProjectState = {
 };
 
 const initialState = {
+  bio: {
+    description: '',
+    title: '',
+  },
   projects: {},
   error: null,
   loading: false,
@@ -21,8 +25,9 @@ export default function (
   action: RootAction
 ): ProjectState {
   switch (action.type) {
-    case STORIES_INIT:
-      return { ...state, loading: true };
+    case getType(portfolio.addBio):
+      const Bio = Bio.AsObject = action.payload.toObject();
+      return { ...state, bio: action.payload };
 
     case ADD_Project:
       const Project: Project.AsObject = action.payload.toObject();

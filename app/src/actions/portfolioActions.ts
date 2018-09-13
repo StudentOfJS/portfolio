@@ -23,12 +23,6 @@ export const ADD_EDUCATION = 'ADD_EDUCATION';
 export const ADD_EXPERIENCE = 'ADD_EXPERIENCE';
 export const ADD_BIO = 'ADD_BIO';
 
-export const GET_SKILLS = 'GET_SKILLS';
-export const GET_PROJECTS = 'GET_PROJECTS';
-export const GET_EDUCATION = 'GET_EDUCATION';
-export const GET_EXPERIENCE = 'GET_EXPERIENCE';
-export const GET_BIO = 'GET_BIO';
-
 export const CV_INIT = 'CV_INIT';
 export const BIO_INIT = 'BIO_INIT';
 export const PROJECT_INIT = 'PROJECT_INIT';
@@ -39,11 +33,6 @@ export const addSkills = (skills: Skills) => action(ADD_SKILLS, skills);
 export const addExperience = (exp: Experience) => action(ADD_EXPERIENCE, exp);
 export const addProjects = (proj: Projects) => action(ADD_PROJECTS, proj);
 
-export const getBio = () => action(GET_BIO);
-export const getEducation = () => action(GET_EDUCATION);
-export const getSkills = () => action(GET_SKILLS);
-export const getExperience = () => action(GET_EXPERIENCE);
-export const getProjects = () => action(GET_PROJECTS);
 export const BIOInit = () => action(BIO_INIT);
 export const CVInit = () => action(CV_INIT);
 export const ProjectsInit = () => action(PROJECT_INIT);
