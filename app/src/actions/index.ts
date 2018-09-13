@@ -1,4 +1,4 @@
-import { StoryActionTypes } from './stories';
+import { PortfolioActionTypes } from './portfolioActions';
 
 export type RootAction =
-  | StoryActionTypes;
+  | PortfolioActionTypes;

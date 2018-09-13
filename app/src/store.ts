@@ -1,5 +1,5 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
-import stories, { StoryState } from './reducers/stories';
+import stories, { StoryState } from './reducers/projects_reducer';
 import { newGrpcMiddleware } from './middleware/grpc';
 
 interface StoreEnhancerState {

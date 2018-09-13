@@ -1,31 +1,31 @@
-import { RootAction } from "../actions";
-import { ADD_STORY, SELECT_STORY, STORIES_INIT } from "../actions/stories";
-import { Story } from "../proto/portfolio";
+import { RootAction } from '../actions';
+import { ADD_PROJECTS } from '../actions/portfolioActions';
+import { Project } from '../proto/portfolio_pb';
 
-export type StoryState = {
-  readonly stories: { [storyId: number]: Story.AsObject };
+export type ProjectState = {
+  readonly projects: { [id: number]: Project.AsObject };
   readonly error: Error | null;
   readonly loading: boolean;
-  readonly selected: Story.AsObject | null;
+  readonly selected: Project.AsObject | null;
 };
 
 const initialState = {
-  stories: {},
+  projects: {},
   error: null,
   loading: false,
   selected: null
 };
 
-export default function(
-  state: StoryState = initialState,
+export default function (
+  state: ProjectState = initialState,
   action: RootAction
-): StoryState {
+): ProjectState {
   switch (action.type) {
     case STORIES_INIT:
       return { ...state, loading: true };
 
-    case ADD_STORY:
-      const story: Story.AsObject = action.payload.toObject();
+    case ADD_Project:
+      const Project: Project.AsObject = action.payload.toObject();
       const selected = state.selected !== null ? state.selected : story;
       if (story.id) {
         return {

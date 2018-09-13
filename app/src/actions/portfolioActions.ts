@@ -17,12 +17,12 @@ import { GrpcAction, grpcRequest } from '../middleware/grpc';
 import { Code, Metadata } from 'grpc-web-client';
 import { PortfolioService } from '../proto/portfolio_pb_service';
 
-export const CV_INIT = 'CV_INIT';
 export const ADD_SKILLS = 'ADD_SKILLS';
 export const ADD_PROJECTS = 'ADD_PROJECTS';
 export const ADD_EDUCATION = 'ADD_EDUCATION';
 export const ADD_EXPERIENCE = 'ADD_EXPERIENCE';
 export const ADD_BIO = 'ADD_BIO';
+export const CV_INIT = 'CV_INIT';
 export const BIO_INIT = 'BIO_INIT';
 export const PROJECT_INIT = 'PROJECT_INIT';
 
