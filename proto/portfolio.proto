@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package portfolio;
+
+
+message Bio {
+    string title = 1;
+    string description = 2;
+}
+
+message Course {
+    string institution = 1;
+    string description = 2;
+    string dates = 3;
+}
+
+message Education {
+    repeated Course courses = 1;
+}
+
+message Skill {
+    string category = 1;
+    string type = 2;
+    string description = 3;
+}
+
+message Skills {
+    repeated Skill skills = 1;
+}
+
+message Project {
+    int32 id = 1;
+    string title = 2;
+    string description = 3;
+
+}
+
+
+message Projects {
+    repeated Project projects = 1;
+}
+
+
+message Job {
+    string company = 1;
+    string job_title = 2;
+    string location = 3;
+    string dates = 4;
+    string description = 5;
+}
+
+message Experience {
+    repeated Job jobs = 1;
+}
+
+service PortfolioService {
+    rpc GetBio (GetBioRequest) returns (stream GetBioResponse);
+    rpc GetCV (GetCVRequest) returns (stream GetCVResponse);
+    rpc ListProjects (ListProjectsRequest) returns (stream ListProjectsResponse);
+}
+
+
+message GetBioResponse {
+    Bio bio = 1;
+}
+message GetBioRequest {}
+
+message GetCVResponse {
+    Skills skills = 1;
+    Experience jobs = 2;
+    Education courses = 3;
+}
+message GetCVRequest {}
+
+message ListProjectsResponse {
+    Projects projects = 1;
+}
+message ListProjectsRequest {}
