@@ -3,13 +3,11 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import './index.css';
 import store from './store';
-import Stories from './Stories';
+import App from './App';
 
 ReactDOM.render(
   <Provider store={store}>
-    <div>
-      <Stories />
-    </div>
+    <App />
   </Provider>,
   document.getElementById('root') as HTMLElement
 );
