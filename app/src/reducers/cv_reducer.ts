@@ -2,7 +2,7 @@ import { portfolio, RootAction } from '../actions';
 import { getType } from 'typesafe-actions';
 import { Bio, Education, Skills } from '../proto/portfolio_pb';
 
-export type ProjectState = {
+export type CVState = {
   readonly bio: Bio.AsObject | null;
   readonly education: Education.AsObject | null;
   readonly skills: Skills.AsObject | null;
@@ -22,9 +22,9 @@ const initialState = {
 };
 
 export default function (
-  state: ProjectState = initialState,
+  state: CVState = initialState,
   action: RootAction
-): ProjectState {
+): CVState {
   switch (action.type) {
     case getType(portfolio.addBio):
       const bio = action.payload.toObject();
