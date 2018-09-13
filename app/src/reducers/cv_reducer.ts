@@ -1,12 +1,11 @@
 import { portfolio, RootAction } from '../actions';
 import { getType } from 'typesafe-actions';
-import { Project } from '../proto/portfolio_pb';
+import { Bio, Education, Skills } from '../proto/portfolio_pb';
 
 export type ProjectState = {
-  readonly projects: { [id: number]: Project.AsObject };
-  readonly error: Error | null;
-  readonly loading: boolean;
-  readonly selected: Project.AsObject | null;
+  readonly bio: Bio.AsObject | null;
+  readonly education: Education.AsObject | null;
+  readonly skills: Skills.AsObject | null;
 };
 
 const initialState = {
@@ -14,10 +13,12 @@ const initialState = {
     description: '',
     title: '',
   },
-  projects: {},
-  error: null,
-  loading: false,
-  selected: null
+  education: {
+    coursesList: []
+  },
+  skills: {
+    skillsList: []
+  },
 };
 
 export default function (
@@ -26,25 +27,16 @@ export default function (
 ): ProjectState {
   switch (action.type) {
     case getType(portfolio.addBio):
-      const Bio = Bio.AsObject = action.payload.toObject();
-      return { ...state, bio: action.payload };
+      const bio = action.payload.toObject();
+      return { ...state, bio };
 
-    case ADD_Project:
-      const Project: Project.AsObject = action.payload.toObject();
-      const selected = state.selected !== null ? state.selected : story;
-      if (story.id) {
-        return {
-          ...state,
-          loading: false,
-          stories: { ...state.stories, [story.id]: story },
-          selected
-        };
-      }
-      return state;
+    case getType(portfolio.addEducation):
+      const education: Education.AsObject = action.payload.toObject();
+      return { ...state, education };
 
-    case SELECT_STORY:
-      return { ...state, selected: state.stories[action.payload] };
-
+    case getType(portfolio.addSkills):
+      const skills: Skills.AsObject = action.payload.toObject();
+      return { ...state, skills };
     default:
       return state;
   }
