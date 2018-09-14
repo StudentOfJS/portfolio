@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { RootState } from '../../reducers';
 import { Skills } from '../../proto/portfolio_pb';
-import { List, Icon } from 'semantic-ui-react';
+import { List } from 'semantic-ui-react';
 import Rating from './Rating';
 
 interface SkillProps {
