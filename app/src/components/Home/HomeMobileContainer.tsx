@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { NavLink, Link } from 'react-router-dom';
 import {
   Button,
   Container,
@@ -32,8 +33,8 @@ export default class HomeMobileContainer extends React.Component {
             <Menu.Item as="a" active={true}>
               Home
             </Menu.Item>
-            <Menu.Item as="a">Projects</Menu.Item>
-            <Menu.Item as="a">CV</Menu.Item>
+            <NavLink to="/cv"><Menu.Item as="a" name="CV" /></NavLink>
+            <NavLink to="/projects"><Menu.Item as="a" name="Projects" /></NavLink>
           </Sidebar>
 
           <Sidebar.Pusher
@@ -53,9 +54,11 @@ export default class HomeMobileContainer extends React.Component {
                     <Icon name="sidebar" />
                   </Menu.Item>
                   <Menu.Item position="right">
-                    <Button as="a" inverted={true}>
-                      Hire
+                    <Link to="/hire">
+                      <Button as="a" inverted={true}>
+                        Hire
                     </Button>
+                    </Link>
                   </Menu.Item>
                 </Menu>
               </Container>
