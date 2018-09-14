@@ -674,8 +674,8 @@ proto.portfolio.Skill.prototype.toObject = function(opt_includeInstance) {
  */
 proto.portfolio.Skill.toObject = function(includeInstance, msg) {
   var f, obj = {
-    category: msg.getCategory(),
-    type: msg.getType(),
+    name: msg.getName(),
+    rating: msg.getRating(),
     description: msg.getDescription()
   };
 
@@ -715,11 +715,11 @@ proto.portfolio.Skill.deserializeBinaryFromReader = function(msg, reader) {
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setCategory(value);
+      msg.setName(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setType(value);
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setRating(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
@@ -763,16 +763,16 @@ proto.portfolio.Skill.prototype.serializeBinary = function() {
  */
 proto.portfolio.Skill.prototype.serializeBinaryToWriter = function (writer) {
   var f = undefined;
-  f = this.getCategory();
+  f = this.getName();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = this.getType();
-  if (f.length > 0) {
-    writer.writeString(
+  f = this.getRating();
+  if (f !== 0) {
+    writer.writeInt32(
       2,
       f
     );
@@ -797,31 +797,31 @@ proto.portfolio.Skill.prototype.cloneMessage = function() {
 
 
 /**
- * optional string category = 1;
+ * optional string name = 1;
  * @return {string}
  */
-proto.portfolio.Skill.prototype.getCategory = function() {
+proto.portfolio.Skill.prototype.getName = function() {
   return /** @type {string} */ (jspb.Message.getFieldProto3(this, 1, ""));
 };
 
 
 /** @param {string} value  */
-proto.portfolio.Skill.prototype.setCategory = function(value) {
+proto.portfolio.Skill.prototype.setName = function(value) {
   jspb.Message.setField(this, 1, value);
 };
 
 
 /**
- * optional string type = 2;
- * @return {string}
+ * optional int32 rating = 2;
+ * @return {number}
  */
-proto.portfolio.Skill.prototype.getType = function() {
-  return /** @type {string} */ (jspb.Message.getFieldProto3(this, 2, ""));
+proto.portfolio.Skill.prototype.getRating = function() {
+  return /** @type {number} */ (jspb.Message.getFieldProto3(this, 2, 0));
 };
 
 
-/** @param {string} value  */
-proto.portfolio.Skill.prototype.setType = function(value) {
+/** @param {number} value  */
+proto.portfolio.Skill.prototype.setRating = function(value) {
   jspb.Message.setField(this, 2, value);
 };
 

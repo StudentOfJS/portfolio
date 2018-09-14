@@ -82,11 +82,11 @@ export namespace Education {
 }
 
 export class Skill extends jspb.Message {
-  getCategory(): string;
-  setCategory(value: string): void;
+  getName(): string;
+  setName(value: string): void;
 
-  getType(): string;
-  setType(value: string): void;
+  getRating(): number;
+  setRating(value: number): void;
 
   getDescription(): string;
   setDescription(value: string): void;
@@ -103,8 +103,8 @@ export class Skill extends jspb.Message {
 
 export namespace Skill {
   export type AsObject = {
-    category: string,
-    type: string,
+    name: string,
+    rating: number,
     description: string,
   }
 }

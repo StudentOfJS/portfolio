@@ -20,8 +20,8 @@ message Education {
 }
 
 message Skill {
-    string category = 1;
-    string type = 2;
+    string name = 1;
+    int32 rating = 2;
     string description = 3;
 }
 
