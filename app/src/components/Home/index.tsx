@@ -9,7 +9,7 @@ import {
   Segment,
 } from 'semantic-ui-react';
 
-import HomeContainer from './HomeContainer';
+import HomeContainer from '../Nav/HomeContainer';
 
 export default () => (
   <HomeContainer>

@@ -7,10 +7,10 @@ import {
   Segment,
   Visibility,
 } from 'semantic-ui-react';
-import HomeHeading from './HomeHeading';
+import HomeHeading from '../Home/HomeHeading';
 import { NavLink, Link } from 'react-router-dom';
 
-export default class HomeDesktopContainer extends React.Component {
+export default class DesktopContainer extends React.Component {
   public state = {
     fixed: true
   };

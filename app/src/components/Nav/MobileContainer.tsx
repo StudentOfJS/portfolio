@@ -9,9 +9,9 @@ import {
   Segment,
   Sidebar,
 } from 'semantic-ui-react';
-import HomeHeading from './HomeHeading';
+import HomeHeading from '../Home/HomeHeading';
 
-export default class HomeMobileContainer extends React.Component {
+export default class MobileContainer extends React.Component {
   state = { sidebarOpened: false };
 
   handlePusherClick = () => {
