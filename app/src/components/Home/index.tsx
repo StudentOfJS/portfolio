@@ -102,7 +102,5 @@ export default () => (
         </Button>
       </Container>
     </Segment>
-
-
   </HomeContainer>
 );
