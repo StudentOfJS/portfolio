@@ -134,6 +134,9 @@ export class Project extends jspb.Message {
   getTitle(): string;
   setTitle(value: string): void;
 
+  getMeta(): string;
+  setMeta(value: string): void;
+
   getDescription(): string;
   setDescription(value: string): void;
 
@@ -151,6 +154,7 @@ export namespace Project {
   export type AsObject = {
     id: number,
     title: string,
+    meta: string,
     description: string,
   }
 }

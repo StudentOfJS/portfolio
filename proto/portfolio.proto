@@ -31,7 +31,8 @@ message Skills {
 message Project {
     int32 id = 1;
     string title = 2;
-    string description = 3;
+    string meta = 3;
+    string description = 4;
 
 }
 

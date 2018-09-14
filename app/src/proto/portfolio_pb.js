@@ -1040,6 +1040,7 @@ proto.portfolio.Project.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: msg.getId(),
     title: msg.getTitle(),
+    meta: msg.getMeta(),
     description: msg.getDescription()
   };
 
@@ -1086,6 +1087,10 @@ proto.portfolio.Project.deserializeBinaryFromReader = function(msg, reader) {
       msg.setTitle(value);
       break;
     case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMeta(value);
+      break;
+    case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setDescription(value);
       break;
@@ -1141,10 +1146,17 @@ proto.portfolio.Project.prototype.serializeBinaryToWriter = function (writer) {
       f
     );
   }
-  f = this.getDescription();
+  f = this.getMeta();
   if (f.length > 0) {
     writer.writeString(
       3,
+      f
+    );
+  }
+  f = this.getDescription();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
       f
     );
   }
@@ -1191,17 +1203,32 @@ proto.portfolio.Project.prototype.setTitle = function(value) {
 
 
 /**
- * optional string description = 3;
+ * optional string meta = 3;
  * @return {string}
  */
-proto.portfolio.Project.prototype.getDescription = function() {
+proto.portfolio.Project.prototype.getMeta = function() {
   return /** @type {string} */ (jspb.Message.getFieldProto3(this, 3, ""));
 };
 
 
 /** @param {string} value  */
-proto.portfolio.Project.prototype.setDescription = function(value) {
+proto.portfolio.Project.prototype.setMeta = function(value) {
   jspb.Message.setField(this, 3, value);
+};
+
+
+/**
+ * optional string description = 4;
+ * @return {string}
+ */
+proto.portfolio.Project.prototype.getDescription = function() {
+  return /** @type {string} */ (jspb.Message.getFieldProto3(this, 4, ""));
+};
+
+
+/** @param {string} value  */
+proto.portfolio.Project.prototype.setDescription = function(value) {
+  jspb.Message.setField(this, 4, value);
 };
 
 
