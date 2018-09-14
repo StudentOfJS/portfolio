@@ -8,9 +8,9 @@ import {
   Visibility,
 } from 'semantic-ui-react';
 import HomeHeading from '../Home/HomeHeading';
-import { NavLink, Link, RouteComponentProps } from 'react-router-dom';
+import { NavLink, Link, RouteProps } from 'react-router-dom';
 
-export default class DesktopContainer extends React.Component<RouteComponentProps> {
+export default class DesktopContainer extends React.Component<RouteProps> {
   public state = {
     fixed: true
   };
@@ -19,7 +19,7 @@ export default class DesktopContainer extends React.Component<RouteComponentProp
   showFixedMenu = () => this.setState({ fixed: true });
 
   render() {
-    const { children, match: { path } } = this.props;
+    const { children, path } = this.props;
     const { fixed } = this.state;
 
     return (
