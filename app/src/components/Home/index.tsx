@@ -5,150 +5,15 @@ import {
   Divider,
   Grid,
   Header,
-  Icon,
   Image,
   List,
-  Menu,
-  Responsive,
   Segment,
-  Sidebar,
-  Visibility,
 } from 'semantic-ui-react';
-import HomeHeading from './HomeHeading';
 
-class DesktopContainer extends React.Component {
-  public state = {
-    fixed: true
-  };
-
-  hideFixedMenu = () => this.setState({ fixed: false });
-  showFixedMenu = () => this.setState({ fixed: true });
-
-  render() {
-    const { children } = this.props;
-    const { fixed } = this.state;
-
-    return (
-      <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-        <Visibility
-          once={false}
-          onBottomPassed={this.showFixedMenu}
-          onBottomPassedReverse={this.hideFixedMenu}
-        >
-          <Segment
-            inverted={true}
-            textAlign="center"
-            style={{ minHeight: 700, padding: '1em 0em' }}
-            vertical={true}
-          >
-            <Menu
-              fixed={fixed ? 'top' : undefined}
-              inverted={!fixed}
-              pointing={!fixed}
-              secondary={!fixed}
-              size="large"
-            >
-              <Container>
-                <Menu.Item as="a" active={true}>
-                  Home
-                </Menu.Item>
-                <Menu.Item as="a">Projects</Menu.Item>
-                <Menu.Item as="a">CV</Menu.Item>
-                <Menu.Item position="right">
-                  <Button as="a" inverted={!fixed}>
-                    Hire
-                  </Button>
-                </Menu.Item>
-              </Container>
-            </Menu>
-            <HomeHeading mobile={false} />
-          </Segment>
-        </Visibility>
-
-        {children}
-      </Responsive>
-    );
-  }
-}
-
-class MobileContainer extends React.Component {
-  state = { sidebarOpened: true };
-
-  handlePusherClick = () => {
-    const { sidebarOpened } = this.state;
-
-    if (sidebarOpened) { this.setState({ sidebarOpened: false }); }
-  }
-
-  handleToggle = () => this.setState({ sidebarOpened: !this.state.sidebarOpened });
-
-  render() {
-    const { children } = this.props;
-    const { sidebarOpened } = this.state;
-
-    return (
-      <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
-        <Sidebar.Pushable>
-          <Sidebar as={Menu} animation="uncover" inverted={true} vertical={true} visible={sidebarOpened}>
-            <Menu.Item as="a" active={true}>
-              Home
-            </Menu.Item>
-            <Menu.Item as="a">Work</Menu.Item>
-            <Menu.Item as="a">Company</Menu.Item>
-            <Menu.Item as="a">Careers</Menu.Item>
-            <Menu.Item as="a">Log in</Menu.Item>
-            <Menu.Item as="a">Sign Up</Menu.Item>
-          </Sidebar>
-
-          <Sidebar.Pusher
-            dimmed={sidebarOpened}
-            onClick={this.handlePusherClick}
-            style={{ minHeight: '100vh' }}
-          >
-            <Segment
-              inverted={true}
-              textAlign="center"
-              style={{ minHeight: 350, padding: '1em 0em' }}
-              vertical={true}
-            >
-              <Container>
-                <Menu inverted={true} pointing={true} secondary={true} size="large">
-                  <Menu.Item onClick={this.handleToggle}>
-                    <Icon name="sidebar" />
-                  </Menu.Item>
-                  <Menu.Item position="right">
-                    <Button as="a" inverted={true}>
-                      Log in
-                    </Button>
-                    <Button as="a" inverted={true} style={{ marginLeft: '0.5em' }}>
-                      Sign Up
-                    </Button>
-                  </Menu.Item>
-                </Menu>
-              </Container>
-              <HomeHeading mobile={true} />
-            </Segment>
-
-            {children}
-          </Sidebar.Pusher>
-        </Sidebar.Pushable>
-      </Responsive>
-    );
-  }
-}
-interface RCProps {
-  children?: React.ReactNode;
-}
-
-const ResponsiveContainer: React.SFC<RCProps> = ({ children }) => (
-  <div>
-    <DesktopContainer>{children}</DesktopContainer>
-    <MobileContainer>{children}</MobileContainer>
-  </div>
-);
+import HomeContainer from './HomeContainer';
 
 export default () => (
-  <ResponsiveContainer>
+  <HomeContainer>
     <Segment style={{ padding: '8em 0em' }} vertical={true}>
       <Grid container={true} stackable={true} verticalAlign="middle">
         <Grid.Row>
@@ -273,5 +138,5 @@ export default () => (
         </Grid>
       </Container>
     </Segment>
-  </ResponsiveContainer>
+  </HomeContainer>
 );
