@@ -15,27 +15,28 @@ export default () => (
           <Grid.Column width={3}>
             <Header inverted={true} as="h4" content="About" />
             <List link={true} inverted={true}>
-              <List.Item as="a">Sitemap</List.Item>
-              <List.Item as="a">Contact Us</List.Item>
-              <List.Item as="a">Request Meeting</List.Item>
-              <List.Item as="a">Gazebo Plans</List.Item>
+              <List.Item as="a">CV</List.Item>
+              <List.Item as="a">Projects</List.Item>
+              <List.Item as="a">Contact</List.Item>
             </List>
           </Grid.Column>
           <Grid.Column width={3}>
             <Header inverted={true} as="h4" content="Services" />
             <List link={true} inverted={true}>
-              <List.Item as="a">Banana Pre-Order</List.Item>
-              <List.Item as="a">DNA FAQ</List.Item>
-              <List.Item as="a">How To Access</List.Item>
-              <List.Item as="a">Favorite X-Men</List.Item>
+              <List.Item as="a">Frontend</List.Item>
+              <List.Item as="a">Backend</List.Item>
+              <List.Item as="a">Other</List.Item>
             </List>
           </Grid.Column>
           <Grid.Column width={7}>
             <Header as="h4" inverted={true}>
-              Footer Header
+              Rod Lewis
             </Header>
             <p>
-              Extra space for a call to action inside the footer that could help re-engage users.
+              If you like what you see, I'm available to hire.
+              I specialise in React applications and can architect a backend to meet most needs.
+              Whether that's a simple JSON/HTML api or a complex gRPC deployment, I have you covered.
+              Pricing Min $1500, $50p/h
             </p>
           </Grid.Column>
         </Grid.Row>
