@@ -1,5 +1,5 @@
-## Example Hacker News Server
-The server is responsible for communication with the [Hacker News API](https://github.com/HackerNews/API)
+# Portfolio Server
+The server is responsible for the CV info
 
 ### Running
 ```bash
