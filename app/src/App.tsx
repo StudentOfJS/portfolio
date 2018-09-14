@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, NavLink, RouteComponentProps } from 're
 import { Input, Menu, Segment } from 'semantic-ui-react';
 import ProjectsView from './components/Projects/ProjectsView';
 import CvView from './components/CV/CvView';
+import Home from './components/Home';
 
 const App: React.SFC<RouteComponentProps> = ({ match }) => (
   <Router>
@@ -24,7 +25,7 @@ const App: React.SFC<RouteComponentProps> = ({ match }) => (
     <Segment attached="bottom">
       <Route exact={true} path="/" component={Home} />
       <Route path="/cv" component={CvView} />
-      <Route exact={true} path="/projects" component={ProjectsView} />
+      <Route path="/projects" component={ProjectsView} />
     </Segment>
   </Router>
 );
