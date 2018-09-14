@@ -6,6 +6,7 @@ import { Input, Menu, Segment } from 'semantic-ui-react';
 import { RootState } from './reducers';
 import { CVState } from './reducers/cv_reducer';
 import { ProjectState } from './reducers/projects_reducer';
+import ProjectsView from './components/Projects/ProjectsView';
 
 type IAppProps = {
   cv: CVState,
@@ -24,9 +25,8 @@ class App extends React.Component<IAppProps, {}> {
     return (
       <Router>
         <Menu attached="top" tabular={true}>
-          <NavLink to="/bio"><Menu.Item name="bio" active={activeItem === 'bio'} /></NavLink>
-          <NavLink to="/education"><Menu.Item name="education" active={activeItem === 'education'} /></NavLink>
-          <NavLink to="/experience"><Menu.Item name="experience" active={activeItem === 'experience'} /></NavLink>
+          <NavLink to="/"><Menu.Item name="home" active={activeItem === 'home'} /></NavLink>
+          <NavLink to="/cv"><Menu.Item name="cv" active={activeItem === 'cv'} /></NavLink>
           <NavLink to="/projects"><Menu.Item name="projects" active={activeItem === 'projects'} /></NavLink>
           <Menu.Menu position="right">
             <Menu.Item>
@@ -41,9 +41,8 @@ class App extends React.Component<IAppProps, {}> {
 
         <Segment attached="bottom">
           <Route exact={true} path="/" component={Home} />
-          <Route path="/about" component={About} />
-          <Route exact={true} path="/projects" component={Topics} />
-          <Route path="/projects/:id" component={Topics} />
+          <Route path="/cv" component={CvView} />
+          <Route exact={true} path="/projects" component={ProjectsView} />
         </Segment>
       </Router>
     );
