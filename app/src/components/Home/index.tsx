@@ -9,10 +9,8 @@ import {
   Segment,
 } from 'semantic-ui-react';
 
-import HomeContainer from '../Nav/HomeContainer';
-
 export default () => (
-  <HomeContainer>
+  <React.Fragment>
     <Segment style={{ padding: '8em 0em' }} vertical={true}>
       <Grid container={true} stackable={true} verticalAlign="middle">
         <Grid.Row>
@@ -102,5 +100,5 @@ export default () => (
         </Button>
       </Container>
     </Segment>
-  </HomeContainer>
+  </React.Fragment>
 );
