@@ -37,6 +37,9 @@ export class Course extends jspb.Message {
   getDates(): string;
   setDates(value: string): void;
 
+  getName(): string;
+  setName(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Course.AsObject;
   static toObject(includeInstance: boolean, msg: Course): Course.AsObject;
@@ -52,6 +55,7 @@ export namespace Course {
     institution: string,
     description: string,
     dates: string,
+    name: string,
   }
 }
 

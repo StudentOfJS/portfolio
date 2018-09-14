@@ -258,7 +258,8 @@ proto.portfolio.Course.toObject = function(includeInstance, msg) {
   var f, obj = {
     institution: msg.getInstitution(),
     description: msg.getDescription(),
-    dates: msg.getDates()
+    dates: msg.getDates(),
+    name: msg.getName()
   };
 
   if (includeInstance) {
@@ -306,6 +307,10 @@ proto.portfolio.Course.deserializeBinaryFromReader = function(msg, reader) {
     case 3:
       var value = /** @type {string} */ (reader.readString());
       msg.setDates(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setName(value);
       break;
     default:
       reader.skipField();
@@ -366,6 +371,13 @@ proto.portfolio.Course.prototype.serializeBinaryToWriter = function (writer) {
       f
     );
   }
+  f = this.getName();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
 };
 
 
@@ -420,6 +432,21 @@ proto.portfolio.Course.prototype.getDates = function() {
 /** @param {string} value  */
 proto.portfolio.Course.prototype.setDates = function(value) {
   jspb.Message.setField(this, 3, value);
+};
+
+
+/**
+ * optional string name = 4;
+ * @return {string}
+ */
+proto.portfolio.Course.prototype.getName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldProto3(this, 4, ""));
+};
+
+
+/** @param {string} value  */
+proto.portfolio.Course.prototype.setName = function(value) {
+  jspb.Message.setField(this, 4, value);
 };
 
 

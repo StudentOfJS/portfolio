@@ -12,6 +12,7 @@ message Course {
     string institution = 1;
     string description = 2;
     string dates = 3;
+    string name = 4;
 }
 
 message Education {
