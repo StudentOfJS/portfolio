@@ -32,7 +32,7 @@ export default class DesktopContainer extends React.Component<RouteComponentProp
           <Segment
             inverted={true}
             textAlign="center"
-            style={{ height: '100vh', minHeight: 700, padding: '1em 0em' }}
+            style={{ minHeight: 700, padding: '1em 0em' }}
             vertical={true}
           >
             <Menu
