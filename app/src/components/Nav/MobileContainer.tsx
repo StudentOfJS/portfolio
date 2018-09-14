@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, RouteProps } from 'react-router-dom';
 import {
   Button,
   Container,
@@ -11,7 +11,7 @@ import {
 } from 'semantic-ui-react';
 import HomeHeading from '../Home/HomeHeading';
 
-export default class MobileContainer extends React.Component {
+export default class MobileContainer extends React.Component<RouteProps> {
   state = { sidebarOpened: false };
 
   handlePusherClick = () => {
@@ -23,18 +23,16 @@ export default class MobileContainer extends React.Component {
   handleToggle = () => this.setState({ sidebarOpened: !this.state.sidebarOpened });
 
   render() {
-    const { children } = this.props;
+    const { children, path } = this.props;
     const { sidebarOpened } = this.state;
 
     return (
       <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
         <Sidebar.Pushable>
           <Sidebar as={Menu} animation="uncover" inverted={true} vertical={true} visible={sidebarOpened}>
-            <Menu.Item as="a" active={true}>
-              Home
-            </Menu.Item>
-            <NavLink to="/cv"><Menu.Item as="a" name="CV" /></NavLink>
-            <NavLink to="/projects"><Menu.Item as="a" name="Projects" /></NavLink>
+            <NavLink to="/"><Menu.Item as="a" name="Home" active={path === '/'} /></NavLink>
+            <NavLink to="/cv"><Menu.Item as="a" name="CV" active={path ? path.includes('/cv') : false} /></NavLink>
+            <NavLink to="/projects"><Menu.Item as="a" name="Projects" active={path === '/projects'} /></NavLink>
           </Sidebar>
 
           <Sidebar.Pusher
