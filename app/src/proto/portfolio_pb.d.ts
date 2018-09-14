@@ -197,6 +197,9 @@ export class Job extends jspb.Message {
   getDescription(): string;
   setDescription(value: string): void;
 
+  getLogoUrl(): string;
+  setLogoUrl(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Job.AsObject;
   static toObject(includeInstance: boolean, msg: Job): Job.AsObject;
@@ -214,6 +217,7 @@ export namespace Job {
     location: string,
     dates: string,
     description: string,
+    logoUrl: string,
   }
 }
 

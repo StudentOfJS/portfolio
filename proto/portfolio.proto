@@ -48,6 +48,7 @@ message Job {
     string location = 3;
     string dates = 4;
     string description = 5;
+    string logo_url = 6;
 }
 
 message Experience {

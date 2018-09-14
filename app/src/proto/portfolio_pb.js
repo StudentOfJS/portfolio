@@ -1460,7 +1460,8 @@ proto.portfolio.Job.toObject = function(includeInstance, msg) {
     jobTitle: msg.getJobTitle(),
     location: msg.getLocation(),
     dates: msg.getDates(),
-    description: msg.getDescription()
+    description: msg.getDescription(),
+    logoUrl: msg.getLogoUrl()
   };
 
   if (includeInstance) {
@@ -1516,6 +1517,10 @@ proto.portfolio.Job.deserializeBinaryFromReader = function(msg, reader) {
     case 5:
       var value = /** @type {string} */ (reader.readString());
       msg.setDescription(value);
+      break;
+    case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setLogoUrl(value);
       break;
     default:
       reader.skipField();
@@ -1587,6 +1592,13 @@ proto.portfolio.Job.prototype.serializeBinaryToWriter = function (writer) {
   if (f.length > 0) {
     writer.writeString(
       5,
+      f
+    );
+  }
+  f = this.getLogoUrl();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
       f
     );
   }
@@ -1674,6 +1686,21 @@ proto.portfolio.Job.prototype.getDescription = function() {
 /** @param {string} value  */
 proto.portfolio.Job.prototype.setDescription = function(value) {
   jspb.Message.setField(this, 5, value);
+};
+
+
+/**
+ * optional string logo_url = 6;
+ * @return {string}
+ */
+proto.portfolio.Job.prototype.getLogoUrl = function() {
+  return /** @type {string} */ (jspb.Message.getFieldProto3(this, 6, ""));
+};
+
+
+/** @param {string} value  */
+proto.portfolio.Job.prototype.setLogoUrl = function(value) {
+  jspb.Message.setField(this, 6, value);
 };
 
 
