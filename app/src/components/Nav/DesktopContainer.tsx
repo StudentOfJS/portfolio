@@ -44,7 +44,7 @@ export default class DesktopContainer extends React.Component<RouteProps> {
             >
               <Container>
                 <NavLink to="/"><Menu.Item as="a" name="Home" active={path === '/'} /></NavLink>
-                <NavLink to="/cv"><Menu.Item as="a" name="CV" active={path.includes('/cv')} /></NavLink>
+                <NavLink to="/cv"><Menu.Item as="a" name="CV" active={path ? path.includes('/cv') : false} /></NavLink>
                 <NavLink to="/projects"><Menu.Item as="a" name="Projects" active={path === '/projects'} /></NavLink>
                 <Menu.Item position="right">
                   <Link to="/hire">
