@@ -105,3 +105,17 @@ func GetBio(title string) (proto.Bio, error) {
 	}
 	return bio, nil
 }
+
+// GetEducation gets the courses from the database
+func GetEducation() (proto.Education, error) {
+	db, err := storm.Open("my.db")
+	defer db.Close()
+	var courses []proto.Course
+	
+	if err := db.All(&courses); err != nil {
+		return nil, log.Errorf("no course found: %v", err)
+	}
+	var edu proto.Education
+	edu.Courses = courses
+	return edu, nil
+}
