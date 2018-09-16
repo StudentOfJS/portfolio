@@ -1,9 +1,9 @@
-// package: portfolio
+// package: proto
 // file: proto/portfolio.proto
 
 import * as proto_portfolio_pb from "../proto/portfolio_pb";
 export class PortfolioService {
-  static serviceName = "portfolio.PortfolioService";
+  static serviceName = "proto.PortfolioService";
 }
 export namespace PortfolioService {
   export class GetBio {

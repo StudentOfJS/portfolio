@@ -1,4 +1,4 @@
-// package: portfolio
+// package: proto
 // file: proto/portfolio.proto
 
 import * as jspb from "google-protobuf";
@@ -28,6 +28,9 @@ export namespace Bio {
 }
 
 export class Course extends jspb.Message {
+  getId(): number;
+  setId(value: number): void;
+
   getInstitution(): string;
   setInstitution(value: string): void;
 
@@ -52,6 +55,7 @@ export class Course extends jspb.Message {
 
 export namespace Course {
   export type AsObject = {
+    id: number,
     institution: string,
     description: string,
     dates: string,
@@ -82,6 +86,9 @@ export namespace Education {
 }
 
 export class Skill extends jspb.Message {
+  getId(): number;
+  setId(value: number): void;
+
   getName(): string;
   setName(value: string): void;
 
@@ -103,6 +110,7 @@ export class Skill extends jspb.Message {
 
 export namespace Skill {
   export type AsObject = {
+    id: number,
     name: string,
     rating: number,
     description: string,
@@ -186,6 +194,9 @@ export namespace Projects {
 }
 
 export class Job extends jspb.Message {
+  getId(): number;
+  setId(value: number): void;
+
   getCompany(): string;
   setCompany(value: string): void;
 
@@ -216,6 +227,7 @@ export class Job extends jspb.Message {
 
 export namespace Job {
   export type AsObject = {
+    id: number,
     company: string,
     jobTitle: string,
     location: string,

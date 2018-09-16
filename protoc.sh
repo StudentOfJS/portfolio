@@ -5,3 +5,4 @@ protoc \
     --ts_out=service=true:./app/src \
     --js_out=import_style=commonjs,binary:./app/src \
     ./proto/portfolio.proto
+    

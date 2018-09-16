@@ -1,6 +1,7 @@
+// file: portfolio.proto
 syntax = "proto3";
 
-package portfolio;
+package proto;
 
 
 message Bio {
@@ -9,10 +10,11 @@ message Bio {
 }
 
 message Course {
-    string institution = 1;
-    string description = 2;
-    string dates = 3;
-    string name = 4;
+    int32 ID = 1;
+    string institution = 2;
+    string description = 3;
+    string dates = 4;
+    string name = 5;
 }
 
 message Education {
@@ -20,9 +22,10 @@ message Education {
 }
 
 message Skill {
-    string name = 1;
-    int32 rating = 2;
-    string description = 3;
+    int32 ID = 1;
+    string name = 2;
+    int32 rating = 3;
+    string description = 4;
 }
 
 message Skills {
@@ -30,7 +33,7 @@ message Skills {
 }
 
 message Project {
-    int32 id = 1;
+    int32 ID = 1;
     string title = 2;
     string meta = 3;
     string description = 4;
@@ -44,12 +47,13 @@ message Projects {
 
 
 message Job {
-    string company = 1;
-    string job_title = 2;
-    string location = 3;
-    string dates = 4;
-    string description = 5;
-    string logo_url = 6;
+    int32 ID = 1;
+    string company = 2;
+    string job_title = 3;
+    string location = 4;
+    string dates = 5;
+    string description = 6;
+    string logo_url = 7;
 }
 
 message Experience {
