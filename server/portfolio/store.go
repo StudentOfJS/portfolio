@@ -48,8 +48,6 @@ func addJob(company, dates, description, jobTitle, location, logoUrl string) err
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
-	}	if err != nil {
-		return grpc.Errorf(codes.Internal, "server error")
 	}
 	defer db.Close()
 	id := uuid.New().ID()
@@ -109,7 +107,7 @@ func addSkill(institution string, description string, rating uint32, name string
 func getBio(title string) (*proto.Bio, error) {
 	db, err := storm.Open("my.db")
 	if err != nil {
-		return grpc.Errorf(codes.Internal, "server error")
+		return nil, grpc.Errorf(codes.Internal, "server error")
 	}
 	defer db.Close()
 	var bio *proto.Bio
@@ -123,7 +121,7 @@ func getBio(title string) (*proto.Bio, error) {
 func getEducation() (*proto.Education, error) {
 	db, err := storm.Open("my.db")
 	if err != nil {
-		return grpc.Errorf(codes.Internal, "server error")
+		return nil, grpc.Errorf(codes.Internal, "server error")
 	}
 	defer db.Close()
 	var courses []*proto.Course
@@ -139,7 +137,7 @@ func getEducation() (*proto.Education, error) {
 func getExperience() (*proto.Experience, error) {
 	db, err := storm.Open("my.db")
 	if err != nil {
-		return grpc.Errorf(codes.Internal, "server error")
+		return nil, grpc.Errorf(codes.Internal, "server error")
 	}
 	defer db.Close()
 	var jobs []*proto.Job
@@ -156,7 +154,7 @@ func getExperience() (*proto.Experience, error) {
 func getProjects() (*proto.Projects, error) {
 	db, err := storm.Open("my.db")
 	if err != nil {
-		return grpc.Errorf(codes.Internal, "server error")
+		return nil, grpc.Errorf(codes.Internal, "server error")
 	}
 	defer db.Close()
 	var p []*proto.Project
@@ -172,7 +170,7 @@ func getProjects() (*proto.Projects, error) {
 func getSkills() (*proto.Skills, error) {
 	db, err := storm.Open("my.db")
 	if err != nil {
-		return grpc.Errorf(codes.Internal, "server error")
+		return nil, grpc.Errorf(codes.Internal, "server error")
 	}
 	defer db.Close()
 	var s []*proto.Skill
