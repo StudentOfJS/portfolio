@@ -133,3 +133,17 @@ func GetExperience() (proto.Experience, error) {
 	experience.Jobs = jobs
 	return experience, nil
 }
+
+// GetProjects gets the courses from the database
+func GetProjects() (proto.Projects, error) {
+	db, err := storm.Open("my.db")
+	defer db.Close()
+	var p []proto.Project
+	
+	if err := db.All(&p); err != nil {
+		return nil, log.Errorf("no project found: %v", err)
+	}
+	var projects proto.Projects
+	projects.Projects = p
+	return projects, nil
+}
