@@ -10,6 +10,13 @@ import (
 
 type portfolioService struct{}
 
+func (s *portfolioService) GetBio(ctx context.Context, projectQuery *proto.ListProjectsRequest) (*proto.Bio, error) {
+	grpc.SendHeader(ctx, metadata.Pairs("Pre-Response-Metadata", "Is-sent-as-headers-unary"))
+	grpc.SetTrailer(ctx, metadata.Pairs("Post-Response-Metadata", "Is-sent-as-trailers-unary"))
+
+	return getBio()
+}
+
 func (s *portfolioService) GetProjects(ctx context.Context, projectQuery *proto.ListProjectsRequest) (*proto.Projects, error) {
 	grpc.SendHeader(ctx, metadata.Pairs("Pre-Response-Metadata", "Is-sent-as-headers-unary"))
 	grpc.SetTrailer(ctx, metadata.Pairs("Post-Response-Metadata", "Is-sent-as-trailers-unary"))

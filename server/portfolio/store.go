@@ -44,7 +44,7 @@ func addCourse(institution string, description string, dates string, name string
 	return nil
 }
 
-func addJob(company, dates, description, jobTitle, location, logoUrl string) error {
+func addJob(company, dates, description, jobTitle, location, logoURL string) error {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
@@ -58,7 +58,7 @@ func addJob(company, dates, description, jobTitle, location, logoUrl string) err
 		Description: description,
 		JobTitle:    jobTitle,
 		Location:    location,
-		LogoUrl:     logoUrl,
+		LogoUrl:     logoURL,
 	}
 	if err := db.Save(&job); err != storm.ErrAlreadyExists {
 		return grpc.Errorf(codes.AlreadyExists, "job already exists")
@@ -104,18 +104,18 @@ func addSkill(institution string, description string, rating uint32, name string
 	return nil
 }
 
-func getBio(title string) (*proto.Bio, error) {
+func getBio() (*proto.Bio, error) {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return nil, grpc.Errorf(codes.Internal, "server error")
 	}
 	defer db.Close()
-	var bio *proto.Bio
+	var bio []*proto.Bio
 
-	if err := db.One("Title", title, &bio); err != nil {
-		return bio, grpc.Errorf(codes.NotFound, "bio not found")
+	if err := db.All(&bio); err != nil {
+		return bio[0], grpc.Errorf(codes.NotFound, "bio not found")
 	}
-	return bio, nil
+	return bio[0], nil
 }
 
 func getEducation() (*proto.Education, error) {
