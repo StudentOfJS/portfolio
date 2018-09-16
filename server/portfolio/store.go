@@ -93,3 +93,15 @@ func AddSkill(institution string, description string, rating int32, name string)
 	}
 	return nil
 }
+
+// GetBio gets the bio from the database
+func GetBio(title string) (proto.Bio, error) {
+	db, err := storm.Open("my.db")
+	defer db.Close()
+	var bio proto.Bio
+	
+	if err := db.One("Title", title, &bio); err != nil {
+		return nil, log.Errorf("bio not found: %v", err)
+	}
+	return bio, nil
+}
