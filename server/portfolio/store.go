@@ -147,3 +147,17 @@ func GetProjects() (proto.Projects, error) {
 	projects.Projects = p
 	return projects, nil
 }
+
+// GetSkills gets the courses from the database
+func GetSkills() (proto.Skills, error) {
+	db, err := storm.Open("my.db")
+	defer db.Close()
+	var s []proto.Skill
+	
+	if err := db.All(&s); err != nil {
+		return nil, log.Errorf("no skill found: %v", err)
+	}
+	var skills proto.Skills
+	skills.Skills = s
+	return skills, nil
+}
