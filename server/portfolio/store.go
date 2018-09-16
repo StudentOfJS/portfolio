@@ -89,10 +89,10 @@ func addSkill(institution string, description string, rating uint32, name string
 	return nil
 }
 
-func getBio(title string) (proto.Bio, error) {
+func getBio(title string) (*proto.Bio, error) {
 	db, err := storm.Open("my.db")
 	defer db.Close()
-	var bio proto.Bio
+	var bio *proto.Bio
 
 	if err := db.One("Title", title, &bio); err != nil {
 		return bio, grpc.Errorf(codes.NotFound, "bio not found")
@@ -100,11 +100,11 @@ func getBio(title string) (proto.Bio, error) {
 	return bio, nil
 }
 
-func getEducation() (proto.Education, error) {
+func getEducation() (*proto.Education, error) {
 	db, err := storm.Open("my.db")
 	defer db.Close()
 	var courses []*proto.Course
-	var edu proto.Education
+	var edu *proto.Education
 
 	if err := db.All(&courses); err != nil {
 		return edu, grpc.Errorf(codes.NotFound, "no course found")
@@ -113,11 +113,11 @@ func getEducation() (proto.Education, error) {
 	return edu, nil
 }
 
-func getExperience() (proto.Experience, error) {
+func getExperience() (*proto.Experience, error) {
 	db, err := storm.Open("my.db")
 	defer db.Close()
 	var jobs []*proto.Job
-	var experience proto.Experience
+	var experience *proto.Experience
 
 	if err := db.All(&jobs); err != nil {
 		return experience, grpc.Errorf(codes.NotFound, "no job found")
@@ -127,11 +127,11 @@ func getExperience() (proto.Experience, error) {
 	return experience, nil
 }
 
-func getProjects() (proto.Projects, error) {
+func getProjects() (*proto.Projects, error) {
 	db, err := storm.Open("my.db")
 	defer db.Close()
 	var p []*proto.Project
-	var projects proto.Projects
+	var projects *proto.Projects
 	if err := db.All(&p); err != nil {
 		return projects, grpc.Errorf(codes.NotFound, "no project found")
 	}
@@ -140,11 +140,11 @@ func getProjects() (proto.Projects, error) {
 	return projects, nil
 }
 
-func getSkills() (proto.Skills, error) {
+func getSkills() (*proto.Skills, error) {
 	db, err := storm.Open("my.db")
 	defer db.Close()
 	var s []*proto.Skill
-	var skills proto.Skills
+	var skills *proto.Skills
 	if err := db.All(&s); err != nil {
 		return skills, grpc.Errorf(codes.NotFound, "no skill found")
 	}
