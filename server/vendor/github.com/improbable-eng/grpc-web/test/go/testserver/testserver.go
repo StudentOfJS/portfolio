@@ -1,26 +1,24 @@
 package main
 
 import (
+	"crypto/tls"
 	"flag"
+	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"os"
+	"sync"
 
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/grpclog"
-
-	"fmt"
-
-	"crypto/tls"
 	google_protobuf "github.com/golang/protobuf/ptypes/empty"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	testproto "github.com/improbable-eng/grpc-web/test/go/_proto/improbable/grpcweb/test"
 	"golang.org/x/net/context"
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/transport"
-	"io"
-	"sync"
 )
 
 var (
@@ -44,13 +42,17 @@ func main() {
 	testproto.RegisterTestUtilServiceServer(grpcServer, testServer)
 	grpclog.SetLogger(log.New(os.Stdout, "testserver: ", log.LstdFlags))
 
-	wrappedServer := grpcweb.WrapServer(grpcServer)
+	websocketOriginFunc := grpcweb.WithWebsocketOriginFunc(func(req *http.Request) bool {
+		return true
+	})
+
+	wrappedServer := grpcweb.WrapServer(grpcServer, grpcweb.WithWebsockets(true), websocketOriginFunc)
 	handler := func(resp http.ResponseWriter, req *http.Request) {
 		wrappedServer.ServeHTTP(resp, req)
 	}
 
 	emptyGrpcServer := grpc.NewServer()
-	emptyWrappedServer := grpcweb.WrapServer(emptyGrpcServer, grpcweb.WithCorsForRegisteredEndpointsOnly(false))
+	emptyWrappedServer := grpcweb.WrapServer(emptyGrpcServer, grpcweb.WithWebsockets(true), websocketOriginFunc, grpcweb.WithCorsForRegisteredEndpointsOnly(false))
 	emptyHandler := func(resp http.ResponseWriter, req *http.Request) {
 		emptyWrappedServer.ServeHTTP(resp, req)
 	}
@@ -120,7 +122,7 @@ func (s *testSrv) PingEmpty(ctx context.Context, _ *google_protobuf.Empty) (*tes
 func (s *testSrv) Ping(ctx context.Context, ping *testproto.PingRequest) (*testproto.PingResponse, error) {
 	if ping.GetCheckMetadata() {
 		md, ok := metadata.FromIncomingContext(ctx)
-		if !ok || md["headertestkey1"][0] != "ClientValue1" {
+		if !ok || md["headertestkey1"][0] != "ClientValue1" || md["headertestkey2"][0] != "ClientValue2" {
 			return nil, grpc.Errorf(codes.InvalidArgument, "Metadata was invalid")
 		}
 	}
@@ -156,7 +158,11 @@ func (s *testSrv) PingError(ctx context.Context, ping *testproto.PingRequest) (*
 	if ping.GetSendTrailers() {
 		grpc.SetTrailer(ctx, metadata.Pairs("TrailerTestKey1", "ServerValue1", "TrailerTestKey2", "ServerValue2"))
 	}
-	return nil, grpc.Errorf(codes.Code(ping.ErrorCodeReturned), "Intentionally returning error for PingError")
+	if ping.FailureType == testproto.PingRequest_CODE {
+	    return nil, grpc.Errorf(codes.Code(ping.ErrorCodeReturned), "Intentionally returning error for PingError")
+	} else {
+	    return nil, grpc.Errorf(codes.Code(ping.ErrorCodeReturned), "💣")
+	}
 }
 
 func (s *testSrv) ContinueStream(ctx context.Context, req *testproto.ContinueStreamRequest) (*google_protobuf.Empty, error) {
@@ -288,9 +294,8 @@ func (s *testSrv) PingPongBidi(stream testproto.TestService_PingPongBidiServer) 
 		if in.FailureType == testproto.PingRequest_CODE {
 			if in.ErrorCodeReturned == 0 {
 				return nil
-			} else {
-				return grpc.Errorf(codes.Code(in.ErrorCodeReturned), "Intentionally returning status code: %d", in.ErrorCodeReturned)
 			}
+			return grpc.Errorf(codes.Code(in.ErrorCodeReturned), "Intentionally returning status code: %d", in.ErrorCodeReturned)
 		}
 		stream.Send(&testproto.PingResponse{
 			Value: in.Value,

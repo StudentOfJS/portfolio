@@ -298,7 +298,7 @@ proto.proto.Course.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readInt32());
+      var value = /** @type {number} */ (reader.readUint32());
       msg.setId(value);
       break;
     case 2:
@@ -357,7 +357,7 @@ proto.proto.Course.prototype.serializeBinaryToWriter = function (writer) {
   var f = undefined;
   f = this.getId();
   if (f !== 0) {
-    writer.writeInt32(
+    writer.writeUint32(
       1,
       f
     );
@@ -403,7 +403,7 @@ proto.proto.Course.prototype.cloneMessage = function() {
 
 
 /**
- * optional int32 ID = 1;
+ * optional uint32 ID = 1;
  * @return {number}
  */
 proto.proto.Course.prototype.getId = function() {
@@ -742,7 +742,7 @@ proto.proto.Skill.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readInt32());
+      var value = /** @type {number} */ (reader.readUint32());
       msg.setId(value);
       break;
     case 2:
@@ -750,7 +750,7 @@ proto.proto.Skill.deserializeBinaryFromReader = function(msg, reader) {
       msg.setName(value);
       break;
     case 3:
-      var value = /** @type {number} */ (reader.readInt32());
+      var value = /** @type {number} */ (reader.readUint32());
       msg.setRating(value);
       break;
     case 4:
@@ -797,7 +797,7 @@ proto.proto.Skill.prototype.serializeBinaryToWriter = function (writer) {
   var f = undefined;
   f = this.getId();
   if (f !== 0) {
-    writer.writeInt32(
+    writer.writeUint32(
       1,
       f
     );
@@ -811,7 +811,7 @@ proto.proto.Skill.prototype.serializeBinaryToWriter = function (writer) {
   }
   f = this.getRating();
   if (f !== 0) {
-    writer.writeInt32(
+    writer.writeUint32(
       3,
       f
     );
@@ -836,7 +836,7 @@ proto.proto.Skill.prototype.cloneMessage = function() {
 
 
 /**
- * optional int32 ID = 1;
+ * optional uint32 ID = 1;
  * @return {number}
  */
 proto.proto.Skill.prototype.getId = function() {
@@ -866,7 +866,7 @@ proto.proto.Skill.prototype.setName = function(value) {
 
 
 /**
- * optional int32 rating = 3;
+ * optional uint32 rating = 3;
  * @return {number}
  */
 proto.proto.Skill.prototype.getRating = function() {
@@ -1160,7 +1160,7 @@ proto.proto.Project.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readInt32());
+      var value = /** @type {number} */ (reader.readUint32());
       msg.setId(value);
       break;
     case 2:
@@ -1215,7 +1215,7 @@ proto.proto.Project.prototype.serializeBinaryToWriter = function (writer) {
   var f = undefined;
   f = this.getId();
   if (f !== 0) {
-    writer.writeInt32(
+    writer.writeUint32(
       1,
       f
     );
@@ -1254,7 +1254,7 @@ proto.proto.Project.prototype.cloneMessage = function() {
 
 
 /**
- * optional int32 ID = 1;
+ * optional uint32 ID = 1;
  * @return {number}
  */
 proto.proto.Project.prototype.getId = function() {
@@ -1581,7 +1581,7 @@ proto.proto.Job.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readInt32());
+      var value = /** @type {number} */ (reader.readUint32());
       msg.setId(value);
       break;
     case 2:
@@ -1648,7 +1648,7 @@ proto.proto.Job.prototype.serializeBinaryToWriter = function (writer) {
   var f = undefined;
   f = this.getId();
   if (f !== 0) {
-    writer.writeInt32(
+    writer.writeUint32(
       1,
       f
     );
@@ -1708,7 +1708,7 @@ proto.proto.Job.prototype.cloneMessage = function() {
 
 
 /**
- * optional int32 ID = 1;
+ * optional uint32 ID = 1;
  * @return {number}
  */
 proto.proto.Job.prototype.getId = function() {

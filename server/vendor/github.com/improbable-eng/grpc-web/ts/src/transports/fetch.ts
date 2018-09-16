@@ -17,19 +17,21 @@ class Fetch implements Transport {
   options: TransportOptions;
   reader: ReadableStreamReader;
   metadata: Metadata;
+  controller: AbortController | undefined = (window as any).AbortController && new AbortController();
 
   constructor(transportOptions: TransportOptions) {
     this.options = transportOptions;
   }
 
-  pump(readerArg: ReadableStreamReader, res: Response): Promise<void | Response> {
+  pump(readerArg: ReadableStreamReader, res: Response) {
     this.reader = readerArg;
     if (this.cancelled) {
       // If the request was cancelled before the first pump then cancel it here
       this.options.debug && debug("Fetch.pump.cancel at first pump");
-      return this.reader.cancel();
+      this.reader.cancel();
+      return;
     }
-    return this.reader.read()
+    this.reader.read()
       .then((result: { done: boolean, value: Uint8Array }) => {
         if (result.done) {
           detach(() => {
@@ -40,23 +42,37 @@ class Fetch implements Transport {
         detach(() => {
           this.options.onChunk(result.value);
         });
-        return this.pump(this.reader, res);
+        this.pump(this.reader, res);
+        return;
+      })
+      .catch(err => {
+        if (this.cancelled) {
+          this.options.debug && debug("Fetch.catch - request cancelled");
+          return;
+        }
+        this.cancelled = true;
+        this.options.debug && debug("Fetch.catch", err.message);
+        detach(() => {
+          this.options.onEnd(err);
+        });
       });
   }
 
-  send(msgBytes: ArrayBufferView) {
+  send(msgBytes: Uint8Array) {
     fetch(this.options.url, {
       headers: this.metadata.toHeaders(),
       method: "POST",
       body: msgBytes,
       credentials: "same-origin",
+      signal: this.controller && this.controller.signal
     }).then((res: Response) => {
       this.options.debug && debug("Fetch.response", res);
       detach(() => {
         this.options.onHeaders(new Metadata(res.headers as any), res.status);
       });
       if (res.body) {
-        return this.pump(res.body.getReader(), res)
+        this.pump(res.body.getReader(), res)
+        return;
       }
       return res;
     }).catch(err => {
@@ -64,6 +80,7 @@ class Fetch implements Transport {
         this.options.debug && debug("Fetch.catch - request cancelled");
         return;
       }
+      this.cancelled = true;
       this.options.debug && debug("Fetch.catch", err.message);
       detach(() => {
         this.options.onEnd(err);
@@ -71,7 +88,7 @@ class Fetch implements Transport {
     });
   }
 
-  sendMessage(msgBytes: ArrayBufferView) {
+  sendMessage(msgBytes: Uint8Array) {
     this.send(msgBytes);
   }
 
@@ -84,6 +101,10 @@ class Fetch implements Transport {
   }
 
   cancel() {
+    if (this.cancelled) {
+      this.options.debug && debug("Fetch.abort.cancel already cancelled");
+      return;
+    }
     this.cancelled = true;
     if (this.reader) {
       // If the reader has already been received in the pump then it can be cancelled immediately
@@ -91,6 +112,9 @@ class Fetch implements Transport {
       this.reader.cancel();
     } else {
       this.options.debug && debug("Fetch.abort.cancel before reader");
+    }
+    if (this.controller) {
+      this.controller.abort();
     }
   }
 }

@@ -1,18 +1,55 @@
+import {SuiteEnum} from "./ts/suiteUtils";
+
 function browser(browserName, browserVersion, os, osVersion) {
-  return {
-    base: 'CustomWebDriver',
-    capabilities: {
-      browserName: browserName,
-      browserVersion: browserVersion,
-      os: os,
-      os_version: osVersion
+  const browsers = [];
+  if (process.env.TEST_SUITE_NAME) {
+    browsers.push({
+      configName: `${os}_${osVersion}_${browserName}_${browserVersion}_${process.env.TEST_SUITE_NAME}`,
+      base: 'CustomWebDriver',
+      capabilities: {
+        testSuite: process.env.TEST_SUITE_NAME,
+        browserName: browserName,
+        browserVersion: browserVersion,
+        os: os,
+        os_version: osVersion
+      }
+    });
+  } else if (process.env.SEPARATE_TEST_SUITES) {
+    for (let suiteName in SuiteEnum) {
+      if (isNaN(Number(suiteName))) {
+        browsers.push({
+          configName: `${os}_${osVersion}_${browserName}_${browserVersion}_${suiteName}`,
+          base: 'CustomWebDriver',
+          capabilities: {
+            testSuite: suiteName,
+            browserName: browserName,
+            browserVersion: browserVersion,
+            os: os,
+            os_version: osVersion
+          }
+        });
+      }
     }
-  };
+  } else {
+    browsers.push({
+      configName: `${os}_${osVersion}_${browserName}_${browserVersion}_allsuites`,
+      base: 'CustomWebDriver',
+      capabilities: {
+        testSuite: undefined,
+        browserName: browserName,
+        browserVersion: browserVersion,
+        os: os,
+        os_version: osVersion
+      }
+    })
+  }
+  return browsers;
 }
 
 // Browser versions that should not have any Fetch/XHR differences in functionality to other (tested) versions are
 // commented out.
 const browsers = {
+  edge15_win: browser("edge", "15", "Windows", "10"),
   edge14_win: browser("edge", "14", "Windows", "10"),
   edge13_win: browser('edge', "13", 'Windows', "10"),
   ie11_win: browser('ie', "11", 'Windows', "7"),
@@ -35,14 +72,23 @@ const browsers = {
 
 export default () => {
   const browserEnv = process.env.BROWSER;
+
+  const filteredBrowsers = {};
   if (browserEnv) {
     const foundBrowser = browsers[browserEnv];
     if (!foundBrowser) {
       throw new Error(`BROWSER env var set to "${browserEnv}", but there is no browser with that identifier`);
     }
-    return {
-      [browserEnv]: foundBrowser,
-    }
+    foundBrowser.forEach(browserConfig => {
+      filteredBrowsers[browserConfig.configName] = browserConfig;
+    });
+    return filteredBrowsers;
   }
-  return browsers
+
+  for(let i in browsers) {
+    browsers[i].forEach(browserConfig => {
+      filteredBrowsers[browserConfig.configName] = browserConfig;
+    });
+  }
+  return filteredBrowsers
 };

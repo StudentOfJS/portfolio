@@ -96,16 +96,22 @@ class GrpcClient<TRequest extends ProtobufMessage, TResponse extends ProtobufMes
     } else {
       this.responseHeaders = headers;
       this.props.debug && debug("onHeaders.responseHeaders", JSON.stringify(this.responseHeaders, null, 2));
-      const code = httpStatusToCode(status);
+
+      const gRPCStatus = getStatusFromHeaders(headers);
+      this.props.debug && debug("onHeaders.gRPCStatus", gRPCStatus);
+
+      const code = gRPCStatus && gRPCStatus >= 0 ? gRPCStatus : httpStatusToCode(status);
       this.props.debug && debug("onHeaders.code", code);
+
       const gRPCMessage = headers.get("grpc-message") || [];
       this.props.debug && debug("onHeaders.gRPCMessage", gRPCMessage);
-      if (code !== Code.OK) {
-        this.rawOnError(code, gRPCMessage[0]);
-        return;
-      }
 
       this.rawOnHeaders(headers);
+
+      if (code !== Code.OK) {
+        const statusMessage = this.decodeGRPCStatus(gRPCMessage[0]);
+        this.rawOnError(code, statusMessage, headers);
+      }
     }
   }
 
@@ -151,7 +157,7 @@ class GrpcClient<TRequest extends ProtobufMessage, TResponse extends ProtobufMes
     if (this.responseTrailers === undefined) {
       if (this.responseHeaders === undefined) {
         // The request was unsuccessful - it did not receive any headers
-        this.rawOnError(Code.Internal, "Response closed without headers");
+        this.rawOnError(Code.Unknown, "Response closed without headers");
         return;
       }
 
@@ -162,12 +168,13 @@ class GrpcClient<TRequest extends ProtobufMessage, TResponse extends ProtobufMes
       this.props.debug && debug("grpc.headers only response ", grpcStatus, grpcMessage);
 
       if (grpcStatus === null) {
-        this.rawOnEnd(Code.Internal, "Response closed without grpc-status (Headers only)", this.responseHeaders);
+        this.rawOnEnd(Code.Unknown, "Response closed without grpc-status (Headers only)", this.responseHeaders);
         return;
       }
 
       // Return an empty trailers instance
-      this.rawOnEnd(grpcStatus, grpcMessage[0], this.responseHeaders);
+      const statusMessage = this.decodeGRPCStatus(grpcMessage[0]);
+      this.rawOnEnd(grpcStatus, statusMessage, this.responseHeaders);
       return;
     }
 
@@ -179,7 +186,20 @@ class GrpcClient<TRequest extends ProtobufMessage, TResponse extends ProtobufMes
     }
 
     const grpcMessage = this.responseTrailers.get("grpc-message");
-    this.rawOnEnd(grpcStatus, grpcMessage[0], this.responseTrailers);
+    const statusMessage = this.decodeGRPCStatus(grpcMessage[0]);
+    this.rawOnEnd(grpcStatus, statusMessage, this.responseTrailers);
+  }
+
+  decodeGRPCStatus(src: string | undefined): string {
+    if (src) {
+      try {
+        return decodeURIComponent(src)
+      } catch (err) {
+        return src
+      }
+    } else {
+      return ""
+    }
   }
 
   rawOnEnd(code: Code, message: string, trailers: Metadata) {
@@ -204,20 +224,20 @@ class GrpcClient<TRequest extends ProtobufMessage, TResponse extends ProtobufMes
     });
   }
 
-  rawOnError(code: Code, msg: string) {
+  rawOnError(code: Code, msg: string, trailers: Metadata = new Metadata()) {
     this.props.debug && debug("rawOnError", code, msg);
     if (this.completed) return;
     this.completed = true;
     this.onEndCallbacks.forEach(callback => {
       detach(() => {
-        callback(code, msg, new Metadata());
+        callback(code, msg, trailers);
       });
     });
   }
 
   rawOnMessage(res: TResponse) {
     this.props.debug && debug("rawOnMessage", res.toObject());
-    if (this.completed) return;
+    if (this.completed || this.closed) return;
     this.onMessageCallbacks.forEach(callback => {
       detach(() => {
         callback(res);

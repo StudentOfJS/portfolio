@@ -7,6 +7,7 @@
 [![GoDoc](http://img.shields.io/badge/GoDoc-Reference-blue.svg)](https://godoc.org/github.com/improbable-eng/grpc-web/go/grpcweb) 
 [![Apache 2.0 License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![quality: alpha](https://img.shields.io/badge/quality-alpha-orange.svg)](#status)
+[![Slack](slack.png)](https://join.slack.com/t/improbable-eng/shared_invite/enQtMzQ1ODcyMzQ5MjM4LWY5ZWZmNGM2ODc5MmViNmQ3ZTA3ZTY3NzQwOTBlMTkzZmIxZTIxODk0OWU3YjZhNWVlNDU3MDlkZGViZjhkMjc)
 
 [gRPC](http://www.grpc.io/) is a modern, [HTTP2](https://hpbn.co/http2/)-based protocol, that provides RPC semantics using the strongly-typed *binary* data format of [protocol buffers](https://developers.google.com/protocol-buffers/docs/overview) across multiple languages (C++, C#, Golang, Java, Python, NodeJS, ObjectiveC, etc.)
 
@@ -125,6 +126,9 @@ grpc.invoke(BookService.QueryBooks, {
 });
 ```
 
+### Usage with React
+* [Example project using gRPC-Web with React and Go](https://github.com/easyCZ/grpc-web-hacker-news)
+
 ## Browser Support
 
 The `grpc-web-client` uses multiple techniques to efficiently invoke gRPC services. Most modern browsers support the [Fetch API](https://developer.mozilla.org/en/docs/Web/API/Fetch_API), which allows for efficient reading of partial, binary responses. For older browsers, it automatically falls back to [`XMLHttpRequest`](https://developer.mozilla.org/nl/docs/Web/API/XMLHttpRequest).
@@ -142,6 +146,16 @@ This library is tested against:
 
 `grpc-web-client` also [supports Node.js through a transport](ts/docs/transport.md#node-http-only-available-in-a-nodejs-environment) that uses the `http` and `https` packages. Usage does not vary from browser usage as transport is determined at runtime.
 
+If you want to use `grpc-web-client` in a node.js environment with Typescript, you must include `dom` in the `"lib"` Array in your `tsconfig.json` otherwise `tsc` will be unable to find some type declarations to compile. Note that `dom` will be included automatically if you do not declare `lib` in your configration and your target is one of `es5` or `es6`. (See [Typescript compiler options](https://www.typescriptlang.org/docs/handbook/compiler-options.html)).
+
+```
+{
+  "compilerOptions": {
+    "lib": [ "dom", /* ... */ ],
+  }
+}
+```
+
 *__Please note - There is an [official Node.js gRPC library](https://www.npmjs.com/package/grpc) that does not require the server to support gRPC-Web__*
 
 ### Client-side streaming
@@ -158,9 +172,17 @@ The code here is `alpha` quality. It is being used for a subset of Improbable's 
 
 ## Known Limitations
 
+### Edge - Unable to abort RPCs
+
+When using Fetch - the default transport for Edge 13+ - RPCs will fail to be aborted. The signal to abort will not be received by the server, potentially resulting in zombie streams in the case of infinite server-streams.
+
+The connection will be closed as normal if the user navigates away from the browser context making the RPC.
+
+See this issue: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/13009916/
+
 ### Server-side streaming with XHR
 
-Browsers that don't support [Fetch with `body.getReader`](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream) (Currently only supported by Edge 14+, Chrome 43+ - full ReadableStream was added in Chrome 52, but only `body.getReader()` is used) or `XMLHttpRequest.responseType = moz-chunked-arraybuffer` (Firefox 38+) use [XmlHttpRequest (XHR)](https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest).
+Browsers that don't support [Fetch with `body.getReader`](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream) (Currently only supported by Edge 13+, Chrome 43+ - full ReadableStream was added in Chrome 52, but only `body.getReader()` is used) or `XMLHttpRequest.responseType = moz-chunked-arraybuffer` (Firefox 38+) use [XmlHttpRequest (XHR)](https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest).
 
 XHR keeps the entire server response in memory. This means that a long-lived or otherwise large streaming response will consume a large amount of memory in the browser and may cause instability. Fetch does not suffer from this issue. It is therefore advised that you don't use open-ended or large payload server streaming if you intend to support browsers that do not support Fetch.
 

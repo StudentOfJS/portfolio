@@ -6,7 +6,6 @@ import (
 
 	"github.com/studentofjs/portfolio/server/proto"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 )
 
@@ -17,8 +16,30 @@ func (s *projectService) GetProjects(ctx context.Context, projectQuery *proto.Li
 	grpc.SetTrailer(ctx, metadata.Pairs("Post-Response-Metadata", "Is-sent-as-trailers-unary"))
 
 	return getProjects()
+}
 
-	return nil, grpc.Errorf(codes.NotFound, "Book could not be found")
+func (s *projectService) GetCV(ctx context.Context, projectQuery *proto.GetCVRequest) (*proto.GetCVResponse, error) {
+	grpc.SendHeader(ctx, metadata.Pairs("Pre-Response-Metadata", "Is-sent-as-headers-unary"))
+	grpc.SetTrailer(ctx, metadata.Pairs("Post-Response-Metadata", "Is-sent-as-trailers-unary"))
+	edu, err := getEducation()
+	if err != nil {
+		return nil, err
+	}
+	exp, err := getExperience()
+	if err != nil {
+		return nil, err
+	}
+	skills, err := getSkills()
+	if err != nil {
+		return nil, err
+	}
+	cv := proto.GetCVResponse{
+		Courses: edu,
+		Jobs:    exp,
+		Skills:  skills,
+	}
+
+	return cv, nill
 }
 
 func (s *projectService) QueryBooks(bookQuery *library.QueryBooksRequest, stream library.BookService_QueryBooksServer) error {

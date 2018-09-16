@@ -13,9 +13,12 @@ import {
 } from "../_proto/improbable/grpcweb/test/test_pb";
 import {FailService, TestService} from "../_proto/improbable/grpcweb/test/test_pb_service";
 import {DEBUG, UncaughtExceptionListener} from "./util";
-import {headerTrailerCombos, runWithHttp1AndHttp2, runWithSupportedTransports} from "./testRpcCombinations";
+import {
+  headerTrailerCombos, runWithHttp1AndHttp2, runWithSupportedTransports
+} from "./testRpcCombinations";
+import { conditionallyRunTestSuite, SuiteEnum } from "../suiteUtils";
 
-describe(`unary`, () => {
+conditionallyRunTestSuite(SuiteEnum.unary, () => {
   runWithHttp1AndHttp2(({ testHostUrl, corsHostUrl, unavailableHost, emptyHost}) => {
     runWithSupportedTransports(transport => {
       it(`should reject a server-streaming method`, () => {
@@ -67,7 +70,7 @@ describe(`unary`, () => {
             onEnd: ({status, statusMessage, headers, message, trailers}) => {
               DEBUG && debug("status", status, "statusMessage", statusMessage, "headers", headers, "res", message, "trailers", trailers);
               assert.strictEqual(status, grpc.Code.OK, "expected OK (0)");
-              assert.strictEqual(statusMessage, undefined, "expected no message");
+              assert.isNotOk(statusMessage, "expected no message");
               if (withHeaders) {
                 assert.deepEqual(headers.get("HeaderTestKey1"), ["ServerValue1"]);
                 assert.deepEqual(headers.get("HeaderTestKey2"), ["ServerValue2"]);
@@ -108,7 +111,7 @@ describe(`unary`, () => {
             onEnd: ({status, statusMessage, headers, message, trailers}) => {
               DEBUG && debug("status", status, "statusMessage", statusMessage, "headers", headers, "res", message, "trailers", trailers);
               assert.strictEqual(status, grpc.Code.OK, "expected OK (0)");
-              assert.strictEqual(statusMessage, undefined, "expected no message");
+              assert.isNotOk(statusMessage, "expected no message");
               if (withHeaders) {
                 assert.deepEqual(headers.get("HeaderTestKey1"), ["ServerValue1"]);
                 assert.deepEqual(headers.get("HeaderTestKey2"), ["ServerValue2"]);
@@ -138,12 +141,15 @@ describe(`unary`, () => {
             debug: DEBUG,
             transport: transport,
             request: ping,
-            metadata: new grpc.Metadata({"HeaderTestKey1": "ClientValue1"}),
+            metadata: new grpc.Metadata({
+              "HeaderTestKey1": "ClientValue1",
+              "HeaderTestKey2": "ClientValue2",
+            }),
             host: testHostUrl,
             onEnd: ({status, statusMessage, headers, message, trailers}) => {
               DEBUG && debug("status", status, "statusMessage", statusMessage, "headers", headers, "res", message, "trailers", trailers);
               assert.strictEqual(status, grpc.Code.OK, "expected OK (0)");
-              assert.strictEqual(statusMessage, undefined, "expected no message");
+              assert.isNotOk(statusMessage, "expected no message");
               if (withHeaders) {
                 assert.deepEqual(headers.get("HeaderTestKey1"), ["ServerValue1"]);
                 assert.deepEqual(headers.get("HeaderTestKey2"), ["ServerValue2"]);
@@ -213,7 +219,7 @@ describe(`unary`, () => {
               DEBUG && debug("status", status, "statusMessage", statusMessage, "headers", headers, "res", message, "trailers", trailers);
               // Some browsers return empty Headers for failed requests
               assert.strictEqual(statusMessage, "Response closed without headers");
-              assert.strictEqual(status, grpc.Code.Internal);
+              assert.strictEqual(status, grpc.Code.Unknown);
               done();
             }
           });
@@ -232,7 +238,7 @@ describe(`unary`, () => {
           onEnd: ({status, statusMessage, headers, message, trailers}) => {
             DEBUG && debug("status", status, "statusMessage", statusMessage, "headers", headers, "res", message, "trailers", trailers);
             assert.strictEqual(statusMessage, "Response closed without grpc-status (Headers only)");
-            assert.strictEqual(status, grpc.Code.Internal);
+            assert.strictEqual(status, grpc.Code.Unknown);
             assert.deepEqual(headers.get("grpc-status"), []);
             assert.deepEqual(headers.get("grpc-message"), []);
             done();
@@ -252,7 +258,7 @@ describe(`unary`, () => {
           onEnd: ({status, statusMessage, headers, message, trailers}) => {
             DEBUG && debug("status", status, "statusMessage", statusMessage, "headers", headers, "res", message, "trailers", trailers);
             assert.strictEqual(statusMessage, "Response closed without headers");
-            assert.strictEqual(status, grpc.Code.Internal);
+            assert.strictEqual(status, grpc.Code.Unknown);
             assert.isNull(message);
             done();
           }

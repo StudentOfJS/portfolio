@@ -5,9 +5,10 @@ import mozXhrRequest, {detectMozXHRSupport} from "./mozXhr";
 import httpNodeRequest, {detectNodeHTTPSupport} from "./nodeHttp";
 import {MethodDefinition} from "../service";
 import {ProtobufMessage} from "../message";
+import websocketRequest from "./websocket";
 
 export interface Transport {
-  sendMessage(msgBytes: ArrayBufferView): void
+  sendMessage(msgBytes: Uint8Array): void
   finishSend(): void
   cancel(): void
   start(metadata: Metadata): void
@@ -58,4 +59,8 @@ function detectTransport(): TransportConstructor {
   }
 
   throw new Error("No suitable transport found for gRPC-Web");
+}
+
+export function WebsocketTransportFactory(transportOptions: TransportOptions): Transport | Error {
+  return websocketRequest(transportOptions);
 }

@@ -10,7 +10,7 @@ message Bio {
 }
 
 message Course {
-    int32 ID = 1;
+    uint32 ID = 1;
     string institution = 2;
     string description = 3;
     string dates = 4;
@@ -22,9 +22,9 @@ message Education {
 }
 
 message Skill {
-    int32 ID = 1;
+    uint32 ID = 1;
     string name = 2;
-    int32 rating = 3;
+    uint32 rating = 3;
     string description = 4;
 }
 
@@ -33,7 +33,7 @@ message Skills {
 }
 
 message Project {
-    int32 ID = 1;
+    uint32 ID = 1;
     string title = 2;
     string meta = 3;
     string description = 4;
@@ -47,7 +47,7 @@ message Projects {
 
 
 message Job {
-    int32 ID = 1;
+    uint32 ID = 1;
     string company = 2;
     string job_title = 3;
     string location = 4;

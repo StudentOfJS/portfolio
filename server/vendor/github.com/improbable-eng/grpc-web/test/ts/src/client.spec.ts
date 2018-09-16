@@ -4,13 +4,16 @@ import {grpc} from "../../../ts/src/index";
 import {debug} from "../../../ts/src/debug";
 import {assert} from "chai";
 // Generated Test Classes
-import {Empty,} from "google-protobuf/google/protobuf/empty_pb";
-import {PingRequest, PingResponse,} from "../_proto/improbable/grpcweb/test/test_pb";
+import {Empty, } from "google-protobuf/google/protobuf/empty_pb";
+import {PingRequest, PingResponse, } from "../_proto/improbable/grpcweb/test/test_pb";
 import {FailService, TestService} from "../_proto/improbable/grpcweb/test/test_pb_service";
 import {continueStream, DEBUG, UncaughtExceptionListener} from "./util";
-import {headerTrailerCombos, runWithHttp1AndHttp2, runWithSupportedTransports} from "./testRpcCombinations";
+import {
+  headerTrailerCombos, runWithHttp1AndHttp2, runWithSupportedTransports
+} from "./testRpcCombinations";
+import { conditionallyRunTestSuite, SuiteEnum } from "../suiteUtils";
 
-describe(`client`, () => {
+conditionallyRunTestSuite(SuiteEnum.client, () => {
   runWithHttp1AndHttp2(({testHostUrl, corsHostUrl, unavailableHost, emptyHost}) => {
     runWithSupportedTransports(transport => {
       it(`should throw an error if close is called before start`, () => {
@@ -111,7 +114,7 @@ describe(`client`, () => {
           client.onEnd((status: grpc.Code, statusMessage: string, trailers: grpc.Metadata) => {
             DEBUG && debug("status", status, "statusMessage", statusMessage);
             assert.strictEqual(status, grpc.Code.OK, "expected OK (0)");
-            assert.strictEqual(statusMessage, undefined, "expected no message");
+            assert.isNotOk(statusMessage, "expected no message");
             if (withTrailers) {
               assert.deepEqual(trailers.get("TrailerTestKey1"), ["ServerValue1"]);
               assert.deepEqual(trailers.get("TrailerTestKey2"), ["ServerValue2"]);
@@ -158,7 +161,7 @@ describe(`client`, () => {
           client.onEnd((status: grpc.Code, statusMessage: string, trailers: grpc.Metadata) => {
             DEBUG && debug("status", status, "statusMessage", statusMessage, "trailers", trailers);
             assert.strictEqual(status, grpc.Code.OK, "expected OK (0)");
-            assert.strictEqual(statusMessage, undefined, "expected no message");
+            assert.isNotOk(statusMessage, "expected no message");
             if (withTrailers) {
               assert.deepEqual(trailers.get("TrailerTestKey1"), ["ServerValue1"]);
               assert.deepEqual(trailers.get("TrailerTestKey2"), ["ServerValue2"]);
@@ -167,7 +170,10 @@ describe(`client`, () => {
             assert.ok(didGetOnMessage);
             done();
           });
-          client.start(new grpc.Metadata({"HeaderTestKey1": "ClientValue1"}));
+          client.start(new grpc.Metadata({
+            "HeaderTestKey1": "ClientValue1",
+            "HeaderTestKey2": "ClientValue2",
+          }));
           client.send(ping);
         });
       });
@@ -203,7 +209,7 @@ describe(`client`, () => {
           client.onEnd((status: grpc.Code, statusMessage: string, trailers: grpc.Metadata) => {
             DEBUG && debug("status", status, "statusMessage", statusMessage, "trailers", trailers);
             assert.strictEqual(status, grpc.Code.OK, "expected OK (0)");
-            assert.strictEqual(statusMessage, undefined, "expected no message");
+            assert.isNotOk(statusMessage, "expected no message");
             if (withTrailers) {
               assert.deepEqual(trailers.get("TrailerTestKey1"), ["ServerValue1"]);
               assert.deepEqual(trailers.get("TrailerTestKey2"), ["ServerValue2"]);
@@ -254,7 +260,7 @@ describe(`client`, () => {
           client.onEnd((status: grpc.Code, statusMessage: string, trailers: grpc.Metadata) => {
             DEBUG && debug("status", status, "statusMessage", statusMessage, "trailers", trailers);
             assert.strictEqual(status, grpc.Code.OK, "expected OK (0)");
-            assert.strictEqual(statusMessage, undefined, "expected no message");
+            assert.isNotOk(statusMessage, "expected no message");
             if (withTrailers) {
               assert.deepEqual(trailers.get("TrailerTestKey1"), ["ServerValue1"]);
               assert.deepEqual(trailers.get("TrailerTestKey2"), ["ServerValue2"]);
@@ -299,7 +305,7 @@ describe(`client`, () => {
           client.onEnd((status: grpc.Code, statusMessage: string, trailers: grpc.Metadata) => {
             DEBUG && debug("status", status, "statusMessage", statusMessage, "trailers", trailers);
             assert.strictEqual(status, grpc.Code.OK, "expected OK (0)");
-            assert.strictEqual(statusMessage, undefined, "expected no message");
+            assert.isNotOk(statusMessage, "expected no message");
             if (withTrailers) {
               assert.deepEqual(trailers.get("TrailerTestKey1"), ["ServerValue1"]);
               assert.deepEqual(trailers.get("TrailerTestKey2"), ["ServerValue2"]);
@@ -351,6 +357,44 @@ describe(`client`, () => {
         });
       });
 
+      headerTrailerCombos((withHeaders, withTrailers) => {
+        it(`should report status code in Unicode for error with headers + trailers`, (done) => {
+          let didGetOnHeaders = false;
+          let didGetOnMessage = false;
+
+          const ping = new PingRequest();
+          ping.setFailureType(PingRequest.FailureType.CODE_UNICODE);
+          ping.setErrorCodeReturned(12);
+          ping.setSendHeaders(withHeaders);
+          ping.setSendTrailers(withTrailers);
+
+          const client = grpc.client(TestService.PingError, {
+            debug: DEBUG,
+            transport: transport,
+            host: testHostUrl,
+          });
+          client.onHeaders((headers: grpc.Metadata) => {
+            DEBUG && debug("headers", headers);
+            didGetOnHeaders = true;
+          });
+          client.onMessage((message: Empty) => {
+            didGetOnMessage = true;
+          });
+          client.onEnd((status: grpc.Code, statusMessage: string, trailers: grpc.Metadata) => {
+            DEBUG && debug("status", status, "statusMessage", statusMessage, "trailers", trailers);
+            assert.deepEqual(trailers.get("grpc-status"), ["12"]);
+            assert.deepEqual(trailers.get("grpc-message"), [encodeURIComponent("💣")]);
+            assert.strictEqual(status, grpc.Code.Unimplemented);
+            assert.strictEqual(statusMessage, "💣");
+            assert.ok(didGetOnHeaders);
+            assert.ok(!didGetOnMessage);
+            done();
+          });
+          client.start();
+          client.send(ping);
+        });
+      });
+
       if (!process.env.DISABLE_CORS_TESTS) {
         it(`should report failure for a CORS failure`, (done) => {
           let didGetOnHeaders = false;
@@ -378,7 +422,7 @@ describe(`client`, () => {
             DEBUG && debug("status", status, "statusMessage", statusMessage, "trailers", trailers);
             // Some browsers return empty Headers for failed requests
             assert.strictEqual(statusMessage, "Response closed without headers");
-            assert.strictEqual(status, grpc.Code.Internal);
+            assert.strictEqual(status, grpc.Code.Unknown);
             assert.ok(!didGetOnMessage);
             done();
           });
@@ -411,7 +455,7 @@ describe(`client`, () => {
         client.onEnd((status: grpc.Code, statusMessage: string, trailers: grpc.Metadata) => {
           DEBUG && debug("status", status, "statusMessage", statusMessage, "trailers", trailers);
           assert.strictEqual(statusMessage, "Response closed without grpc-status (Headers only)");
-          assert.strictEqual(status, grpc.Code.Internal);
+          assert.strictEqual(status, grpc.Code.Unknown);
           assert.ok(!didGetOnMessage);
           done();
         });
@@ -440,7 +484,7 @@ describe(`client`, () => {
         client.onEnd((status: grpc.Code, statusMessage: string, trailers: grpc.Metadata) => {
           DEBUG && debug("status", status, "statusMessage", statusMessage, "trailers", trailers);
           assert.strictEqual(statusMessage, "Response closed without headers");
-          assert.strictEqual(status, grpc.Code.Internal);
+          assert.strictEqual(status, grpc.Code.Unknown);
           assert.ok(!didGetOnMessage);
           done();
         });
