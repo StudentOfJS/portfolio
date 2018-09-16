@@ -6,10 +6,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/asdine/storm"
 	"github.com/studentofjs/portfolio/server/proto"
-	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/metadata"
 )
 
 func addBio(title string, description string) error {
@@ -20,7 +17,7 @@ func addBio(title string, description string) error {
 		Description: description,
 	}
 	if err := db.Save(&bio); err != storm.ErrAlreadyExists {
-		return grpc.Errorf("bio already exists: %v", err)
+		return grpc.Errorf(codes.AlreadyExists, "bio already exists")
 	}
 	return nil
 }
@@ -37,7 +34,7 @@ func addCourse(institution string, description string, dates string, name string
 		Name: name
 	}
 	if err := db.Save(&course); err != storm.ErrAlreadyExists {
-		return grpc.Errorf("course already exists: %v", err)
+		return grpc.Errorf(codes.AlreadyExists, "course already exists")
 	}
 	return nil
 }
@@ -58,7 +55,7 @@ func addJob(company, dates, description, jobTitle, location, logoUrl string) err
 		Rating: rating,
 	}
 	if err := db.Save(&job); err != storm.ErrAlreadyExists {
-		return grpc.Errorf("job already exists: %v", err)
+		return grpc.Errorf(codes.AlreadyExists, "job already exists")
 	}
 	return nil
 }
@@ -75,7 +72,7 @@ func addProject(description string, meta int32, title string) error {
 		Description: description,
 	}
 	if err := db.Save(&project); err != storm.ErrAlreadyExists {
-		return grpc.Errorf("project already exists: %v", err)
+		return grpc.Errorf(codes.AlreadyExists, "project already exists")
 	}
 	return nil
 }
@@ -93,7 +90,7 @@ func addSkill(institution string, description string, rating int32, name string)
 		Name: name,
 	}
 	if err := db.Save(&skill); err != storm.ErrAlreadyExists {
-		return grpc.Errorf("skill already exists: %v", err)
+		return grpc.Errorf(codes.AlreadyExists, "skill already exists")
 	}
 	return nil
 }
@@ -105,7 +102,7 @@ func getBio(title string) (proto.Bio, error) {
 	var bio proto.Bio
 	
 	if err := db.One("Title", title, &bio); err != nil {
-		return nil, grpc.Errorf("bio not found: %v", err)
+		return nil, grpc.Errorf(codes.NotFound, "bio not found")
 	}
 	return bio, nil
 }
@@ -117,7 +114,7 @@ func getEducation() (proto.Education, error) {
 	var courses []proto.Course
 	
 	if err := db.All(&courses); err != nil {
-		return nil, grpc.Errorf("no course found: %v", err)
+		return nil, grpc.Errorf(codes.NotFound, "no course found")
 	}
 	var edu proto.Education
 	edu.Courses = courses
@@ -131,7 +128,7 @@ func getExperience() (proto.Experience, error) {
 	var jobs []proto.Job
 	
 	if err := db.All(&jobs); err != nil {
-		return nil, grpc.Errorf("no job found: %v", err)
+		return nil, grpc.Errorf(codes.NotFound, "no job found")
 	}
 	var experience proto.Experience
 	experience.Jobs = jobs
@@ -145,7 +142,7 @@ func getProjects() (proto.Projects, error) {
 	var p []proto.Project
 	
 	if err := db.All(&p); err != nil {
-		return nil, grpc.Errorf("no project found: %v", err)
+		return nil, grpc.Errorf(codes.NotFound, "no project found")
 	}
 	var projects proto.Projects
 	projects.Projects = p
@@ -159,7 +156,7 @@ func getSkills() (proto.Skills, error) {
 	var s []proto.Skill
 	
 	if err := db.All(&s); err != nil {
-		return nil, grpc.Errorf("no skill found: %v", err)
+		return nil, grpc.Errorf(codes.NotFound, "no skill found")
 	}
 	var skills proto.Skills
 	skills.Skills = s
