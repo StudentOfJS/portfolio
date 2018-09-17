@@ -4,19 +4,28 @@ import (
 	"github.com/studentofjs/portfolio/server/proto"
 )
 
-type service struct {
+// Service is the portfolio service struct containing the service methods
+type Service struct {
 	api *API
 }
 
 // NewPortfolioService returns the api
-func NewPortfolioService(api *API) *service {
+func NewPortfolioService(api *API) *Service {
 	if api == nil {
 		api = NewPortfolioAPI()
 	}
-	return &service{api}
+	return &Service{api}
 }
 
-func (s *service) GetBio(req *proto.GetBioRequest, resp proto.PortfolioService_GetBioServer) error {
+func (s *Service) AddBio(req *proto.AddBioRequest, resp proto.PortfolioService_AddBioServer) error {
+	err := s.api.addBio(req.Bio)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *Service) GetBio(req *proto.GetBioRequest, resp proto.PortfolioService_GetBioServer) error {
 	b, err := s.api.getBio()
 	if err != nil {
 		return err
@@ -27,7 +36,7 @@ func (s *service) GetBio(req *proto.GetBioRequest, resp proto.PortfolioService_G
 	return nil
 }
 
-func (s *service) ListProjects(req *proto.ListProjectsRequest, resp proto.PortfolioService_ListProjectsServer) error {
+func (s *Service) ListProjects(req *proto.ListProjectsRequest, resp proto.PortfolioService_ListProjectsServer) error {
 	p, err := s.api.getProjects()
 	if err != nil {
 		return nil
@@ -38,7 +47,7 @@ func (s *service) ListProjects(req *proto.ListProjectsRequest, resp proto.Portfo
 	return nil
 }
 
-func (s *service) GetCV(req *proto.GetCVRequest, res proto.PortfolioService_GetCVServer) error {
+func (s *Service) GetCV(req *proto.GetCVRequest, res proto.PortfolioService_GetCVServer) error {
 	edu, err := s.api.getEducation()
 	if err != nil {
 		return nil

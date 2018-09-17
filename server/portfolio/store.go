@@ -16,16 +16,12 @@ func NewPortfolioAPI() *API {
 	return &API{}
 }
 
-func (*API) addBio(title string, description string) error {
+func (*API) addBio(bio *proto.Bio) error {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
 	}
 	defer db.Close()
-	bio := proto.Bio{
-		Title:       title,
-		Description: description,
-	}
 	if err := db.Save(&bio); err == storm.ErrAlreadyExists {
 		return grpc.Errorf(codes.AlreadyExists, "bio already exists")
 	}
