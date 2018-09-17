@@ -25,6 +25,14 @@ func (s *Service) AddBio(req *proto.AddBioRequest, resp proto.PortfolioService_A
 	return nil
 }
 
+func (s *Service) AddCourse(req *proto.AddCourseRequest, resp proto.PortfolioService_AddCourseServer) error {
+	err := s.api.addCourse(req.Course)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func (s *Service) AddJob(req *proto.AddJobRequest, resp proto.PortfolioService_AddJobServer) error {
 	err := s.api.addJob(req.Job)
 	if err != nil {

@@ -28,20 +28,14 @@ func (*API) addBio(bio *proto.Bio) error {
 	return nil
 }
 
-func (*API) addCourse(institution string, description string, dates string, name string) error {
+func (*API) addCourse(course *proto.Course) error {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
 	}
 	defer db.Close()
 	id := uuid.New().ID()
-	course := proto.Course{
-		ID:          id,
-		Institution: institution,
-		Description: description,
-		Dates:       dates,
-		Name:        name,
-	}
+	course.ID = id
 	if err := db.Save(&course); err == storm.ErrAlreadyExists {
 		return grpc.Errorf(codes.AlreadyExists, "course already exists")
 	}
