@@ -503,6 +503,226 @@ func (m *Experience) GetJobs() []*Job {
 	return nil
 }
 
+type AddBioResponse struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *AddBioResponse) Reset()         { *m = AddBioResponse{} }
+func (m *AddBioResponse) String() string { return proto.CompactTextString(m) }
+func (*AddBioResponse) ProtoMessage()    {}
+func (*AddBioResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d7973498bfb7f266, []int{9}
+}
+func (m *AddBioResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AddBioResponse.Unmarshal(m, b)
+}
+func (m *AddBioResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AddBioResponse.Marshal(b, m, deterministic)
+}
+func (m *AddBioResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddBioResponse.Merge(m, src)
+}
+func (m *AddBioResponse) XXX_Size() int {
+	return xxx_messageInfo_AddBioResponse.Size(m)
+}
+func (m *AddBioResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddBioResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AddBioResponse proto.InternalMessageInfo
+
+type AddBioRequest struct {
+	Bio                  *Bio     `protobuf:"bytes,1,opt,name=bio,proto3" json:"bio,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *AddBioRequest) Reset()         { *m = AddBioRequest{} }
+func (m *AddBioRequest) String() string { return proto.CompactTextString(m) }
+func (*AddBioRequest) ProtoMessage()    {}
+func (*AddBioRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d7973498bfb7f266, []int{10}
+}
+func (m *AddBioRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AddBioRequest.Unmarshal(m, b)
+}
+func (m *AddBioRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AddBioRequest.Marshal(b, m, deterministic)
+}
+func (m *AddBioRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddBioRequest.Merge(m, src)
+}
+func (m *AddBioRequest) XXX_Size() int {
+	return xxx_messageInfo_AddBioRequest.Size(m)
+}
+func (m *AddBioRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddBioRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AddBioRequest proto.InternalMessageInfo
+
+func (m *AddBioRequest) GetBio() *Bio {
+	if m != nil {
+		return m.Bio
+	}
+	return nil
+}
+
+type AddCVResponse struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *AddCVResponse) Reset()         { *m = AddCVResponse{} }
+func (m *AddCVResponse) String() string { return proto.CompactTextString(m) }
+func (*AddCVResponse) ProtoMessage()    {}
+func (*AddCVResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d7973498bfb7f266, []int{11}
+}
+func (m *AddCVResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AddCVResponse.Unmarshal(m, b)
+}
+func (m *AddCVResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AddCVResponse.Marshal(b, m, deterministic)
+}
+func (m *AddCVResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddCVResponse.Merge(m, src)
+}
+func (m *AddCVResponse) XXX_Size() int {
+	return xxx_messageInfo_AddCVResponse.Size(m)
+}
+func (m *AddCVResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddCVResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AddCVResponse proto.InternalMessageInfo
+
+type AddCVRequest struct {
+	Skills               *Skills     `protobuf:"bytes,1,opt,name=skills,proto3" json:"skills,omitempty"`
+	Jobs                 *Experience `protobuf:"bytes,2,opt,name=jobs,proto3" json:"jobs,omitempty"`
+	Courses              *Education  `protobuf:"bytes,3,opt,name=courses,proto3" json:"courses,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
+}
+
+func (m *AddCVRequest) Reset()         { *m = AddCVRequest{} }
+func (m *AddCVRequest) String() string { return proto.CompactTextString(m) }
+func (*AddCVRequest) ProtoMessage()    {}
+func (*AddCVRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d7973498bfb7f266, []int{12}
+}
+func (m *AddCVRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AddCVRequest.Unmarshal(m, b)
+}
+func (m *AddCVRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AddCVRequest.Marshal(b, m, deterministic)
+}
+func (m *AddCVRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddCVRequest.Merge(m, src)
+}
+func (m *AddCVRequest) XXX_Size() int {
+	return xxx_messageInfo_AddCVRequest.Size(m)
+}
+func (m *AddCVRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddCVRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AddCVRequest proto.InternalMessageInfo
+
+func (m *AddCVRequest) GetSkills() *Skills {
+	if m != nil {
+		return m.Skills
+	}
+	return nil
+}
+
+func (m *AddCVRequest) GetJobs() *Experience {
+	if m != nil {
+		return m.Jobs
+	}
+	return nil
+}
+
+func (m *AddCVRequest) GetCourses() *Education {
+	if m != nil {
+		return m.Courses
+	}
+	return nil
+}
+
+type AddProjectsResponse struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *AddProjectsResponse) Reset()         { *m = AddProjectsResponse{} }
+func (m *AddProjectsResponse) String() string { return proto.CompactTextString(m) }
+func (*AddProjectsResponse) ProtoMessage()    {}
+func (*AddProjectsResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d7973498bfb7f266, []int{13}
+}
+func (m *AddProjectsResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AddProjectsResponse.Unmarshal(m, b)
+}
+func (m *AddProjectsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AddProjectsResponse.Marshal(b, m, deterministic)
+}
+func (m *AddProjectsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddProjectsResponse.Merge(m, src)
+}
+func (m *AddProjectsResponse) XXX_Size() int {
+	return xxx_messageInfo_AddProjectsResponse.Size(m)
+}
+func (m *AddProjectsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddProjectsResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AddProjectsResponse proto.InternalMessageInfo
+
+type AddProjectsRequest struct {
+	Projects             *Projects `protobuf:"bytes,1,opt,name=projects,proto3" json:"projects,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
+}
+
+func (m *AddProjectsRequest) Reset()         { *m = AddProjectsRequest{} }
+func (m *AddProjectsRequest) String() string { return proto.CompactTextString(m) }
+func (*AddProjectsRequest) ProtoMessage()    {}
+func (*AddProjectsRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d7973498bfb7f266, []int{14}
+}
+func (m *AddProjectsRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AddProjectsRequest.Unmarshal(m, b)
+}
+func (m *AddProjectsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AddProjectsRequest.Marshal(b, m, deterministic)
+}
+func (m *AddProjectsRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddProjectsRequest.Merge(m, src)
+}
+func (m *AddProjectsRequest) XXX_Size() int {
+	return xxx_messageInfo_AddProjectsRequest.Size(m)
+}
+func (m *AddProjectsRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddProjectsRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AddProjectsRequest proto.InternalMessageInfo
+
+func (m *AddProjectsRequest) GetProjects() *Projects {
+	if m != nil {
+		return m.Projects
+	}
+	return nil
+}
+
 type GetBioResponse struct {
 	Bio                  *Bio     `protobuf:"bytes,1,opt,name=bio,proto3" json:"bio,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -514,7 +734,7 @@ func (m *GetBioResponse) Reset()         { *m = GetBioResponse{} }
 func (m *GetBioResponse) String() string { return proto.CompactTextString(m) }
 func (*GetBioResponse) ProtoMessage()    {}
 func (*GetBioResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_d7973498bfb7f266, []int{9}
+	return fileDescriptor_d7973498bfb7f266, []int{15}
 }
 func (m *GetBioResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetBioResponse.Unmarshal(m, b)
@@ -551,7 +771,7 @@ func (m *GetBioRequest) Reset()         { *m = GetBioRequest{} }
 func (m *GetBioRequest) String() string { return proto.CompactTextString(m) }
 func (*GetBioRequest) ProtoMessage()    {}
 func (*GetBioRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_d7973498bfb7f266, []int{10}
+	return fileDescriptor_d7973498bfb7f266, []int{16}
 }
 func (m *GetBioRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetBioRequest.Unmarshal(m, b)
@@ -584,7 +804,7 @@ func (m *GetCVResponse) Reset()         { *m = GetCVResponse{} }
 func (m *GetCVResponse) String() string { return proto.CompactTextString(m) }
 func (*GetCVResponse) ProtoMessage()    {}
 func (*GetCVResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_d7973498bfb7f266, []int{11}
+	return fileDescriptor_d7973498bfb7f266, []int{17}
 }
 func (m *GetCVResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetCVResponse.Unmarshal(m, b)
@@ -635,7 +855,7 @@ func (m *GetCVRequest) Reset()         { *m = GetCVRequest{} }
 func (m *GetCVRequest) String() string { return proto.CompactTextString(m) }
 func (*GetCVRequest) ProtoMessage()    {}
 func (*GetCVRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_d7973498bfb7f266, []int{12}
+	return fileDescriptor_d7973498bfb7f266, []int{18}
 }
 func (m *GetCVRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetCVRequest.Unmarshal(m, b)
@@ -666,7 +886,7 @@ func (m *ListProjectsResponse) Reset()         { *m = ListProjectsResponse{} }
 func (m *ListProjectsResponse) String() string { return proto.CompactTextString(m) }
 func (*ListProjectsResponse) ProtoMessage()    {}
 func (*ListProjectsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_d7973498bfb7f266, []int{13}
+	return fileDescriptor_d7973498bfb7f266, []int{19}
 }
 func (m *ListProjectsResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListProjectsResponse.Unmarshal(m, b)
@@ -703,7 +923,7 @@ func (m *ListProjectsRequest) Reset()         { *m = ListProjectsRequest{} }
 func (m *ListProjectsRequest) String() string { return proto.CompactTextString(m) }
 func (*ListProjectsRequest) ProtoMessage()    {}
 func (*ListProjectsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_d7973498bfb7f266, []int{14}
+	return fileDescriptor_d7973498bfb7f266, []int{20}
 }
 func (m *ListProjectsRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListProjectsRequest.Unmarshal(m, b)
@@ -733,6 +953,12 @@ func init() {
 	proto.RegisterType((*Projects)(nil), "proto.Projects")
 	proto.RegisterType((*Job)(nil), "proto.Job")
 	proto.RegisterType((*Experience)(nil), "proto.Experience")
+	proto.RegisterType((*AddBioResponse)(nil), "proto.AddBioResponse")
+	proto.RegisterType((*AddBioRequest)(nil), "proto.AddBioRequest")
+	proto.RegisterType((*AddCVResponse)(nil), "proto.AddCVResponse")
+	proto.RegisterType((*AddCVRequest)(nil), "proto.AddCVRequest")
+	proto.RegisterType((*AddProjectsResponse)(nil), "proto.AddProjectsResponse")
+	proto.RegisterType((*AddProjectsRequest)(nil), "proto.AddProjectsRequest")
 	proto.RegisterType((*GetBioResponse)(nil), "proto.GetBioResponse")
 	proto.RegisterType((*GetBioRequest)(nil), "proto.GetBioRequest")
 	proto.RegisterType((*GetCVResponse)(nil), "proto.GetCVResponse")
@@ -753,6 +979,9 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type PortfolioServiceClient interface {
+	AddBio(ctx context.Context, in *AddBioRequest, opts ...grpc.CallOption) (PortfolioService_AddBioClient, error)
+	AddCV(ctx context.Context, in *AddCVRequest, opts ...grpc.CallOption) (PortfolioService_AddCVClient, error)
+	AddProjects(ctx context.Context, in *AddProjectsRequest, opts ...grpc.CallOption) (PortfolioService_AddProjectsClient, error)
 	GetBio(ctx context.Context, in *GetBioRequest, opts ...grpc.CallOption) (PortfolioService_GetBioClient, error)
 	GetCV(ctx context.Context, in *GetCVRequest, opts ...grpc.CallOption) (PortfolioService_GetCVClient, error)
 	ListProjects(ctx context.Context, in *ListProjectsRequest, opts ...grpc.CallOption) (PortfolioService_ListProjectsClient, error)
@@ -766,8 +995,104 @@ func NewPortfolioServiceClient(cc *grpc.ClientConn) PortfolioServiceClient {
 	return &portfolioServiceClient{cc}
 }
 
+func (c *portfolioServiceClient) AddBio(ctx context.Context, in *AddBioRequest, opts ...grpc.CallOption) (PortfolioService_AddBioClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_PortfolioService_serviceDesc.Streams[0], "/proto.PortfolioService/AddBio", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &portfolioServiceAddBioClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type PortfolioService_AddBioClient interface {
+	Recv() (*AddBioResponse, error)
+	grpc.ClientStream
+}
+
+type portfolioServiceAddBioClient struct {
+	grpc.ClientStream
+}
+
+func (x *portfolioServiceAddBioClient) Recv() (*AddBioResponse, error) {
+	m := new(AddBioResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *portfolioServiceClient) AddCV(ctx context.Context, in *AddCVRequest, opts ...grpc.CallOption) (PortfolioService_AddCVClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_PortfolioService_serviceDesc.Streams[1], "/proto.PortfolioService/AddCV", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &portfolioServiceAddCVClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type PortfolioService_AddCVClient interface {
+	Recv() (*AddCVResponse, error)
+	grpc.ClientStream
+}
+
+type portfolioServiceAddCVClient struct {
+	grpc.ClientStream
+}
+
+func (x *portfolioServiceAddCVClient) Recv() (*AddCVResponse, error) {
+	m := new(AddCVResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *portfolioServiceClient) AddProjects(ctx context.Context, in *AddProjectsRequest, opts ...grpc.CallOption) (PortfolioService_AddProjectsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_PortfolioService_serviceDesc.Streams[2], "/proto.PortfolioService/AddProjects", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &portfolioServiceAddProjectsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type PortfolioService_AddProjectsClient interface {
+	Recv() (*AddProjectsResponse, error)
+	grpc.ClientStream
+}
+
+type portfolioServiceAddProjectsClient struct {
+	grpc.ClientStream
+}
+
+func (x *portfolioServiceAddProjectsClient) Recv() (*AddProjectsResponse, error) {
+	m := new(AddProjectsResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *portfolioServiceClient) GetBio(ctx context.Context, in *GetBioRequest, opts ...grpc.CallOption) (PortfolioService_GetBioClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_PortfolioService_serviceDesc.Streams[0], "/proto.PortfolioService/GetBio", opts...)
+	stream, err := c.cc.NewStream(ctx, &_PortfolioService_serviceDesc.Streams[3], "/proto.PortfolioService/GetBio", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -799,7 +1124,7 @@ func (x *portfolioServiceGetBioClient) Recv() (*GetBioResponse, error) {
 }
 
 func (c *portfolioServiceClient) GetCV(ctx context.Context, in *GetCVRequest, opts ...grpc.CallOption) (PortfolioService_GetCVClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_PortfolioService_serviceDesc.Streams[1], "/proto.PortfolioService/GetCV", opts...)
+	stream, err := c.cc.NewStream(ctx, &_PortfolioService_serviceDesc.Streams[4], "/proto.PortfolioService/GetCV", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -831,7 +1156,7 @@ func (x *portfolioServiceGetCVClient) Recv() (*GetCVResponse, error) {
 }
 
 func (c *portfolioServiceClient) ListProjects(ctx context.Context, in *ListProjectsRequest, opts ...grpc.CallOption) (PortfolioService_ListProjectsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_PortfolioService_serviceDesc.Streams[2], "/proto.PortfolioService/ListProjects", opts...)
+	stream, err := c.cc.NewStream(ctx, &_PortfolioService_serviceDesc.Streams[5], "/proto.PortfolioService/ListProjects", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -864,6 +1189,9 @@ func (x *portfolioServiceListProjectsClient) Recv() (*ListProjectsResponse, erro
 
 // PortfolioServiceServer is the server API for PortfolioService service.
 type PortfolioServiceServer interface {
+	AddBio(*AddBioRequest, PortfolioService_AddBioServer) error
+	AddCV(*AddCVRequest, PortfolioService_AddCVServer) error
+	AddProjects(*AddProjectsRequest, PortfolioService_AddProjectsServer) error
 	GetBio(*GetBioRequest, PortfolioService_GetBioServer) error
 	GetCV(*GetCVRequest, PortfolioService_GetCVServer) error
 	ListProjects(*ListProjectsRequest, PortfolioService_ListProjectsServer) error
@@ -871,6 +1199,69 @@ type PortfolioServiceServer interface {
 
 func RegisterPortfolioServiceServer(s *grpc.Server, srv PortfolioServiceServer) {
 	s.RegisterService(&_PortfolioService_serviceDesc, srv)
+}
+
+func _PortfolioService_AddBio_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(AddBioRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(PortfolioServiceServer).AddBio(m, &portfolioServiceAddBioServer{stream})
+}
+
+type PortfolioService_AddBioServer interface {
+	Send(*AddBioResponse) error
+	grpc.ServerStream
+}
+
+type portfolioServiceAddBioServer struct {
+	grpc.ServerStream
+}
+
+func (x *portfolioServiceAddBioServer) Send(m *AddBioResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _PortfolioService_AddCV_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(AddCVRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(PortfolioServiceServer).AddCV(m, &portfolioServiceAddCVServer{stream})
+}
+
+type PortfolioService_AddCVServer interface {
+	Send(*AddCVResponse) error
+	grpc.ServerStream
+}
+
+type portfolioServiceAddCVServer struct {
+	grpc.ServerStream
+}
+
+func (x *portfolioServiceAddCVServer) Send(m *AddCVResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _PortfolioService_AddProjects_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(AddProjectsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(PortfolioServiceServer).AddProjects(m, &portfolioServiceAddProjectsServer{stream})
+}
+
+type PortfolioService_AddProjectsServer interface {
+	Send(*AddProjectsResponse) error
+	grpc.ServerStream
+}
+
+type portfolioServiceAddProjectsServer struct {
+	grpc.ServerStream
+}
+
+func (x *portfolioServiceAddProjectsServer) Send(m *AddProjectsResponse) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _PortfolioService_GetBio_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -942,6 +1333,21 @@ var _PortfolioService_serviceDesc = grpc.ServiceDesc{
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
 		{
+			StreamName:    "AddBio",
+			Handler:       _PortfolioService_AddBio_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "AddCV",
+			Handler:       _PortfolioService_AddCV_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "AddProjects",
+			Handler:       _PortfolioService_AddProjects_Handler,
+			ServerStreams: true,
+		},
+		{
 			StreamName:    "GetBio",
 			Handler:       _PortfolioService_GetBio_Handler,
 			ServerStreams: true,
@@ -963,42 +1369,48 @@ var _PortfolioService_serviceDesc = grpc.ServiceDesc{
 func init() { proto.RegisterFile("proto/portfolio.proto", fileDescriptor_d7973498bfb7f266) }
 
 var fileDescriptor_d7973498bfb7f266 = []byte{
-	// 586 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x94, 0xdd, 0x6e, 0xd3, 0x30,
-	0x14, 0xc7, 0x95, 0xa4, 0xc9, 0xba, 0xb3, 0xb6, 0x1b, 0x5e, 0x8b, 0x42, 0x87, 0x50, 0x15, 0x31,
-	0x31, 0x0d, 0x54, 0xd0, 0x98, 0xe0, 0x8a, 0x9b, 0x75, 0x13, 0xda, 0xc4, 0xc5, 0x94, 0x01, 0xb7,
-	0x53, 0x92, 0x9a, 0xc9, 0x25, 0x8d, 0x43, 0xec, 0x22, 0x78, 0x01, 0x24, 0x9e, 0x89, 0x57, 0xe0,
-	0xa1, 0x50, 0x8e, 0xed, 0x24, 0x6d, 0x76, 0xc1, 0x55, 0x7d, 0x3e, 0xfd, 0x3b, 0xc7, 0xff, 0x06,
-	0x46, 0x79, 0xc1, 0x25, 0x7f, 0x99, 0xf3, 0x42, 0x7e, 0xe1, 0x29, 0xe3, 0x53, 0xb4, 0x89, 0x8b,
-	0x3f, 0xc1, 0x3b, 0x70, 0xce, 0x18, 0x27, 0x43, 0x70, 0x25, 0x93, 0x29, 0xf5, 0xad, 0x89, 0x75,
-	0xb4, 0x1d, 0x2a, 0x83, 0x4c, 0x60, 0x67, 0x4e, 0x45, 0x52, 0xb0, 0x5c, 0x32, 0x9e, 0xf9, 0x36,
-	0xc6, 0x9a, 0xae, 0xe0, 0x97, 0x05, 0xde, 0x8c, 0xaf, 0x0a, 0x41, 0xc9, 0x00, 0xec, 0xcb, 0x73,
-	0xac, 0xef, 0x87, 0x36, 0x3b, 0x2f, 0x8b, 0x59, 0x26, 0x24, 0x93, 0xab, 0x66, 0x71, 0xc3, 0xb5,
-	0xd9, 0xde, 0x69, 0xb5, 0x2f, 0xb1, 0xe6, 0x91, 0xa4, 0xc2, 0xef, 0x28, 0x2c, 0x34, 0x08, 0x81,
-	0x4e, 0x16, 0x2d, 0xa9, 0xef, 0xa2, 0x13, 0xcf, 0xc1, 0x29, 0x6c, 0x5f, 0xcc, 0x57, 0x49, 0x84,
-	0x65, 0xcf, 0x60, 0x2b, 0x41, 0x28, 0xe1, 0x5b, 0x13, 0xe7, 0x68, 0xe7, 0xa4, 0xaf, 0x86, 0x9e,
-	0x2a, 0xd4, 0xd0, 0x44, 0x03, 0x0a, 0xee, 0xcd, 0x57, 0x96, 0xa6, 0x2d, 0x78, 0x73, 0x85, 0x5d,
-	0x5f, 0x41, 0x1e, 0x82, 0x57, 0x44, 0x92, 0x65, 0x77, 0x48, 0xda, 0x0f, 0xb5, 0xb5, 0x39, 0x46,
-	0xa7, 0xbd, 0xa5, 0x29, 0x78, 0x78, 0x8d, 0x20, 0x4f, 0xc1, 0x13, 0x78, 0xd2, 0x60, 0x3d, 0x0d,
-	0x86, 0xe1, 0x50, 0xc7, 0x02, 0x0a, 0x5b, 0xd7, 0x05, 0x5f, 0xd0, 0x44, 0xb6, 0xc0, 0xaa, 0x87,
-	0xb2, 0x9b, 0x0f, 0x45, 0xa0, 0xb3, 0xa4, 0x32, 0xd2, 0x2b, 0xc4, 0xf3, 0x7f, 0x60, 0xbd, 0x81,
-	0xae, 0xbe, 0x46, 0x90, 0x63, 0xe8, 0xe6, 0xfa, 0xac, 0xd1, 0x06, 0x1a, 0x4d, 0xa7, 0x84, 0x55,
-	0x3c, 0xf8, 0x63, 0x81, 0x73, 0xc5, 0xe3, 0x16, 0x9b, 0x5f, 0xae, 0x7d, 0x99, 0x47, 0xd9, 0x4f,
-	0x4d, 0x67, 0x4c, 0x72, 0x00, 0xdb, 0x0b, 0x1e, 0xdf, 0x2a, 0x72, 0x05, 0xd9, 0x5d, 0xf0, 0xf8,
-	0x23, 0xc2, 0x8f, 0xa1, 0x9b, 0x72, 0xf5, 0x72, 0x9a, 0xb2, 0xb2, 0x6b, 0x01, 0xb8, 0x4d, 0x01,
-	0x6c, 0x8c, 0xe6, 0xb5, 0x85, 0xf3, 0xa8, 0xec, 0x79, 0xc7, 0x6f, 0x57, 0x45, 0xea, 0x6f, 0x29,
-	0x96, 0xd2, 0xfe, 0x54, 0xa4, 0xc1, 0x0b, 0x80, 0x8b, 0x1f, 0x39, 0x2d, 0x18, 0xcd, 0x12, 0x4a,
-	0x9e, 0x40, 0x67, 0xc1, 0x63, 0x33, 0x33, 0xe8, 0x99, 0xaf, 0x78, 0x1c, 0xa2, 0x3f, 0x98, 0xc2,
-	0xe0, 0x3d, 0x95, 0x67, 0x8c, 0x87, 0x54, 0xe4, 0x3c, 0x13, 0x94, 0x3c, 0x06, 0x27, 0x66, 0x1c,
-	0xc7, 0xae, 0x0b, 0xca, 0x84, 0xd2, 0x1d, 0xec, 0x42, 0xdf, 0xe4, 0x7f, 0x5b, 0x51, 0x21, 0x83,
-	0xdf, 0x16, 0x7a, 0x66, 0x9f, 0xab, 0x06, 0x87, 0x0d, 0x0d, 0x58, 0x0d, 0x71, 0x2a, 0x89, 0x18,
-	0x11, 0x90, 0x43, 0x4d, 0x66, 0x63, 0xd2, 0x03, 0x9d, 0x54, 0xa3, 0x2b, 0x40, 0x72, 0x5c, 0x6b,
-	0xdd, 0xc1, 0xcc, 0x3d, 0x93, 0x69, 0xfe, 0x0e, 0xb5, 0xdc, 0x07, 0xd0, 0xd3, 0x28, 0x8a, 0x6d,
-	0x06, 0xc3, 0x0f, 0x4c, 0x48, 0x23, 0x82, 0x8a, 0xf0, 0xf9, 0x9a, 0x18, 0xca, 0xa6, 0xbb, 0xeb,
-	0x62, 0x10, 0x0d, 0x35, 0x8c, 0x60, 0x7f, 0xbd, 0x09, 0xf6, 0x3e, 0xf9, 0x6b, 0xc1, 0xde, 0xb5,
-	0xf9, 0xe6, 0xdc, 0xd0, 0xe2, 0x3b, 0x4b, 0x28, 0x79, 0x0b, 0x9e, 0xda, 0x0e, 0x19, 0xea, 0x86,
-	0x6b, 0xcb, 0x1a, 0x8f, 0x36, 0xbc, 0x8a, 0xe7, 0x95, 0x45, 0x4e, 0xc1, 0x45, 0x72, 0xb2, 0x5f,
-	0x67, 0x54, 0x73, 0x8c, 0x87, 0xeb, 0xce, 0xaa, 0xea, 0x12, 0x7a, 0x4d, 0x34, 0x32, 0xd6, 0x79,
-	0xf7, 0xf0, 0x8e, 0x0f, 0xee, 0x8d, 0x99, 0x56, 0xb1, 0x87, 0xd1, 0xd7, 0xff, 0x02, 0x00, 0x00,
-	0xff, 0xff, 0x58, 0xd5, 0x9d, 0xe2, 0x4e, 0x05, 0x00, 0x00,
+	// 674 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x94, 0x4d, 0x6f, 0xd3, 0x30,
+	0x18, 0xc7, 0x95, 0xa6, 0xcd, 0xba, 0x67, 0x6d, 0x37, 0xbc, 0x16, 0x65, 0x19, 0x42, 0x53, 0xc4,
+	0xc4, 0x34, 0xa0, 0xa0, 0x31, 0xb1, 0x13, 0x87, 0xbd, 0x81, 0x36, 0x71, 0x98, 0x32, 0xe0, 0x3a,
+	0x35, 0x8d, 0x99, 0x5c, 0xb2, 0x38, 0xc4, 0x2e, 0x82, 0x33, 0x12, 0x82, 0xcf, 0xc4, 0x97, 0x43,
+	0x79, 0x6c, 0xe7, 0xa5, 0x99, 0x04, 0x9c, 0x38, 0x2d, 0x7e, 0xde, 0xfc, 0x7b, 0xfe, 0xfe, 0xaf,
+	0x30, 0x4a, 0x33, 0x2e, 0xf9, 0xd3, 0x94, 0x67, 0xf2, 0x03, 0x8f, 0x19, 0x1f, 0xe3, 0x99, 0x74,
+	0xf0, 0x8f, 0xff, 0x12, 0xec, 0x23, 0xc6, 0xc9, 0x10, 0x3a, 0x92, 0xc9, 0x98, 0xba, 0xd6, 0x96,
+	0xb5, 0xb3, 0x1c, 0xa8, 0x03, 0xd9, 0x82, 0x95, 0x88, 0x8a, 0x69, 0xc6, 0x52, 0xc9, 0x78, 0xe2,
+	0xb6, 0x30, 0x57, 0x0d, 0xf9, 0xdf, 0x2d, 0x70, 0x8e, 0xf9, 0x3c, 0x13, 0x94, 0x0c, 0xa0, 0x75,
+	0x76, 0x82, 0xfd, 0xfd, 0xa0, 0xc5, 0x4e, 0xf2, 0x66, 0x96, 0x08, 0xc9, 0xe4, 0xbc, 0xda, 0x5c,
+	0x09, 0x2d, 0x8e, 0xb7, 0x1b, 0xe3, 0x73, 0xac, 0x68, 0x22, 0xa9, 0x70, 0xdb, 0x0a, 0x0b, 0x0f,
+	0x84, 0x40, 0x3b, 0x99, 0xdc, 0x50, 0xb7, 0x83, 0x41, 0xfc, 0xf6, 0xf7, 0x61, 0xf9, 0x34, 0x9a,
+	0x4f, 0x27, 0xd8, 0xf6, 0x10, 0x96, 0xa6, 0x08, 0x25, 0x5c, 0x6b, 0xcb, 0xde, 0x59, 0xd9, 0xeb,
+	0xab, 0xa5, 0xc7, 0x0a, 0x35, 0x30, 0x59, 0x9f, 0x42, 0xe7, 0xf2, 0x23, 0x8b, 0xe3, 0x06, 0xbc,
+	0xb9, 0xa2, 0x55, 0x5e, 0x41, 0xee, 0x82, 0x93, 0x4d, 0x24, 0x4b, 0xae, 0x91, 0xb4, 0x1f, 0xe8,
+	0xd3, 0xe2, 0x1a, 0xed, 0xa6, 0x4a, 0x63, 0x70, 0xf0, 0x1a, 0x41, 0x1e, 0x80, 0x23, 0xf0, 0x4b,
+	0x83, 0xf5, 0x34, 0x18, 0xa6, 0x03, 0x9d, 0xf3, 0x29, 0x2c, 0x5d, 0x64, 0x7c, 0x46, 0xa7, 0xb2,
+	0x01, 0x56, 0x3c, 0x54, 0xab, 0xfa, 0x50, 0x04, 0xda, 0x37, 0x54, 0x4e, 0xb4, 0x84, 0xf8, 0xfd,
+	0x17, 0x58, 0x2f, 0xa0, 0xab, 0xaf, 0x11, 0x64, 0x17, 0xba, 0xa9, 0xfe, 0xd6, 0x68, 0x03, 0x8d,
+	0xa6, 0x4b, 0x82, 0x22, 0xef, 0xff, 0xb2, 0xc0, 0x3e, 0xe7, 0x61, 0x83, 0xcd, 0xcd, 0x65, 0xbf,
+	0x49, 0x27, 0xc9, 0x57, 0x4d, 0x67, 0x8e, 0x64, 0x13, 0x96, 0x67, 0x3c, 0xbc, 0x52, 0xe4, 0x0a,
+	0xb2, 0x3b, 0xe3, 0xe1, 0x5b, 0x84, 0xf7, 0xa0, 0x1b, 0x73, 0xf5, 0x72, 0x9a, 0xb2, 0x38, 0x97,
+	0x06, 0xe8, 0x54, 0x0d, 0xb0, 0xb0, 0x9a, 0xd3, 0x34, 0xce, 0x46, 0x3e, 0xf3, 0x9a, 0x5f, 0xcd,
+	0xb3, 0xd8, 0x5d, 0x52, 0x2c, 0xf9, 0xf9, 0x5d, 0x16, 0xfb, 0x8f, 0x01, 0x4e, 0xbf, 0xa4, 0x34,
+	0x63, 0x34, 0x99, 0x52, 0x72, 0x1f, 0xda, 0x33, 0x1e, 0x9a, 0x9d, 0x41, 0xef, 0x7c, 0xce, 0xc3,
+	0x00, 0xe3, 0xfe, 0x1a, 0x0c, 0x0e, 0xa3, 0xe8, 0x88, 0xf1, 0x80, 0x8a, 0x94, 0x27, 0x82, 0xfa,
+	0x4f, 0xa0, 0x6f, 0x22, 0x9f, 0xe6, 0x54, 0x48, 0x72, 0x0f, 0xec, 0x90, 0x71, 0xd4, 0xa1, 0x9c,
+	0x90, 0xe7, 0xf3, 0xb0, 0xbf, 0x8a, 0xe5, 0xc7, 0xef, 0x8b, 0xfe, 0x1f, 0x16, 0xf4, 0x74, 0x44,
+	0xf5, 0x6f, 0x57, 0x3c, 0x61, 0x55, 0xcc, 0xaa, 0x2c, 0x63, 0x4c, 0x41, 0xb6, 0x35, 0x69, 0x0b,
+	0x8b, 0xee, 0xe8, 0xa2, 0x72, 0x15, 0x05, 0x4c, 0x76, 0x4b, 0xef, 0xdb, 0x58, 0xb9, 0x66, 0x2a,
+	0xcd, 0xbf, 0x47, 0x69, 0xff, 0x11, 0xac, 0x1f, 0x46, 0x91, 0xf1, 0x40, 0x41, 0x78, 0x08, 0xa4,
+	0x16, 0x56, 0x98, 0x8f, 0x6a, 0x0e, 0xc9, 0x27, 0xaf, 0xd6, 0x1d, 0x22, 0x2a, 0x16, 0x19, 0xc3,
+	0xe0, 0x35, 0x95, 0x15, 0xd9, 0xfe, 0xac, 0x92, 0xa9, 0xc7, 0xdb, 0xfc, 0x9f, 0x16, 0x46, 0x4a,
+	0xdd, 0xfe, 0xa3, 0x4c, 0x03, 0xe8, 0x69, 0x14, 0xc5, 0x76, 0x0c, 0xc3, 0x37, 0x4c, 0xc8, 0x45,
+	0xdd, 0xfe, 0x4d, 0xa1, 0x11, 0xac, 0xd7, 0x87, 0xe0, 0xec, 0xbd, 0x6f, 0x36, 0xac, 0x5d, 0x98,
+	0x9f, 0xea, 0x4b, 0x9a, 0x7d, 0x66, 0x53, 0x4a, 0x0e, 0xc0, 0x51, 0x96, 0x23, 0x43, 0x3d, 0xb0,
+	0xe6, 0x40, 0x6f, 0xb4, 0x10, 0x55, 0x3c, 0xcf, 0x2c, 0xb2, 0x0f, 0x1d, 0xb4, 0x1a, 0x59, 0x2f,
+	0x2b, 0x8a, 0x3d, 0xbc, 0x61, 0x3d, 0x58, 0x74, 0xbd, 0x82, 0x95, 0xca, 0xfb, 0x93, 0x8d, 0xb2,
+	0x6c, 0x81, 0xd6, 0xf3, 0x6e, 0x4b, 0x15, 0x73, 0x0e, 0xc0, 0x51, 0x8f, 0x5a, 0x60, 0xd7, 0xde,
+	0xb8, 0xc0, 0xae, 0x3b, 0x45, 0x61, 0xa3, 0xe0, 0x05, 0x76, 0x55, 0x7e, 0x6f, 0x58, 0x0f, 0x16,
+	0x5d, 0x67, 0xd0, 0xab, 0x2a, 0x4a, 0x0c, 0xdc, 0x2d, 0x32, 0x7b, 0x9b, 0xb7, 0xe6, 0xcc, 0xa8,
+	0xd0, 0xc1, 0xec, 0xf3, 0xdf, 0x01, 0x00, 0x00, 0xff, 0xff, 0xe1, 0xf0, 0x60, 0x11, 0x3c, 0x07,
+	0x00, 0x00,
 }

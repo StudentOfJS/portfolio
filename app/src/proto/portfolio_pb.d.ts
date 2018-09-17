@@ -259,6 +259,132 @@ export namespace Experience {
   }
 }
 
+export class AddBioResponse extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): AddBioResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: AddBioResponse): AddBioResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: AddBioResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): AddBioResponse;
+  static deserializeBinaryFromReader(message: AddBioResponse, reader: jspb.BinaryReader): AddBioResponse;
+}
+
+export namespace AddBioResponse {
+  export type AsObject = {
+  }
+}
+
+export class AddBioRequest extends jspb.Message {
+  hasBio(): boolean;
+  clearBio(): void;
+  getBio(): Bio | undefined;
+  setBio(value?: Bio): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): AddBioRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: AddBioRequest): AddBioRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: AddBioRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): AddBioRequest;
+  static deserializeBinaryFromReader(message: AddBioRequest, reader: jspb.BinaryReader): AddBioRequest;
+}
+
+export namespace AddBioRequest {
+  export type AsObject = {
+    bio?: Bio.AsObject,
+  }
+}
+
+export class AddCVResponse extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): AddCVResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: AddCVResponse): AddCVResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: AddCVResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): AddCVResponse;
+  static deserializeBinaryFromReader(message: AddCVResponse, reader: jspb.BinaryReader): AddCVResponse;
+}
+
+export namespace AddCVResponse {
+  export type AsObject = {
+  }
+}
+
+export class AddCVRequest extends jspb.Message {
+  hasSkills(): boolean;
+  clearSkills(): void;
+  getSkills(): Skills | undefined;
+  setSkills(value?: Skills): void;
+
+  hasJobs(): boolean;
+  clearJobs(): void;
+  getJobs(): Experience | undefined;
+  setJobs(value?: Experience): void;
+
+  hasCourses(): boolean;
+  clearCourses(): void;
+  getCourses(): Education | undefined;
+  setCourses(value?: Education): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): AddCVRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: AddCVRequest): AddCVRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: AddCVRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): AddCVRequest;
+  static deserializeBinaryFromReader(message: AddCVRequest, reader: jspb.BinaryReader): AddCVRequest;
+}
+
+export namespace AddCVRequest {
+  export type AsObject = {
+    skills?: Skills.AsObject,
+    jobs?: Experience.AsObject,
+    courses?: Education.AsObject,
+  }
+}
+
+export class AddProjectsResponse extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): AddProjectsResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: AddProjectsResponse): AddProjectsResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: AddProjectsResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): AddProjectsResponse;
+  static deserializeBinaryFromReader(message: AddProjectsResponse, reader: jspb.BinaryReader): AddProjectsResponse;
+}
+
+export namespace AddProjectsResponse {
+  export type AsObject = {
+  }
+}
+
+export class AddProjectsRequest extends jspb.Message {
+  hasProjects(): boolean;
+  clearProjects(): void;
+  getProjects(): Projects | undefined;
+  setProjects(value?: Projects): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): AddProjectsRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: AddProjectsRequest): AddProjectsRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: AddProjectsRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): AddProjectsRequest;
+  static deserializeBinaryFromReader(message: AddProjectsRequest, reader: jspb.BinaryReader): AddProjectsRequest;
+}
+
+export namespace AddProjectsRequest {
+  export type AsObject = {
+    projects?: Projects.AsObject,
+  }
+}
+
 export class GetBioResponse extends jspb.Message {
   hasBio(): boolean;
   clearBio(): void;

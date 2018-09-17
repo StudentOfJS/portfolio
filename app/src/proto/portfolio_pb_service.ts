@@ -6,6 +6,30 @@ export class PortfolioService {
   static serviceName = "proto.PortfolioService";
 }
 export namespace PortfolioService {
+  export class AddBio {
+    static readonly methodName = "AddBio";
+    static readonly service = PortfolioService;
+    static readonly requestStream = false;
+    static readonly responseStream = true;
+    static readonly requestType = proto_portfolio_pb.AddBioRequest;
+    static readonly responseType = proto_portfolio_pb.AddBioResponse;
+  }
+  export class AddCV {
+    static readonly methodName = "AddCV";
+    static readonly service = PortfolioService;
+    static readonly requestStream = false;
+    static readonly responseStream = true;
+    static readonly requestType = proto_portfolio_pb.AddCVRequest;
+    static readonly responseType = proto_portfolio_pb.AddCVResponse;
+  }
+  export class AddProjects {
+    static readonly methodName = "AddProjects";
+    static readonly service = PortfolioService;
+    static readonly requestStream = false;
+    static readonly responseStream = true;
+    static readonly requestType = proto_portfolio_pb.AddProjectsRequest;
+    static readonly responseType = proto_portfolio_pb.AddProjectsResponse;
+  }
   export class GetBio {
     static readonly methodName = "GetBio";
     static readonly service = PortfolioService;

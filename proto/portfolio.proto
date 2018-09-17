@@ -61,11 +61,31 @@ message Experience {
 }
 
 service PortfolioService {
+    rpc AddBio (AddBioRequest) returns (stream AddBioResponse);
+    rpc AddCV (AddCVRequest) returns (stream AddCVResponse);
+    rpc AddProjects (AddProjectsRequest) returns (stream AddProjectsResponse);
     rpc GetBio (GetBioRequest) returns (stream GetBioResponse);
     rpc GetCV (GetCVRequest) returns (stream GetCVResponse);
     rpc ListProjects (ListProjectsRequest) returns (stream ListProjectsResponse);
 }
 
+
+message AddBioResponse {}
+message AddBioRequest {
+    Bio bio = 1;
+}
+
+message AddCVResponse {}
+message AddCVRequest {
+    Skills skills = 1;
+    Experience jobs = 2;
+    Education courses = 3;
+}
+
+message AddProjectsResponse {}
+message AddProjectsRequest {
+    Projects projects = 1;
+}
 
 message GetBioResponse {
     Bio bio = 1;
