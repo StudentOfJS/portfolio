@@ -17,65 +17,70 @@ func NewPortfolioService(api *API) *Service {
 	return &Service{api}
 }
 
-func (s *Service) AddBio(req *proto.AddBioRequest, resp proto.PortfolioService_AddBioServer) error {
+func (s *Service) AddBio(req *proto.AddBioRequest, res proto.PortfolioService_AddBioServer) error {
 	err := s.api.addBio(req.Bio)
 	if err != nil {
 		return err
 	}
+	res.Send(nil)
 	return nil
 }
 
-func (s *Service) AddCourse(req *proto.AddCourseRequest, resp proto.PortfolioService_AddCourseServer) error {
+func (s *Service) AddCourse(req *proto.AddCourseRequest, res proto.PortfolioService_AddCourseServer) error {
 	err := s.api.addCourse(req.Course)
 	if err != nil {
 		return err
 	}
+	res.Send(nil)
 	return nil
 }
 
-func (s *Service) AddJob(req *proto.AddJobRequest, resp proto.PortfolioService_AddJobServer) error {
+func (s *Service) AddJob(req *proto.AddJobRequest, res proto.PortfolioService_AddJobServer) error {
 	err := s.api.addJob(req.Job)
 	if err != nil {
 		return err
 	}
+	res.Send(nil)
 	return nil
 }
 
-func (s *Service) AddProject(req *proto.AddProjectRequest, resp proto.PortfolioService_AddProjectServer) error {
+func (s *Service) AddProject(req *proto.AddProjectRequest, res proto.PortfolioService_AddProjectServer) error {
 	err := s.api.addProject(req.Project)
 	if err != nil {
 		return nil
 	}
+	res.Send(nil)
 	return nil
 }
 
-func (s *Service) AddSkill(req *proto.AddSkillRequest, resp proto.PortfolioService_AddSkillServer) error {
+func (s *Service) AddSkill(req *proto.AddSkillRequest, res proto.PortfolioService_AddSkillServer) error {
 	err := s.api.addSkill(req.Skill)
 	if err != nil {
 		return nil
 	}
+	res.Send(nil)
 	return nil
 }
 
-func (s *Service) GetBio(req *proto.GetBioRequest, resp proto.PortfolioService_GetBioServer) error {
+func (s *Service) GetBio(req *proto.GetBioRequest, res proto.PortfolioService_GetBioServer) error {
 	b, err := s.api.getBio()
 	if err != nil {
 		return err
 	}
 	var bio *proto.GetBioResponse
 	bio.Bio = b
-	resp.Send(bio)
+	res.Send(bio)
 	return nil
 }
 
-func (s *Service) ListProjects(req *proto.ListProjectsRequest, resp proto.PortfolioService_ListProjectsServer) error {
+func (s *Service) ListProjects(req *proto.ListProjectsRequest, res proto.PortfolioService_ListProjectsServer) error {
 	p, err := s.api.getProjects()
 	if err != nil {
 		return nil
 	}
 	var projects *proto.ListProjectsResponse
 	projects.Projects = p
-	resp.Send(projects)
+	res.Send(projects)
 	return nil
 }
 
