@@ -5,11 +5,12 @@ import (
 	"github.com/studentofjs/portfolio/server/proto"
 )
 
-func InitCV() error {
+func InitCV() {
+	var a *API
 	var Bio *proto.Bio
 	Bio.Description = "Rod's BIO description"
 	Bio.Title = "Rod's BIO"
-	addBio(Bio)
+	a.addBio(Bio)
 
 	Courses := []*proto.Course{
 		{
@@ -91,7 +92,7 @@ func InitCV() error {
 		},
 	}
 	for _, course := range Courses {
-		addCourse(course)
+		a.addCourse(course)
 	}
 
 	Jobs := []*proto.Job{
@@ -160,7 +161,7 @@ func InitCV() error {
 		},
 	}
 	for _, job := range Jobs {
-		addJob(job)
+		a.addJob(job)
 	}
 
 	Projects := []*proto.Project{
@@ -215,73 +216,68 @@ func InitCV() error {
 		},
 	}
 	for _, project := range Projects {
-		addProject(project)
+		a.addProject(project)
 	}
 
 	Skills := []*proto.Skill{
 		{
 			ID:          uuid.New().ID(),
-			Description: "",
-			Name:        "",
+			Description: "JS",
+			Name:        "React",
+			Rating:      9,
+		},
+		{
+			ID:          uuid.New().ID(),
+			Description: "html/JSON, GraphQL, gRPC",
+			Name:        "API integration",
+			Rating:      7,
+		},
+		{
+			ID:          uuid.New().ID(),
+			Description: "html/JSON, GraphQL, gRPC",
+			Name:        "API creation",
+			Rating:      7,
+		},
+		{
+			ID:          uuid.New().ID(),
+			Description: "HTML, CSS, JS",
+			Name:        "Frontend basics",
+			Rating:      10,
+		},
+		{
+			ID:          uuid.New().ID(),
+			Description: "MongoDB, BoltDB, SQL, PostgreSQL",
+			Name:        "Databases",
+			Rating:      7,
+		},
+		{
+			ID:          uuid.New().ID(),
+			Description: "intermediate level",
+			Name:        "Go",
+			Rating:      7,
+		},
+		{
+			ID:          uuid.New().ID(),
+			Description: "basics",
+			Name:        "Node",
+			Rating:      6,
+		},
+		{
+			ID:          uuid.New().ID(),
+			Description: "React and express/GraphQL server experience",
+			Name:        "TypeScript",
 			Rating:      8,
 		},
 		{
 			ID:          uuid.New().ID(),
-			Description: "",
-			Name:        "",
-			Rating:      8,
-		},
-		{
-			ID:          uuid.New().ID(),
-			Description: "",
-			Name:        "",
-			Rating:      8,
-		},
-		{
-			ID:          uuid.New().ID(),
-			Description: "",
-			Name:        "",
-			Rating:      8,
-		},
-		{
-			ID:          uuid.New().ID(),
-			Description: "",
-			Name:        "",
-			Rating:      8,
-		},
-		{
-			ID:          uuid.New().ID(),
-			Description: "",
-			Name:        "",
-			Rating:      8,
-		},
-		{
-			ID:          uuid.New().ID(),
-			Description: "",
-			Name:        "",
-			Rating:      8,
-		},
-		{
-			ID:          uuid.New().ID(),
-			Description: "",
-			Name:        "",
-			Rating:      8,
-		},
-		{
-			ID:          uuid.New().ID(),
-			Description: "",
-			Name:        "",
-			Rating:      8,
-		},
-		{
-			ID:          uuid.New().ID(),
-			Description: "",
-			Name:        "",
+			Description: "Worked in ops for over a decade, primarily as Systems Administrator",
+			Name:        "Sys Ops",
 			Rating:      8,
 		},
 	}
 
 	for _, skill := range Skills {
-		addSkill(skill)
+		a.addSkill(skill)
 	}
+	return nil
 }
