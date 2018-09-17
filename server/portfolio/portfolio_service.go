@@ -49,6 +49,14 @@ func (s *Service) AddProject(req *proto.AddProjectRequest, resp proto.PortfolioS
 	return nil
 }
 
+func (s *Service) AddSkill(req *proto.AddSkillRequest, resp proto.PortfolioService_AddSkillServer) error {
+	err := s.api.addSkill(req.Skill)
+	if err != nil {
+		return nil
+	}
+	return nil
+}
+
 func (s *Service) GetBio(req *proto.GetBioRequest, resp proto.PortfolioService_GetBioServer) error {
 	b, err := s.api.getBio()
 	if err != nil {

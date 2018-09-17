@@ -70,19 +70,14 @@ func (*API) addProject(project *proto.Project) error {
 	return nil
 }
 
-func (*API) addSkill(institution string, description string, rating uint32, name string) error {
+func (*API) addSkill(skill *proto.Skill) error {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
 	}
 	defer db.Close()
 	id := uuid.New().ID()
-	skill := proto.Skill{
-		ID:          id,
-		Description: description,
-		Rating:      rating,
-		Name:        name,
-	}
+	skill.ID = id
 	if err := db.Save(&skill); err == storm.ErrAlreadyExists {
 		return grpc.Errorf(codes.AlreadyExists, "skill already exists")
 	}
