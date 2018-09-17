@@ -265,3 +265,122 @@ func getSkills() (*proto.Skills, error) {
 	skills.Skills = s
 	return skills, nil
 }
+
+func updateBio(title string, description string) error {
+	db, err := storm.Open("my.db")
+	if err != nil {
+		return grpc.Errorf(codes.Internal, "server error")
+	}
+	defer db.Close()
+	bio := proto.Bio{
+		Title:       title,
+		Description: description,
+	}
+	if err := db.Update(&bio); err != nil {
+		switch err {
+		case storm.ErrNotFound:
+			return grpc.Errorf(codes.NotFound, "bio not found")
+		default:
+			return grpc.Errorf(codes.Internal, "server error")
+		}
+	}
+	return nil
+}
+
+func updateCourse(id uint32, institution string, description string, dates string, name string) error {
+	db, err := storm.Open("my.db")
+	if err != nil {
+		return grpc.Errorf(codes.Internal, "server error")
+	}
+	defer db.Close()
+	course := proto.Course{
+		ID:          id,
+		Institution: institution,
+		Description: description,
+		Dates:       dates,
+		Name:        name,
+	}
+	if err := db.Update(&course); err != nil {
+		switch err {
+		case storm.ErrNotFound:
+			return grpc.Errorf(codes.NotFound, "course not found")
+		default:
+			return grpc.Errorf(codes.Internal, "server error")
+		}
+	}
+	return nil
+}
+
+func updateJob(id uint32, company, dates, description, jobTitle, location, logoURL string) error {
+	db, err := storm.Open("my.db")
+	if err != nil {
+		return grpc.Errorf(codes.Internal, "server error")
+	}
+	defer db.Close()
+	job := proto.Job{
+		ID:          id,
+		Company:     company,
+		Dates:       dates,
+		Description: description,
+		JobTitle:    jobTitle,
+		Location:    location,
+		LogoUrl:     logoURL,
+	}
+	if err := db.Update(&job); err != nil {
+		switch err {
+		case storm.ErrNotFound:
+			return grpc.Errorf(codes.NotFound, "job not found")
+		default:
+			return grpc.Errorf(codes.Internal, "server error")
+		}
+	}
+	return nil
+}
+
+func updateProject(id uint32, description, meta, title string) error {
+	db, err := storm.Open("my.db")
+	if err != nil {
+		return grpc.Errorf(codes.Internal, "server error")
+	}
+	defer db.Close()
+
+	project := proto.Project{
+		ID:          id,
+		Title:       title,
+		Meta:        meta,
+		Description: description,
+	}
+	if err := db.Update(&project); err != nil {
+		switch err {
+		case storm.ErrNotFound:
+			return grpc.Errorf(codes.NotFound, "project not found")
+		default:
+			return grpc.Errorf(codes.Internal, "server error")
+		}
+	}
+	return nil
+}
+
+func updateSkill(id uint32, institution string, description string, rating uint32, name string) error {
+	db, err := storm.Open("my.db")
+	if err != nil {
+		return grpc.Errorf(codes.Internal, "server error")
+	}
+	defer db.Close()
+
+	skill := proto.Skill{
+		ID:          id,
+		Description: description,
+		Rating:      rating,
+		Name:        name,
+	}
+	if err := db.Update(&skill); err != nil {
+		switch err {
+		case storm.ErrNotFound:
+			return grpc.Errorf(codes.NotFound, "skill not found")
+		default:
+			return grpc.Errorf(codes.Internal, "server error")
+		}
+	}
+	return nil
+}
