@@ -3,59 +3,42 @@ package main
 import (
 	"flag"
 	"log"
-	"time"
 
-	"github.com/studentofjs/portfolio/proto"
+	"github.com/studentofjs/portfolio/client/proto"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
 
-var client proto.
+var client proto.PortfolioServiceClient
 
 func main() {
-	addFlag := flag.Bool("add", false, "add new block")
-	listFlag := flag.Bool("list", false, "get the blockchain")
-
+	addBioFlag := flag.Bool("addb", false, "add bio to cv")
 	flag.Parse()
 
-	conn, err := grpc.Dial("localhost:8080", grpc.WithInsecure())
+	conn, err := grpc.Dial("localhost:8900", grpc.WithInsecure())
 	if err != nil {
-		log.Fatalf("cannout dial server: %v", err)
+		log.Fatalf("can not dial server: %v", err)
 	}
 
-	client = proto.NewBlockchainClient(conn)
+	client = proto.NewPortfolioServiceClient(conn)
 
-	if *addFlag {
-		addBlock()
+	if *addBioFlag {
+		addBio()
 	}
 
-	if *listFlag {
-		getBlockchain()
-	}
 }
 
-func addBlock() {
-	block, err := client.AddBlock(context.Background(), &proto.AddBlockRequest{
-		Data: time.Now().String(),
+func addBio() {
+	bio, err := client.AddBio(context.Background(), &proto.AddBioRequest{
+		Bio: &proto.Bio{
+			Title:       "Rod's Bio",
+			Description: "Rod's Bio Description",
+		},
 	})
 
 	if err != nil {
-		log.Fatalf("unable to add block: %v", err)
+		log.Fatalf("unable to add bio: %v", err)
 	}
 
-	log.Printf("new block hash: %s\n", block)
-}
-
-func getBlockchain() {
-	bc, err := client.GetBlockchain(context.Background(), &proto.GetBlockchainRequest{})
-
-	if err != nil {
-		log.Fatalf("unable to get blockchain: %v", err)
-	}
-
-	log.Println("blocks:")
-
-	for _, b := range bc.Blocks {
-		log.Printf("hash: %s, prev block hash: %s, data: %s", b.Hash, b.PrevBlockHash, b.Data)
-	}
+	log.Printf("new Bio: %s\n", bio)
 }
