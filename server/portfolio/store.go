@@ -18,7 +18,7 @@ func addBio(title string, description string) error {
 		Title:       title,
 		Description: description,
 	}
-	if err := db.Save(&bio); err != storm.ErrAlreadyExists {
+	if err := db.Save(&bio); err == storm.ErrAlreadyExists {
 		return grpc.Errorf(codes.AlreadyExists, "bio already exists")
 	}
 	return nil
@@ -38,7 +38,7 @@ func addCourse(institution string, description string, dates string, name string
 		Dates:       dates,
 		Name:        name,
 	}
-	if err := db.Save(&course); err != storm.ErrAlreadyExists {
+	if err := db.Save(&course); err == storm.ErrAlreadyExists {
 		return grpc.Errorf(codes.AlreadyExists, "course already exists")
 	}
 	return nil
@@ -60,7 +60,7 @@ func addJob(company, dates, description, jobTitle, location, logoURL string) err
 		Location:    location,
 		LogoUrl:     logoURL,
 	}
-	if err := db.Save(&job); err != storm.ErrAlreadyExists {
+	if err := db.Save(&job); err == storm.ErrAlreadyExists {
 		return grpc.Errorf(codes.AlreadyExists, "job already exists")
 	}
 	return nil
@@ -79,7 +79,7 @@ func addProject(description, meta, title string) error {
 		Meta:        meta,
 		Description: description,
 	}
-	if err := db.Save(&project); err != storm.ErrAlreadyExists {
+	if err := db.Save(&project); err == storm.ErrAlreadyExists {
 		return grpc.Errorf(codes.AlreadyExists, "project already exists")
 	}
 	return nil
@@ -98,8 +98,91 @@ func addSkill(institution string, description string, rating uint32, name string
 		Rating:      rating,
 		Name:        name,
 	}
-	if err := db.Save(&skill); err != storm.ErrAlreadyExists {
+	if err := db.Save(&skill); err == storm.ErrAlreadyExists {
 		return grpc.Errorf(codes.AlreadyExists, "skill already exists")
+	}
+	return nil
+}
+
+func deleteBio(title string, description string) error {
+	db, err := storm.Open("my.db")
+	if err != nil {
+		return grpc.Errorf(codes.Internal, "server error")
+	}
+	defer db.Close()
+	bio := proto.Bio{
+		Title:       title,
+		Description: description,
+	}
+	if err := db.DeleteStruct(&bio); err != nil {
+		return grpc.Errorf(codes.NotFound, "bio does not exist")
+	}
+	return nil
+}
+
+func deleteCourse(id uint32) error {
+	db, err := storm.Open("my.db")
+	if err != nil {
+		return grpc.Errorf(codes.Internal, "server error")
+	}
+	defer db.Close()
+	var course proto.Course
+
+	if err := db.Find("ID", id, &course); err == storm.ErrNotFound {
+		return grpc.Errorf(codes.NotFound, "course not found")
+	}
+	if err := db.DeleteStruct(&course); err != nil {
+		return grpc.Errorf(codes.Internal, "course found, but can't delete")
+	}
+
+	return nil
+}
+
+func deleteJob(id uint32) error {
+	db, err := storm.Open("my.db")
+	if err != nil {
+		return grpc.Errorf(codes.Internal, "server error")
+	}
+	defer db.Close()
+	var job proto.Job
+	if err := db.Find("ID", id, &job); err == storm.ErrNotFound {
+		return grpc.Errorf(codes.NotFound, "job not found")
+	}
+	if err := db.DeleteStruct(&job); err != nil {
+		return grpc.Errorf(codes.Internal, "job found, but can't delete")
+	}
+	return nil
+}
+
+func deleteProject(id uint32) error {
+	db, err := storm.Open("my.db")
+	if err != nil {
+		return grpc.Errorf(codes.Internal, "server error")
+	}
+	defer db.Close()
+	var project proto.Project
+	if err := db.Find("ID", id, &project); err == storm.ErrNotFound {
+		return grpc.Errorf(codes.NotFound, "project not found")
+	}
+	if err := db.DeleteStruct(&project); err != nil {
+		return grpc.Errorf(codes.Internal, "project found, but can't delete")
+	}
+	return nil
+}
+
+func deleteSkill(id uint32) error {
+	db, err := storm.Open("my.db")
+	if err != nil {
+		return grpc.Errorf(codes.Internal, "server error")
+	}
+	defer db.Close()
+
+	var skill proto.Skill
+	if err := db.Find("ID", id, &skill); err == storm.ErrNotFound {
+		return grpc.Errorf(codes.NotFound, "skill not found")
+	}
+	if err := db.DeleteStruct(&skill); err != nil {
+		return grpc.Errorf(codes.Internal, "skill found, but can't delete")
 	}
 	return nil
 }
