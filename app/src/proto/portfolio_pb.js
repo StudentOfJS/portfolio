@@ -1132,7 +1132,8 @@ proto.proto.Project.toObject = function(includeInstance, msg) {
     id: msg.getId(),
     title: msg.getTitle(),
     meta: msg.getMeta(),
-    description: msg.getDescription()
+    description: msg.getDescription(),
+    repo: msg.getRepo()
   };
 
   if (includeInstance) {
@@ -1184,6 +1185,10 @@ proto.proto.Project.deserializeBinaryFromReader = function(msg, reader) {
     case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setDescription(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRepo(value);
       break;
     default:
       reader.skipField();
@@ -1248,6 +1253,13 @@ proto.proto.Project.prototype.serializeBinaryToWriter = function (writer) {
   if (f.length > 0) {
     writer.writeString(
       4,
+      f
+    );
+  }
+  f = this.getRepo();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
       f
     );
   }
@@ -1320,6 +1332,21 @@ proto.proto.Project.prototype.getDescription = function() {
 /** @param {string} value  */
 proto.proto.Project.prototype.setDescription = function(value) {
   jspb.Message.setField(this, 4, value);
+};
+
+
+/**
+ * optional string repo = 5;
+ * @return {string}
+ */
+proto.proto.Project.prototype.getRepo = function() {
+  return /** @type {string} */ (jspb.Message.getFieldProto3(this, 5, ""));
+};
+
+
+/** @param {string} value  */
+proto.proto.Project.prototype.setRepo = function(value) {
+  jspb.Message.setField(this, 5, value);
 };
 
 

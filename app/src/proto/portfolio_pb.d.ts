@@ -152,6 +152,9 @@ export class Project extends jspb.Message {
   getDescription(): string;
   setDescription(value: string): void;
 
+  getRepo(): string;
+  setRepo(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Project.AsObject;
   static toObject(includeInstance: boolean, msg: Project): Project.AsObject;
@@ -168,6 +171,7 @@ export namespace Project {
     title: string,
     meta: string,
     description: string,
+    repo: string,
   }
 }
 

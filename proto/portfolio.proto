@@ -37,7 +37,7 @@ message Project {
     string title = 2;
     string meta = 3;
     string description = 4;
-
+    string repo = 5;
 }
 
 
