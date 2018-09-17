@@ -48,29 +48,21 @@ func (*API) addCourse(institution string, description string, dates string, name
 	return nil
 }
 
-func (*API) addJob(company, dates, description, jobTitle, location, logoURL string) error {
+func (*API) addJob(job *proto.Job) error {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
 	}
 	defer db.Close()
 	id := uuid.New().ID()
-	job := proto.Job{
-		ID:          id,
-		Company:     company,
-		Dates:       dates,
-		Description: description,
-		JobTitle:    jobTitle,
-		Location:    location,
-		LogoUrl:     logoURL,
-	}
+	job.ID = id
 	if err := db.Save(&job); err == storm.ErrAlreadyExists {
 		return grpc.Errorf(codes.AlreadyExists, "job already exists")
 	}
 	return nil
 }
 
-func (*API) addProject(project *proto.Projects) error {
+func (*API) addProject(project *proto.Project) error {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
