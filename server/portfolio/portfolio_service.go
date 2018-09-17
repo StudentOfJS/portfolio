@@ -1,60 +1,62 @@
 package portfolio
 
 import (
-	"context"
-
 	"github.com/studentofjs/portfolio/server/proto"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/metadata"
 )
 
-type portfolioService struct{}
+type service struct {
+	api *API
+}
 
-func (s *portfolioService) GetBio(ctx context.Context, projectQuery *proto.GetBioRequest) (*proto.GetBioResponse, error) {
-	grpc.SendHeader(ctx, metadata.Pairs("Pre-Response-Metadata", "Is-sent-as-headers-unary"))
-	grpc.SetTrailer(ctx, metadata.Pairs("Post-Response-Metadata", "Is-sent-as-trailers-unary"))
+// NewPortfolioService returns the api
+func NewPortfolioService(api *API) *service {
+	if api == nil {
+		api = NewPortfolioAPI()
+	}
+	return &service{api}
+}
 
-	b, err := getBio()
+func (s *service) GetBio(req *proto.GetBioRequest, resp proto.PortfolioService_GetBioServer) error {
+	b, err := s.api.getBio()
 	if err != nil {
-		return nil, err
+		return err
 	}
 	var bio *proto.GetBioResponse
 	bio.Bio = b
-	return bio, nil
+	resp.Send(bio)
+	return nil
 }
 
-func (s *portfolioService) GetProjects(ctx context.Context, projectQuery *proto.ListProjectsRequest) (*proto.ListProjectsResponse, error) {
-	grpc.SendHeader(ctx, metadata.Pairs("Pre-Response-Metadata", "Is-sent-as-headers-unary"))
-	grpc.SetTrailer(ctx, metadata.Pairs("Post-Response-Metadata", "Is-sent-as-trailers-unary"))
-
-	p, err := getProjects()
+func (s *service) ListProjects(req *proto.ListProjectsRequest, resp proto.PortfolioService_ListProjectsServer) error {
+	p, err := s.api.getProjects()
 	if err != nil {
-		return nil, err
+		return nil
 	}
 	var projects *proto.ListProjectsResponse
 	projects.Projects = p
-	return projects, nil
+	resp.Send(projects)
+	return nil
 }
 
-func (s *portfolioService) GetCV(ctx context.Context, projectQuery *proto.GetCVRequest) (*proto.GetCVResponse, error) {
-	grpc.SendHeader(ctx, metadata.Pairs("Pre-Response-Metadata", "Is-sent-as-headers-unary"))
-	grpc.SetTrailer(ctx, metadata.Pairs("Post-Response-Metadata", "Is-sent-as-trailers-unary"))
-	edu, err := getEducation()
+func (s *service) GetCV(req *proto.GetCVRequest, res proto.PortfolioService_GetCVServer) error {
+	edu, err := s.api.getEducation()
 	if err != nil {
-		return nil, err
+		return nil
 	}
-	exp, err := getExperience()
+	exp, err := s.api.getExperience()
 	if err != nil {
-		return nil, err
+		return nil
 	}
-	skills, err := getSkills()
+	skills, err := s.api.getSkills()
 	if err != nil {
-		return nil, err
+		return nil
 	}
 	var cv *proto.GetCVResponse
 	cv.Courses = edu
 	cv.Jobs = exp
 	cv.Skills = skills
 
-	return cv, nil
+	res.Send(cv)
+
+	return nil
 }

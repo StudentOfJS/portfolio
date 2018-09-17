@@ -8,12 +8,18 @@ import (
 	"github.com/go-chi/cors"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	"github.com/studentofjs/portfolio/server/middleware"
+	"github.com/studentofjs/portfolio/server/portfolio"
+	portfolio_pb "github.com/studentofjs/portfolio/server/proto"
+	"github.com/studentofjs/portfolio/server/proxy"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/grpclog"
 )
 
 func main() {
 	grpcServer := grpc.NewServer()
+
+	portfolioService := portfolio.NewPortfolioService(nil)
+	portfolio_pb.RegisterPortfolioServiceServer(grpcServer, portfolioService)
 
 	wrappedGrpc := grpcweb.WrapServer(grpcServer)
 
@@ -32,7 +38,10 @@ func main() {
 		}).Handler,
 	)
 
+	router.Get("/portfolio", proxy.Portfolio)
+
 	if err := http.ListenAndServe(":8900", router); err != nil {
 		grpclog.Fatalf("failed starting http2 server: %v", err)
 	}
+
 }

@@ -8,7 +8,15 @@ import (
 	"google.golang.org/grpc/codes"
 )
 
-func addBio(title string, description string) error {
+// API contains the methods for interacting with the database
+type API struct{}
+
+// NewPortfolioAPI returns the API
+func NewPortfolioAPI() *API {
+	return &API{}
+}
+
+func (*API) addBio(title string, description string) error {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
@@ -24,7 +32,7 @@ func addBio(title string, description string) error {
 	return nil
 }
 
-func addCourse(institution string, description string, dates string, name string) error {
+func (*API) addCourse(institution string, description string, dates string, name string) error {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
@@ -44,7 +52,7 @@ func addCourse(institution string, description string, dates string, name string
 	return nil
 }
 
-func addJob(company, dates, description, jobTitle, location, logoURL string) error {
+func (*API) addJob(company, dates, description, jobTitle, location, logoURL string) error {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
@@ -66,7 +74,7 @@ func addJob(company, dates, description, jobTitle, location, logoURL string) err
 	return nil
 }
 
-func addProject(description, meta, title string) error {
+func (*API) addProject(description, meta, title string) error {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
@@ -85,7 +93,7 @@ func addProject(description, meta, title string) error {
 	return nil
 }
 
-func addSkill(institution string, description string, rating uint32, name string) error {
+func (*API) addSkill(institution string, description string, rating uint32, name string) error {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
@@ -104,7 +112,7 @@ func addSkill(institution string, description string, rating uint32, name string
 	return nil
 }
 
-func deleteBio(title string, description string) error {
+func (*API) deleteBio(title string, description string) error {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
@@ -120,7 +128,7 @@ func deleteBio(title string, description string) error {
 	return nil
 }
 
-func deleteCourse(id uint32) error {
+func (*API) deleteCourse(id uint32) error {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
@@ -138,7 +146,7 @@ func deleteCourse(id uint32) error {
 	return nil
 }
 
-func deleteJob(id uint32) error {
+func (*API) deleteJob(id uint32) error {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
@@ -154,7 +162,7 @@ func deleteJob(id uint32) error {
 	return nil
 }
 
-func deleteProject(id uint32) error {
+func (*API) deleteProject(id uint32) error {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
@@ -170,7 +178,7 @@ func deleteProject(id uint32) error {
 	return nil
 }
 
-func deleteSkill(id uint32) error {
+func (*API) deleteSkill(id uint32) error {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
@@ -187,7 +195,7 @@ func deleteSkill(id uint32) error {
 	return nil
 }
 
-func getBio() (*proto.Bio, error) {
+func (*API) getBio() (*proto.Bio, error) {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return nil, grpc.Errorf(codes.Internal, "server error")
@@ -201,7 +209,7 @@ func getBio() (*proto.Bio, error) {
 	return bio[0], nil
 }
 
-func getEducation() (*proto.Education, error) {
+func (*API) getEducation() (*proto.Education, error) {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return nil, grpc.Errorf(codes.Internal, "server error")
@@ -217,7 +225,7 @@ func getEducation() (*proto.Education, error) {
 	return edu, nil
 }
 
-func getExperience() (*proto.Experience, error) {
+func (*API) getExperience() (*proto.Experience, error) {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return nil, grpc.Errorf(codes.Internal, "server error")
@@ -234,7 +242,7 @@ func getExperience() (*proto.Experience, error) {
 	return experience, nil
 }
 
-func getProjects() (*proto.Projects, error) {
+func (*API) getProjects() (*proto.Projects, error) {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return nil, grpc.Errorf(codes.Internal, "server error")
@@ -250,7 +258,7 @@ func getProjects() (*proto.Projects, error) {
 	return projects, nil
 }
 
-func getSkills() (*proto.Skills, error) {
+func (*API) getSkills() (*proto.Skills, error) {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return nil, grpc.Errorf(codes.Internal, "server error")
@@ -266,7 +274,7 @@ func getSkills() (*proto.Skills, error) {
 	return skills, nil
 }
 
-func updateBio(title string, description string) error {
+func (*API) updateBio(title string, description string) error {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
@@ -287,7 +295,7 @@ func updateBio(title string, description string) error {
 	return nil
 }
 
-func updateCourse(id uint32, institution string, description string, dates string, name string) error {
+func (*API) updateCourse(id uint32, institution string, description string, dates string, name string) error {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
@@ -311,7 +319,7 @@ func updateCourse(id uint32, institution string, description string, dates strin
 	return nil
 }
 
-func updateJob(id uint32, company, dates, description, jobTitle, location, logoURL string) error {
+func (*API) updateJob(id uint32, company, dates, description, jobTitle, location, logoURL string) error {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
@@ -337,7 +345,7 @@ func updateJob(id uint32, company, dates, description, jobTitle, location, logoU
 	return nil
 }
 
-func updateProject(id uint32, description, meta, title string) error {
+func (*API) updateProject(id uint32, description, meta, title string) error {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
@@ -361,7 +369,7 @@ func updateProject(id uint32, description, meta, title string) error {
 	return nil
 }
 
-func updateSkill(id uint32, institution string, description string, rating uint32, name string) error {
+func (*API) updateSkill(id uint32, institution string, description string, rating uint32, name string) error {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
