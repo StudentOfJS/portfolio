@@ -10,18 +10,30 @@ import (
 
 type portfolioService struct{}
 
-func (s *portfolioService) GetBio(ctx context.Context, projectQuery *proto.GetBioRequest) (*proto.Bio, error) {
+func (s *portfolioService) GetBio(ctx context.Context, projectQuery *proto.GetBioRequest) (*proto.GetBioResponse, error) {
 	grpc.SendHeader(ctx, metadata.Pairs("Pre-Response-Metadata", "Is-sent-as-headers-unary"))
 	grpc.SetTrailer(ctx, metadata.Pairs("Post-Response-Metadata", "Is-sent-as-trailers-unary"))
 
-	return getBio()
+	b, err := getBio()
+	if err != nil {
+		return nil, err
+	}
+	var bio *proto.GetBioResponse
+	bio.Bio = b
+	return bio, nil
 }
 
-func (s *portfolioService) GetProjects(ctx context.Context, projectQuery *proto.ListProjectsRequest) (*proto.Projects, error) {
+func (s *portfolioService) GetProjects(ctx context.Context, projectQuery *proto.ListProjectsRequest) (*proto.ListProjectsResponse, error) {
 	grpc.SendHeader(ctx, metadata.Pairs("Pre-Response-Metadata", "Is-sent-as-headers-unary"))
 	grpc.SetTrailer(ctx, metadata.Pairs("Post-Response-Metadata", "Is-sent-as-trailers-unary"))
 
-	return getProjects()
+	p, err := getProjects()
+	if err != nil {
+		return nil, err
+	}
+	var projects *proto.ListProjectsResponse
+	projects.Projects = p
+	return projects, nil
 }
 
 func (s *portfolioService) GetCV(ctx context.Context, projectQuery *proto.GetCVRequest) (*proto.GetCVResponse, error) {
