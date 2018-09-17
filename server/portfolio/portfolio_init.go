@@ -264,6 +264,12 @@ func InitCV() {
 		},
 		{
 			ID:          uuid.New().ID(),
+			Description: "experience with truffle, web3 and solidity",
+			Name:        "Smart Contracts",
+			Rating:      6,
+		},
+		{
+			ID:          uuid.New().ID(),
 			Description: "React and express/GraphQL server experience",
 			Name:        "TypeScript",
 			Rating:      8,
@@ -279,5 +285,4 @@ func InitCV() {
 	for _, skill := range Skills {
 		a.addSkill(skill)
 	}
-	return nil
 }
