@@ -14,21 +14,37 @@ export namespace PortfolioService {
     static readonly requestType = proto_portfolio_pb.AddBioRequest;
     static readonly responseType = proto_portfolio_pb.AddBioResponse;
   }
-  export class AddCV {
-    static readonly methodName = "AddCV";
+  export class AddCourse {
+    static readonly methodName = "AddCourse";
     static readonly service = PortfolioService;
     static readonly requestStream = false;
     static readonly responseStream = true;
-    static readonly requestType = proto_portfolio_pb.AddCVRequest;
-    static readonly responseType = proto_portfolio_pb.AddCVResponse;
+    static readonly requestType = proto_portfolio_pb.AddCourseRequest;
+    static readonly responseType = proto_portfolio_pb.AddCourseResponse;
   }
-  export class AddProjects {
-    static readonly methodName = "AddProjects";
+  export class AddJob {
+    static readonly methodName = "AddJob";
     static readonly service = PortfolioService;
     static readonly requestStream = false;
     static readonly responseStream = true;
-    static readonly requestType = proto_portfolio_pb.AddProjectsRequest;
-    static readonly responseType = proto_portfolio_pb.AddProjectsResponse;
+    static readonly requestType = proto_portfolio_pb.AddJobRequest;
+    static readonly responseType = proto_portfolio_pb.AddJobResponse;
+  }
+  export class AddProject {
+    static readonly methodName = "AddProject";
+    static readonly service = PortfolioService;
+    static readonly requestStream = false;
+    static readonly responseStream = true;
+    static readonly requestType = proto_portfolio_pb.AddProjectRequest;
+    static readonly responseType = proto_portfolio_pb.AddProjectResponse;
+  }
+  export class AddSkill {
+    static readonly methodName = "AddSkill";
+    static readonly service = PortfolioService;
+    static readonly requestStream = false;
+    static readonly responseStream = true;
+    static readonly requestType = proto_portfolio_pb.AddSkillRequest;
+    static readonly responseType = proto_portfolio_pb.AddSkillResponse;
   }
   export class GetBio {
     static readonly methodName = "GetBio";

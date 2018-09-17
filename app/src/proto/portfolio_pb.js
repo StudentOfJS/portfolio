@@ -11,10 +11,14 @@ var global = Function('return this')();
 
 goog.exportSymbol('proto.proto.AddBioRequest', null, global);
 goog.exportSymbol('proto.proto.AddBioResponse', null, global);
-goog.exportSymbol('proto.proto.AddCVRequest', null, global);
-goog.exportSymbol('proto.proto.AddCVResponse', null, global);
-goog.exportSymbol('proto.proto.AddProjectsRequest', null, global);
-goog.exportSymbol('proto.proto.AddProjectsResponse', null, global);
+goog.exportSymbol('proto.proto.AddCourseRequest', null, global);
+goog.exportSymbol('proto.proto.AddCourseResponse', null, global);
+goog.exportSymbol('proto.proto.AddJobRequest', null, global);
+goog.exportSymbol('proto.proto.AddJobResponse', null, global);
+goog.exportSymbol('proto.proto.AddProjectRequest', null, global);
+goog.exportSymbol('proto.proto.AddProjectResponse', null, global);
+goog.exportSymbol('proto.proto.AddSkillRequest', null, global);
+goog.exportSymbol('proto.proto.AddSkillResponse', null, global);
 goog.exportSymbol('proto.proto.Bio', null, global);
 goog.exportSymbol('proto.proto.Course', null, global);
 goog.exportSymbol('proto.proto.Education', null, global);
@@ -2316,12 +2320,12 @@ proto.proto.AddBioRequest.prototype.hasBio = function() {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.proto.AddCVResponse = function(opt_data) {
+proto.proto.AddCourseResponse = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.proto.AddCVResponse, jspb.Message);
+goog.inherits(proto.proto.AddCourseResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.proto.AddCVResponse.displayName = 'proto.proto.AddCVResponse';
+  proto.proto.AddCourseResponse.displayName = 'proto.proto.AddCourseResponse';
 }
 
 
@@ -2336,8 +2340,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.proto.AddCVResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.proto.AddCVResponse.toObject(opt_includeInstance, this);
+proto.proto.AddCourseResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.proto.AddCourseResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -2346,10 +2350,10 @@ proto.proto.AddCVResponse.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.proto.AddCVResponse} msg The msg instance to transform.
+ * @param {!proto.proto.AddCourseResponse} msg The msg instance to transform.
  * @return {!Object}
  */
-proto.proto.AddCVResponse.toObject = function(includeInstance, msg) {
+proto.proto.AddCourseResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
 
   };
@@ -2365,23 +2369,23 @@ proto.proto.AddCVResponse.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.proto.AddCVResponse}
+ * @return {!proto.proto.AddCourseResponse}
  */
-proto.proto.AddCVResponse.deserializeBinary = function(bytes) {
+proto.proto.AddCourseResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.proto.AddCVResponse;
-  return proto.proto.AddCVResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.proto.AddCourseResponse;
+  return proto.proto.AddCourseResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.proto.AddCVResponse} msg The message object to deserialize into.
+ * @param {!proto.proto.AddCourseResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.proto.AddCVResponse}
+ * @return {!proto.proto.AddCourseResponse}
  */
-proto.proto.AddCVResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.proto.AddCourseResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -2400,10 +2404,10 @@ proto.proto.AddCVResponse.deserializeBinaryFromReader = function(msg, reader) {
 /**
  * Class method variant: serializes the given message to binary data
  * (in protobuf wire format), writing to the given BinaryWriter.
- * @param {!proto.proto.AddCVResponse} message
+ * @param {!proto.proto.AddCourseResponse} message
  * @param {!jspb.BinaryWriter} writer
  */
-proto.proto.AddCVResponse.serializeBinaryToWriter = function(message, writer) {
+proto.proto.AddCourseResponse.serializeBinaryToWriter = function(message, writer) {
   message.serializeBinaryToWriter(writer);
 };
 
@@ -2412,7 +2416,7 @@ proto.proto.AddCVResponse.serializeBinaryToWriter = function(message, writer) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.proto.AddCVResponse.prototype.serializeBinary = function() {
+proto.proto.AddCourseResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
   this.serializeBinaryToWriter(writer);
   return writer.getResultBuffer();
@@ -2424,17 +2428,17 @@ proto.proto.AddCVResponse.prototype.serializeBinary = function() {
  * writing to the given BinaryWriter.
  * @param {!jspb.BinaryWriter} writer
  */
-proto.proto.AddCVResponse.prototype.serializeBinaryToWriter = function (writer) {
+proto.proto.AddCourseResponse.prototype.serializeBinaryToWriter = function (writer) {
   var f = undefined;
 };
 
 
 /**
  * Creates a deep clone of this proto. No data is shared with the original.
- * @return {!proto.proto.AddCVResponse} The clone.
+ * @return {!proto.proto.AddCourseResponse} The clone.
  */
-proto.proto.AddCVResponse.prototype.cloneMessage = function() {
-  return /** @type {!proto.proto.AddCVResponse} */ (jspb.Message.cloneMessage(this));
+proto.proto.AddCourseResponse.prototype.cloneMessage = function() {
+  return /** @type {!proto.proto.AddCourseResponse} */ (jspb.Message.cloneMessage(this));
 };
 
 
@@ -2449,12 +2453,12 @@ proto.proto.AddCVResponse.prototype.cloneMessage = function() {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.proto.AddCVRequest = function(opt_data) {
+proto.proto.AddCourseRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.proto.AddCVRequest, jspb.Message);
+goog.inherits(proto.proto.AddCourseRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.proto.AddCVRequest.displayName = 'proto.proto.AddCVRequest';
+  proto.proto.AddCourseRequest.displayName = 'proto.proto.AddCourseRequest';
 }
 
 
@@ -2469,8 +2473,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.proto.AddCVRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.proto.AddCVRequest.toObject(opt_includeInstance, this);
+proto.proto.AddCourseRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.proto.AddCourseRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -2479,14 +2483,12 @@ proto.proto.AddCVRequest.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.proto.AddCVRequest} msg The msg instance to transform.
+ * @param {!proto.proto.AddCourseRequest} msg The msg instance to transform.
  * @return {!Object}
  */
-proto.proto.AddCVRequest.toObject = function(includeInstance, msg) {
+proto.proto.AddCourseRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    skills: (f = msg.getSkills()) && proto.proto.Skills.toObject(includeInstance, f),
-    jobs: (f = msg.getJobs()) && proto.proto.Experience.toObject(includeInstance, f),
-    courses: (f = msg.getCourses()) && proto.proto.Education.toObject(includeInstance, f)
+    course: (f = msg.getCourse()) && proto.proto.Course.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -2500,23 +2502,23 @@ proto.proto.AddCVRequest.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.proto.AddCVRequest}
+ * @return {!proto.proto.AddCourseRequest}
  */
-proto.proto.AddCVRequest.deserializeBinary = function(bytes) {
+proto.proto.AddCourseRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.proto.AddCVRequest;
-  return proto.proto.AddCVRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.proto.AddCourseRequest;
+  return proto.proto.AddCourseRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.proto.AddCVRequest} msg The message object to deserialize into.
+ * @param {!proto.proto.AddCourseRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.proto.AddCVRequest}
+ * @return {!proto.proto.AddCourseRequest}
  */
-proto.proto.AddCVRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.proto.AddCourseRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -2524,19 +2526,9 @@ proto.proto.AddCVRequest.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new proto.proto.Skills;
-      reader.readMessage(value,proto.proto.Skills.deserializeBinaryFromReader);
-      msg.setSkills(value);
-      break;
-    case 2:
-      var value = new proto.proto.Experience;
-      reader.readMessage(value,proto.proto.Experience.deserializeBinaryFromReader);
-      msg.setJobs(value);
-      break;
-    case 3:
-      var value = new proto.proto.Education;
-      reader.readMessage(value,proto.proto.Education.deserializeBinaryFromReader);
-      msg.setCourses(value);
+      var value = new proto.proto.Course;
+      reader.readMessage(value,proto.proto.Course.deserializeBinaryFromReader);
+      msg.setCourse(value);
       break;
     default:
       reader.skipField();
@@ -2550,10 +2542,10 @@ proto.proto.AddCVRequest.deserializeBinaryFromReader = function(msg, reader) {
 /**
  * Class method variant: serializes the given message to binary data
  * (in protobuf wire format), writing to the given BinaryWriter.
- * @param {!proto.proto.AddCVRequest} message
+ * @param {!proto.proto.AddCourseRequest} message
  * @param {!jspb.BinaryWriter} writer
  */
-proto.proto.AddCVRequest.serializeBinaryToWriter = function(message, writer) {
+proto.proto.AddCourseRequest.serializeBinaryToWriter = function(message, writer) {
   message.serializeBinaryToWriter(writer);
 };
 
@@ -2562,7 +2554,7 @@ proto.proto.AddCVRequest.serializeBinaryToWriter = function(message, writer) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.proto.AddCVRequest.prototype.serializeBinary = function() {
+proto.proto.AddCourseRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
   this.serializeBinaryToWriter(writer);
   return writer.getResultBuffer();
@@ -2574,30 +2566,14 @@ proto.proto.AddCVRequest.prototype.serializeBinary = function() {
  * writing to the given BinaryWriter.
  * @param {!jspb.BinaryWriter} writer
  */
-proto.proto.AddCVRequest.prototype.serializeBinaryToWriter = function (writer) {
+proto.proto.AddCourseRequest.prototype.serializeBinaryToWriter = function (writer) {
   var f = undefined;
-  f = this.getSkills();
+  f = this.getCourse();
   if (f != null) {
     writer.writeMessage(
       1,
       f,
-      proto.proto.Skills.serializeBinaryToWriter
-    );
-  }
-  f = this.getJobs();
-  if (f != null) {
-    writer.writeMessage(
-      2,
-      f,
-      proto.proto.Experience.serializeBinaryToWriter
-    );
-  }
-  f = this.getCourses();
-  if (f != null) {
-    writer.writeMessage(
-      3,
-      f,
-      proto.proto.Education.serializeBinaryToWriter
+      proto.proto.Course.serializeBinaryToWriter
     );
   }
 };
@@ -2605,31 +2581,31 @@ proto.proto.AddCVRequest.prototype.serializeBinaryToWriter = function (writer) {
 
 /**
  * Creates a deep clone of this proto. No data is shared with the original.
- * @return {!proto.proto.AddCVRequest} The clone.
+ * @return {!proto.proto.AddCourseRequest} The clone.
  */
-proto.proto.AddCVRequest.prototype.cloneMessage = function() {
-  return /** @type {!proto.proto.AddCVRequest} */ (jspb.Message.cloneMessage(this));
+proto.proto.AddCourseRequest.prototype.cloneMessage = function() {
+  return /** @type {!proto.proto.AddCourseRequest} */ (jspb.Message.cloneMessage(this));
 };
 
 
 /**
- * optional Skills skills = 1;
- * @return {proto.proto.Skills}
+ * optional Course course = 1;
+ * @return {proto.proto.Course}
  */
-proto.proto.AddCVRequest.prototype.getSkills = function() {
-  return /** @type{proto.proto.Skills} */ (
-    jspb.Message.getWrapperField(this, proto.proto.Skills, 1));
+proto.proto.AddCourseRequest.prototype.getCourse = function() {
+  return /** @type{proto.proto.Course} */ (
+    jspb.Message.getWrapperField(this, proto.proto.Course, 1));
 };
 
 
-/** @param {proto.proto.Skills|undefined} value  */
-proto.proto.AddCVRequest.prototype.setSkills = function(value) {
+/** @param {proto.proto.Course|undefined} value  */
+proto.proto.AddCourseRequest.prototype.setCourse = function(value) {
   jspb.Message.setWrapperField(this, 1, value);
 };
 
 
-proto.proto.AddCVRequest.prototype.clearSkills = function() {
-  this.setSkills(undefined);
+proto.proto.AddCourseRequest.prototype.clearCourse = function() {
+  this.setCourse(undefined);
 };
 
 
@@ -2637,71 +2613,11 @@ proto.proto.AddCVRequest.prototype.clearSkills = function() {
  * Returns whether this field is set.
  * @return{!boolean}
  */
-proto.proto.AddCVRequest.prototype.hasSkills = function() {
+proto.proto.AddCourseRequest.prototype.hasCourse = function() {
   return jspb.Message.getField(this, 1) != null;
 };
 
 
-/**
- * optional Experience jobs = 2;
- * @return {proto.proto.Experience}
- */
-proto.proto.AddCVRequest.prototype.getJobs = function() {
-  return /** @type{proto.proto.Experience} */ (
-    jspb.Message.getWrapperField(this, proto.proto.Experience, 2));
-};
-
-
-/** @param {proto.proto.Experience|undefined} value  */
-proto.proto.AddCVRequest.prototype.setJobs = function(value) {
-  jspb.Message.setWrapperField(this, 2, value);
-};
-
-
-proto.proto.AddCVRequest.prototype.clearJobs = function() {
-  this.setJobs(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return{!boolean}
- */
-proto.proto.AddCVRequest.prototype.hasJobs = function() {
-  return jspb.Message.getField(this, 2) != null;
-};
-
-
-/**
- * optional Education courses = 3;
- * @return {proto.proto.Education}
- */
-proto.proto.AddCVRequest.prototype.getCourses = function() {
-  return /** @type{proto.proto.Education} */ (
-    jspb.Message.getWrapperField(this, proto.proto.Education, 3));
-};
-
-
-/** @param {proto.proto.Education|undefined} value  */
-proto.proto.AddCVRequest.prototype.setCourses = function(value) {
-  jspb.Message.setWrapperField(this, 3, value);
-};
-
-
-proto.proto.AddCVRequest.prototype.clearCourses = function() {
-  this.setCourses(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return{!boolean}
- */
-proto.proto.AddCVRequest.prototype.hasCourses = function() {
-  return jspb.Message.getField(this, 3) != null;
-};
-
-
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -2713,12 +2629,12 @@ proto.proto.AddCVRequest.prototype.hasCourses = function() {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.proto.AddProjectsResponse = function(opt_data) {
+proto.proto.AddJobResponse = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.proto.AddProjectsResponse, jspb.Message);
+goog.inherits(proto.proto.AddJobResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.proto.AddProjectsResponse.displayName = 'proto.proto.AddProjectsResponse';
+  proto.proto.AddJobResponse.displayName = 'proto.proto.AddJobResponse';
 }
 
 
@@ -2733,8 +2649,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.proto.AddProjectsResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.proto.AddProjectsResponse.toObject(opt_includeInstance, this);
+proto.proto.AddJobResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.proto.AddJobResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -2743,10 +2659,10 @@ proto.proto.AddProjectsResponse.prototype.toObject = function(opt_includeInstanc
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.proto.AddProjectsResponse} msg The msg instance to transform.
+ * @param {!proto.proto.AddJobResponse} msg The msg instance to transform.
  * @return {!Object}
  */
-proto.proto.AddProjectsResponse.toObject = function(includeInstance, msg) {
+proto.proto.AddJobResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
 
   };
@@ -2762,23 +2678,23 @@ proto.proto.AddProjectsResponse.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.proto.AddProjectsResponse}
+ * @return {!proto.proto.AddJobResponse}
  */
-proto.proto.AddProjectsResponse.deserializeBinary = function(bytes) {
+proto.proto.AddJobResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.proto.AddProjectsResponse;
-  return proto.proto.AddProjectsResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.proto.AddJobResponse;
+  return proto.proto.AddJobResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.proto.AddProjectsResponse} msg The message object to deserialize into.
+ * @param {!proto.proto.AddJobResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.proto.AddProjectsResponse}
+ * @return {!proto.proto.AddJobResponse}
  */
-proto.proto.AddProjectsResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.proto.AddJobResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -2797,10 +2713,10 @@ proto.proto.AddProjectsResponse.deserializeBinaryFromReader = function(msg, read
 /**
  * Class method variant: serializes the given message to binary data
  * (in protobuf wire format), writing to the given BinaryWriter.
- * @param {!proto.proto.AddProjectsResponse} message
+ * @param {!proto.proto.AddJobResponse} message
  * @param {!jspb.BinaryWriter} writer
  */
-proto.proto.AddProjectsResponse.serializeBinaryToWriter = function(message, writer) {
+proto.proto.AddJobResponse.serializeBinaryToWriter = function(message, writer) {
   message.serializeBinaryToWriter(writer);
 };
 
@@ -2809,7 +2725,7 @@ proto.proto.AddProjectsResponse.serializeBinaryToWriter = function(message, writ
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.proto.AddProjectsResponse.prototype.serializeBinary = function() {
+proto.proto.AddJobResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
   this.serializeBinaryToWriter(writer);
   return writer.getResultBuffer();
@@ -2821,17 +2737,17 @@ proto.proto.AddProjectsResponse.prototype.serializeBinary = function() {
  * writing to the given BinaryWriter.
  * @param {!jspb.BinaryWriter} writer
  */
-proto.proto.AddProjectsResponse.prototype.serializeBinaryToWriter = function (writer) {
+proto.proto.AddJobResponse.prototype.serializeBinaryToWriter = function (writer) {
   var f = undefined;
 };
 
 
 /**
  * Creates a deep clone of this proto. No data is shared with the original.
- * @return {!proto.proto.AddProjectsResponse} The clone.
+ * @return {!proto.proto.AddJobResponse} The clone.
  */
-proto.proto.AddProjectsResponse.prototype.cloneMessage = function() {
-  return /** @type {!proto.proto.AddProjectsResponse} */ (jspb.Message.cloneMessage(this));
+proto.proto.AddJobResponse.prototype.cloneMessage = function() {
+  return /** @type {!proto.proto.AddJobResponse} */ (jspb.Message.cloneMessage(this));
 };
 
 
@@ -2846,12 +2762,12 @@ proto.proto.AddProjectsResponse.prototype.cloneMessage = function() {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.proto.AddProjectsRequest = function(opt_data) {
+proto.proto.AddJobRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.proto.AddProjectsRequest, jspb.Message);
+goog.inherits(proto.proto.AddJobRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.proto.AddProjectsRequest.displayName = 'proto.proto.AddProjectsRequest';
+  proto.proto.AddJobRequest.displayName = 'proto.proto.AddJobRequest';
 }
 
 
@@ -2866,8 +2782,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.proto.AddProjectsRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.proto.AddProjectsRequest.toObject(opt_includeInstance, this);
+proto.proto.AddJobRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.proto.AddJobRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -2876,12 +2792,12 @@ proto.proto.AddProjectsRequest.prototype.toObject = function(opt_includeInstance
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.proto.AddProjectsRequest} msg The msg instance to transform.
+ * @param {!proto.proto.AddJobRequest} msg The msg instance to transform.
  * @return {!Object}
  */
-proto.proto.AddProjectsRequest.toObject = function(includeInstance, msg) {
+proto.proto.AddJobRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    projects: (f = msg.getProjects()) && proto.proto.Projects.toObject(includeInstance, f)
+    job: (f = msg.getJob()) && proto.proto.Job.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -2895,23 +2811,23 @@ proto.proto.AddProjectsRequest.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.proto.AddProjectsRequest}
+ * @return {!proto.proto.AddJobRequest}
  */
-proto.proto.AddProjectsRequest.deserializeBinary = function(bytes) {
+proto.proto.AddJobRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.proto.AddProjectsRequest;
-  return proto.proto.AddProjectsRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.proto.AddJobRequest;
+  return proto.proto.AddJobRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.proto.AddProjectsRequest} msg The message object to deserialize into.
+ * @param {!proto.proto.AddJobRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.proto.AddProjectsRequest}
+ * @return {!proto.proto.AddJobRequest}
  */
-proto.proto.AddProjectsRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.proto.AddJobRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -2919,9 +2835,9 @@ proto.proto.AddProjectsRequest.deserializeBinaryFromReader = function(msg, reade
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new proto.proto.Projects;
-      reader.readMessage(value,proto.proto.Projects.deserializeBinaryFromReader);
-      msg.setProjects(value);
+      var value = new proto.proto.Job;
+      reader.readMessage(value,proto.proto.Job.deserializeBinaryFromReader);
+      msg.setJob(value);
       break;
     default:
       reader.skipField();
@@ -2935,10 +2851,10 @@ proto.proto.AddProjectsRequest.deserializeBinaryFromReader = function(msg, reade
 /**
  * Class method variant: serializes the given message to binary data
  * (in protobuf wire format), writing to the given BinaryWriter.
- * @param {!proto.proto.AddProjectsRequest} message
+ * @param {!proto.proto.AddJobRequest} message
  * @param {!jspb.BinaryWriter} writer
  */
-proto.proto.AddProjectsRequest.serializeBinaryToWriter = function(message, writer) {
+proto.proto.AddJobRequest.serializeBinaryToWriter = function(message, writer) {
   message.serializeBinaryToWriter(writer);
 };
 
@@ -2947,7 +2863,7 @@ proto.proto.AddProjectsRequest.serializeBinaryToWriter = function(message, write
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.proto.AddProjectsRequest.prototype.serializeBinary = function() {
+proto.proto.AddJobRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
   this.serializeBinaryToWriter(writer);
   return writer.getResultBuffer();
@@ -2959,14 +2875,14 @@ proto.proto.AddProjectsRequest.prototype.serializeBinary = function() {
  * writing to the given BinaryWriter.
  * @param {!jspb.BinaryWriter} writer
  */
-proto.proto.AddProjectsRequest.prototype.serializeBinaryToWriter = function (writer) {
+proto.proto.AddJobRequest.prototype.serializeBinaryToWriter = function (writer) {
   var f = undefined;
-  f = this.getProjects();
+  f = this.getJob();
   if (f != null) {
     writer.writeMessage(
       1,
       f,
-      proto.proto.Projects.serializeBinaryToWriter
+      proto.proto.Job.serializeBinaryToWriter
     );
   }
 };
@@ -2974,31 +2890,31 @@ proto.proto.AddProjectsRequest.prototype.serializeBinaryToWriter = function (wri
 
 /**
  * Creates a deep clone of this proto. No data is shared with the original.
- * @return {!proto.proto.AddProjectsRequest} The clone.
+ * @return {!proto.proto.AddJobRequest} The clone.
  */
-proto.proto.AddProjectsRequest.prototype.cloneMessage = function() {
-  return /** @type {!proto.proto.AddProjectsRequest} */ (jspb.Message.cloneMessage(this));
+proto.proto.AddJobRequest.prototype.cloneMessage = function() {
+  return /** @type {!proto.proto.AddJobRequest} */ (jspb.Message.cloneMessage(this));
 };
 
 
 /**
- * optional Projects projects = 1;
- * @return {proto.proto.Projects}
+ * optional Job job = 1;
+ * @return {proto.proto.Job}
  */
-proto.proto.AddProjectsRequest.prototype.getProjects = function() {
-  return /** @type{proto.proto.Projects} */ (
-    jspb.Message.getWrapperField(this, proto.proto.Projects, 1));
+proto.proto.AddJobRequest.prototype.getJob = function() {
+  return /** @type{proto.proto.Job} */ (
+    jspb.Message.getWrapperField(this, proto.proto.Job, 1));
 };
 
 
-/** @param {proto.proto.Projects|undefined} value  */
-proto.proto.AddProjectsRequest.prototype.setProjects = function(value) {
+/** @param {proto.proto.Job|undefined} value  */
+proto.proto.AddJobRequest.prototype.setJob = function(value) {
   jspb.Message.setWrapperField(this, 1, value);
 };
 
 
-proto.proto.AddProjectsRequest.prototype.clearProjects = function() {
-  this.setProjects(undefined);
+proto.proto.AddJobRequest.prototype.clearJob = function() {
+  this.setJob(undefined);
 };
 
 
@@ -3006,7 +2922,625 @@ proto.proto.AddProjectsRequest.prototype.clearProjects = function() {
  * Returns whether this field is set.
  * @return{!boolean}
  */
-proto.proto.AddProjectsRequest.prototype.hasProjects = function() {
+proto.proto.AddJobRequest.prototype.hasJob = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.proto.AddProjectResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.proto.AddProjectResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.proto.AddProjectResponse.displayName = 'proto.proto.AddProjectResponse';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.proto.AddProjectResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.proto.AddProjectResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.proto.AddProjectResponse} msg The msg instance to transform.
+ * @return {!Object}
+ */
+proto.proto.AddProjectResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.proto.AddProjectResponse}
+ */
+proto.proto.AddProjectResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.proto.AddProjectResponse;
+  return proto.proto.AddProjectResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.proto.AddProjectResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.proto.AddProjectResponse}
+ */
+proto.proto.AddProjectResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Class method variant: serializes the given message to binary data
+ * (in protobuf wire format), writing to the given BinaryWriter.
+ * @param {!proto.proto.AddProjectResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.proto.AddProjectResponse.serializeBinaryToWriter = function(message, writer) {
+  message.serializeBinaryToWriter(writer);
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.proto.AddProjectResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  this.serializeBinaryToWriter(writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format),
+ * writing to the given BinaryWriter.
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.proto.AddProjectResponse.prototype.serializeBinaryToWriter = function (writer) {
+  var f = undefined;
+};
+
+
+/**
+ * Creates a deep clone of this proto. No data is shared with the original.
+ * @return {!proto.proto.AddProjectResponse} The clone.
+ */
+proto.proto.AddProjectResponse.prototype.cloneMessage = function() {
+  return /** @type {!proto.proto.AddProjectResponse} */ (jspb.Message.cloneMessage(this));
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.proto.AddProjectRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.proto.AddProjectRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.proto.AddProjectRequest.displayName = 'proto.proto.AddProjectRequest';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.proto.AddProjectRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.proto.AddProjectRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.proto.AddProjectRequest} msg The msg instance to transform.
+ * @return {!Object}
+ */
+proto.proto.AddProjectRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    project: (f = msg.getProject()) && proto.proto.Project.toObject(includeInstance, f)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.proto.AddProjectRequest}
+ */
+proto.proto.AddProjectRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.proto.AddProjectRequest;
+  return proto.proto.AddProjectRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.proto.AddProjectRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.proto.AddProjectRequest}
+ */
+proto.proto.AddProjectRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.proto.Project;
+      reader.readMessage(value,proto.proto.Project.deserializeBinaryFromReader);
+      msg.setProject(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Class method variant: serializes the given message to binary data
+ * (in protobuf wire format), writing to the given BinaryWriter.
+ * @param {!proto.proto.AddProjectRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.proto.AddProjectRequest.serializeBinaryToWriter = function(message, writer) {
+  message.serializeBinaryToWriter(writer);
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.proto.AddProjectRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  this.serializeBinaryToWriter(writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format),
+ * writing to the given BinaryWriter.
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.proto.AddProjectRequest.prototype.serializeBinaryToWriter = function (writer) {
+  var f = undefined;
+  f = this.getProject();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.proto.Project.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * Creates a deep clone of this proto. No data is shared with the original.
+ * @return {!proto.proto.AddProjectRequest} The clone.
+ */
+proto.proto.AddProjectRequest.prototype.cloneMessage = function() {
+  return /** @type {!proto.proto.AddProjectRequest} */ (jspb.Message.cloneMessage(this));
+};
+
+
+/**
+ * optional Project project = 1;
+ * @return {proto.proto.Project}
+ */
+proto.proto.AddProjectRequest.prototype.getProject = function() {
+  return /** @type{proto.proto.Project} */ (
+    jspb.Message.getWrapperField(this, proto.proto.Project, 1));
+};
+
+
+/** @param {proto.proto.Project|undefined} value  */
+proto.proto.AddProjectRequest.prototype.setProject = function(value) {
+  jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+proto.proto.AddProjectRequest.prototype.clearProject = function() {
+  this.setProject(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return{!boolean}
+ */
+proto.proto.AddProjectRequest.prototype.hasProject = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.proto.AddSkillResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.proto.AddSkillResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.proto.AddSkillResponse.displayName = 'proto.proto.AddSkillResponse';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.proto.AddSkillResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.proto.AddSkillResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.proto.AddSkillResponse} msg The msg instance to transform.
+ * @return {!Object}
+ */
+proto.proto.AddSkillResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.proto.AddSkillResponse}
+ */
+proto.proto.AddSkillResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.proto.AddSkillResponse;
+  return proto.proto.AddSkillResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.proto.AddSkillResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.proto.AddSkillResponse}
+ */
+proto.proto.AddSkillResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Class method variant: serializes the given message to binary data
+ * (in protobuf wire format), writing to the given BinaryWriter.
+ * @param {!proto.proto.AddSkillResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.proto.AddSkillResponse.serializeBinaryToWriter = function(message, writer) {
+  message.serializeBinaryToWriter(writer);
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.proto.AddSkillResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  this.serializeBinaryToWriter(writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format),
+ * writing to the given BinaryWriter.
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.proto.AddSkillResponse.prototype.serializeBinaryToWriter = function (writer) {
+  var f = undefined;
+};
+
+
+/**
+ * Creates a deep clone of this proto. No data is shared with the original.
+ * @return {!proto.proto.AddSkillResponse} The clone.
+ */
+proto.proto.AddSkillResponse.prototype.cloneMessage = function() {
+  return /** @type {!proto.proto.AddSkillResponse} */ (jspb.Message.cloneMessage(this));
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.proto.AddSkillRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.proto.AddSkillRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.proto.AddSkillRequest.displayName = 'proto.proto.AddSkillRequest';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.proto.AddSkillRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.proto.AddSkillRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.proto.AddSkillRequest} msg The msg instance to transform.
+ * @return {!Object}
+ */
+proto.proto.AddSkillRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    skill: (f = msg.getSkill()) && proto.proto.Skill.toObject(includeInstance, f)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.proto.AddSkillRequest}
+ */
+proto.proto.AddSkillRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.proto.AddSkillRequest;
+  return proto.proto.AddSkillRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.proto.AddSkillRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.proto.AddSkillRequest}
+ */
+proto.proto.AddSkillRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.proto.Skill;
+      reader.readMessage(value,proto.proto.Skill.deserializeBinaryFromReader);
+      msg.setSkill(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Class method variant: serializes the given message to binary data
+ * (in protobuf wire format), writing to the given BinaryWriter.
+ * @param {!proto.proto.AddSkillRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.proto.AddSkillRequest.serializeBinaryToWriter = function(message, writer) {
+  message.serializeBinaryToWriter(writer);
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.proto.AddSkillRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  this.serializeBinaryToWriter(writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format),
+ * writing to the given BinaryWriter.
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.proto.AddSkillRequest.prototype.serializeBinaryToWriter = function (writer) {
+  var f = undefined;
+  f = this.getSkill();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.proto.Skill.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * Creates a deep clone of this proto. No data is shared with the original.
+ * @return {!proto.proto.AddSkillRequest} The clone.
+ */
+proto.proto.AddSkillRequest.prototype.cloneMessage = function() {
+  return /** @type {!proto.proto.AddSkillRequest} */ (jspb.Message.cloneMessage(this));
+};
+
+
+/**
+ * optional Skill skill = 1;
+ * @return {proto.proto.Skill}
+ */
+proto.proto.AddSkillRequest.prototype.getSkill = function() {
+  return /** @type{proto.proto.Skill} */ (
+    jspb.Message.getWrapperField(this, proto.proto.Skill, 1));
+};
+
+
+/** @param {proto.proto.Skill|undefined} value  */
+proto.proto.AddSkillRequest.prototype.setSkill = function(value) {
+  jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+proto.proto.AddSkillRequest.prototype.clearSkill = function() {
+  this.setSkill(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return{!boolean}
+ */
+proto.proto.AddSkillRequest.prototype.hasSkill = function() {
   return jspb.Message.getField(this, 1) != null;
 };
 

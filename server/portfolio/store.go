@@ -70,19 +70,14 @@ func (*API) addJob(company, dates, description, jobTitle, location, logoURL stri
 	return nil
 }
 
-func (*API) addProject(description, meta, title string) error {
+func (*API) addProject(project *proto.Projects) error {
 	db, err := storm.Open("my.db")
 	if err != nil {
 		return grpc.Errorf(codes.Internal, "server error")
 	}
 	defer db.Close()
 	id := uuid.New().ID()
-	project := proto.Project{
-		ID:          id,
-		Title:       title,
-		Meta:        meta,
-		Description: description,
-	}
+	project.ID = id
 	if err := db.Save(&project); err == storm.ErrAlreadyExists {
 		return grpc.Errorf(codes.AlreadyExists, "project already exists")
 	}
