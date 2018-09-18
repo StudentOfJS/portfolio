@@ -34,7 +34,7 @@ export default () => (
             </Header>
             <p>
               If you like what you see, I'm available to hire.
-              I specialise in React applications and can architect a backend to meet most needs.
+              I specialize in React applications and can architect a backend to meet most needs.
               Whether that's a simple JSON/HTML api or a complex gRPC deployment, I have you covered.
               Pricing Min $1500, $50p/h
             </p>
