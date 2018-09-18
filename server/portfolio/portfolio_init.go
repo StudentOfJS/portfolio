@@ -5,6 +5,7 @@ import (
 	"github.com/studentofjs/portfolio/server/proto"
 )
 
+// InitCV initializes the data in the database
 func InitCV() {
 	var a *API
 	var Bio *proto.Bio
@@ -14,84 +15,84 @@ func InitCV() {
 
 	Courses := []*proto.Course{
 		{
-			ID:          uuid.New().ID(),
+			ID:          1,
 			Institution: "PluralSight, Udemy, CodeSchool",
 			Description: "40+ courses, 1000+hrs ",
 			Dates:       "February 2017 - June 2018",
 			Name:        "Go, Solidity, Haskell, Elm, JS, ES6-ES7, MongoDB, SQL, PostgreSQL, React",
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          2,
 			Institution: "FreeCodeCamp",
 			Description: "Certification, representing approximately 400 hours of coursework",
 			Dates:       "September 2016 - September 2017",
 			Name:        "Front End Development Program Certificate",
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          3,
 			Institution: "IBM",
 			Description: "Intro to hyperledger",
 			Dates:       "August 2017",
 			Name:        "Blockchain Essentials",
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          4,
 			Institution: "DataCamp",
 			Description: "Intermediate R and Intermediate Python for Data Science",
 			Dates:       "February 2016 - September 2016",
 			Name:        "",
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          5,
 			Institution: "The Hong Kong University of Science and Technology",
 			Description: "final grade: 100%",
 			Dates:       "September, 2016",
 			Name:        "Front-End Web UI Frameworks and Tools",
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          6,
 			Institution: "MITx",
 			Description: "final grade: 93%",
 			Dates:       "Nov, 2016",
 			Name:        "Introduction to Computer Science and Programming Using Python",
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          7,
 			Institution: "Microsoft",
 			Description: "final grade: 90%",
 			Dates:       "June, 2016",
 			Name:        "DAT209x Programming in R for Data Science",
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          8,
 			Institution: "Microsoft",
 			Description: "final grade: 92%",
 			Dates:       " April, 2016",
 			Name:        "DAT204x Introduction to R Programming",
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          9,
 			Institution: "Microsoft",
 			Description: "final grade: 92%",
 			Dates:       " April, 2016",
 			Name:        "DAT204x Introduction to R Programming",
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          10,
 			Institution: "Global Knowledge",
 			Description: "AWS Certified Solutions Architect Associate",
 			Dates:       "April 2015",
 			Name:        "Architecting on AWS",
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          11,
 			Institution: "Bolitho",
 			Description: "Computing - A, Art - B,  Business studies - C",
 			Dates:       "1998 - 2000",
 			Name:        "A levels",
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          12,
 			Institution: "King's School",
 			Description: "10 grade A-C",
 			Dates:       "1994-1998",
@@ -156,15 +157,6 @@ func InitCV() {
 			Dates:       "10/2007 to 04/2009",
 			Description: "",
 			LogoUrl:     "https://media.licdn.com/dms/image/C4D0BAQFnqVwyqwr-Gw/company-logo_200_200/0?e=1545264000&v=beta&t=95FCovYn5YRjAaa3SNmPSi0jGiXpgCwqu1l7kWVFZJw",
-		},
-		{
-			ID:          7,
-			Company:     "BRG Direct Ltd",
-			JobTitle:    "IT Support",
-			Location:    "Cornwall, UK",
-			Dates:       "10/2007 to 04/2009",
-			Description: "",
-			LogoUrl:     "",
 		},
 	}
 	for _, job := range Jobs {
