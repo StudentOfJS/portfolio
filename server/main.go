@@ -15,11 +15,8 @@ import (
 	"google.golang.org/grpc/grpclog"
 )
 
-func init() {
-	portfolio.InitCV()
-}
-
 func main() {
+	portfolio.InitCV()
 	grpcServer := grpc.NewServer()
 
 	portfolioService := portfolio.NewPortfolioService(nil)

@@ -8,10 +8,10 @@ import (
 // InitCV initializes the data in the database
 func InitCV() {
 	var a *API
-	var Bio *proto.Bio
+	var Bio proto.Bio
 	Bio.Description = "Rod's BIO description"
 	Bio.Title = "Rod's BIO"
-	a.addBio(Bio)
+	a.addBio(&Bio)
 
 	Courses := []*proto.Course{
 		{
