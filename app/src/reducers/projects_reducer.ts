@@ -1,6 +1,6 @@
-import { portfolio, RootAction } from '../actions';
-import { getType } from 'typesafe-actions';
+import { RootAction } from '../actions';
 import { Projects } from '../proto/portfolio_pb';
+import { ADD_PROJECTS } from '../actions/portfolioActions';
 
 export type ProjectState = {
   readonly projects: Projects.AsObject | null;
@@ -23,7 +23,7 @@ export default function (
   action: RootAction
 ): ProjectState {
   switch (action.type) {
-    case getType(portfolio.addProjects):
+    case ADD_PROJECTS:
       return {
         ...state,
         loading: false,
