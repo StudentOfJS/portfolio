@@ -1,6 +1,6 @@
-import { portfolio, RootAction } from '../actions';
-import { getType } from 'typesafe-actions';
+import { RootAction } from '../actions';
 import { Bio, Education, Experience, Skills } from '../proto/portfolio_pb';
+import { ADD_BIO, ADD_EDUCATION, ADD_EXPERIENCE, ADD_SKILLS } from '../actions/portfolioActions';
 
 export type CVState = {
   readonly bio: Bio.AsObject | null;
@@ -30,19 +30,19 @@ export default function (
   action: RootAction
 ): CVState {
   switch (action.type) {
-    case getType(portfolio.addBio):
-      const bio = action.payload.toObject();
+    case ADD_BIO:
+      const bio = action && action.payload.toObject();
       return { ...state, bio };
 
-    case getType(portfolio.addEducation):
+    case ADD_EDUCATION:
       const education: Education.AsObject = action.payload.toObject();
       return { ...state, education };
 
-    case getType(portfolio.addSkills):
+    case ADD_SKILLS:
       const skills: Skills.AsObject = action.payload.toObject();
       return { ...state, skills };
 
-    case getType(portfolio.addExperience):
+    case ADD_EXPERIENCE:
       const experience: Experience.AsObject = action.payload.toObject();
       return { ...state, experience };
     default:

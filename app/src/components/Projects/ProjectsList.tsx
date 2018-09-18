@@ -4,7 +4,7 @@ import { portfolio, RootAction } from '../../actions';
 import { Card, Icon, List } from 'semantic-ui-react';
 import { RootState } from '../../reducers';
 import { ProjectState } from '../../reducers/projects_reducer';
-import * as images from './images'
+import * as images from './images';
 
 type IProjectsProps = {
   pobj: ProjectState,
@@ -19,7 +19,7 @@ const extra = (
 );
 
 class ProjectsList extends React.Component<IProjectsProps, {}> {
-  public componentDidMount = async () => {
+  public async componentDidMount() {
     await this.props.fetchProjects();
   }
   public render() {

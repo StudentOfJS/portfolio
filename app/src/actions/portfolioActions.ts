@@ -1,5 +1,4 @@
 import { Action } from 'redux';
-import { action } from 'typesafe-actions';
 import {
   Bio,
   Education,
@@ -27,20 +26,45 @@ export const CV_INIT = 'CV_INIT';
 export const BIO_INIT = 'BIO_INIT';
 export const PROJECT_INIT = 'PROJECT_INIT';
 
-export const addBio = (bio: Bio) => action(ADD_BIO, bio);
-export const addEducation = (edu: Education) => action(ADD_EDUCATION, edu);
-export const addSkills = (skills: Skills) => action(ADD_SKILLS, skills);
-export const addExperience = (exp: Experience) => action(ADD_EXPERIENCE, exp);
-export const addProjects = (proj: Projects) => action(ADD_PROJECTS, proj);
+type AddSkills = {
+  type: typeof ADD_SKILLS,
+  payload: Skills,
+};
+export const addSkills = (skills: Skills) => ({ type: ADD_SKILLS, payload: skills });
 
-export const BIOInit = () => action(BIO_INIT);
-export const CVInit = () => action(CV_INIT);
-export const ProjectsInit = () => action(PROJECT_INIT);
+type AddExperience = {
+  type: typeof ADD_EXPERIENCE,
+  payload: Experience,
+};
+export const addExperience = (exp: Experience) => ({ type: ADD_EXPERIENCE, payload: exp });
+
+type AddEducation = {
+  type: typeof ADD_EDUCATION,
+  payload: Education,
+};
+export const addEducation = (edu: Education) => ({ type: ADD_EDUCATION, payload: edu });
+
+type AddBio = {
+  type: typeof ADD_BIO,
+  payload: Bio,
+};
+export const addBio = (bio: Bio) => ({ type: ADD_BIO, payload: bio });
+
+type AddProjects = {
+  type: typeof ADD_PROJECTS,
+  payload: Projects,
+};
+export const addProjects = (projects: Projects) => ({ type: ADD_PROJECTS, payload: projects });
+
+type ListProjectsInit = {
+  type: typeof PROJECT_INIT,
+};
+export const listProjectsInit = (): ListProjectsInit => ({ type: PROJECT_INIT });
 
 export const initializeProjects = () => {
   return grpcRequest<ListProjectsRequest, ListProjectsResponse>({
     request: new ListProjectsRequest(),
-    onStart: () => ProjectsInit(),
+    onStart: () => listProjectsInit(),
     onEnd: (
       code: Code,
       message: string | undefined,
@@ -61,10 +85,15 @@ export const initializeProjects = () => {
   });
 };
 
+type ListBioInit = {
+  type: typeof BIO_INIT,
+};
+export const listBioInit = (): ListBioInit => ({ type: BIO_INIT });
+
 export const initializeBio = () => {
   return grpcRequest<GetBioRequest, GetBioResponse>({
     request: new GetBioRequest(),
-    onStart: () => BIOInit(),
+    onStart: () => listBioInit(),
     onEnd: (
       code: Code,
       message: string | undefined,
@@ -85,10 +114,15 @@ export const initializeBio = () => {
   });
 };
 
+type ListCVInit = {
+  type: typeof CV_INIT,
+};
+export const listCVInit = (): ListCVInit => ({ type: CV_INIT });
+
 export const initializeCV = () => {
   return grpcRequest<GetCVRequest, GetCVResponse>({
     request: new GetCVRequest(),
-    onStart: () => CVInit(),
+    onStart: () => listCVInit(),
     onEnd: (
       code: Code,
       message: string | undefined,
@@ -118,6 +152,14 @@ export const initializeCV = () => {
 };
 
 export type PortfolioActionTypes =
+  | AddBio
+  | AddExperience
+  | AddEducation
+  | AddSkills
+  | ListProjectsInit
+  | ListBioInit
+  | ListCVInit
+  | AddProjects
   | GrpcAction<ListProjectsRequest, ListProjectsResponse>
   | GrpcAction<GetBioRequest, GetBioResponse>
   | GrpcAction<GetCVRequest, GetCVResponse>;

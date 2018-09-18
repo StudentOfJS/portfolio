@@ -14,7 +14,7 @@ type ICvViewProps = {
 };
 
 class CvView extends React.Component<RouteComponentProps & ICvViewProps> {
-  public componentDidMount = async () => {
+  public async componentDidMount() {
     await this.props.fetchCV();
   }
   public render() {
