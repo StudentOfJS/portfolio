@@ -2,9 +2,6 @@ package portfolio
 
 import (
 	"testing"
-
-	"github.com/asdine/storm"
-	"github.com/studentofjs/portfolio/server/proto"
 )
 
 func TestAddBio(t *testing.T) {
@@ -57,21 +54,35 @@ func TestAddCourse(t *testing.T) {
 	}
 	err := addCourse(course, false)
 	if err != nil {
-		t.Errorf("adding bio failed: %v", err)
+		t.Errorf("adding course failed: %v", err)
 	}
+}
 
-	db, err := storm.Open("test.db")
-	defer db.Close()
+func TestUpdateCourse(t *testing.T) {
+	course := Course{
+		ID:          1,
+		Institution: "test",
+		Description: "test",
+		Dates:       "February 2017 - June 2018",
+		Name:        "test",
+	}
+	if err := updateCourse(course, false); err != nil {
+		t.Errorf("updating course failed with error: %v", err)
+	}
+}
+
+func TestGetCourses(t *testing.T) {
+	b, err := getEducation(false)
 	if err != nil {
-		t.Errorf("opening test db failed: %v", err)
+		t.Errorf("failed to fetch courses: %v", err)
 	}
+	if len(b) != 1 {
+		t.Errorf("expected 1 course to be returned, got %d", len(b))
+	}
+}
 
-	var c proto.Course
-	if err := db.One("ID", 1, &c); err != nil {
-		t.Errorf("dropping Course bucket failed: %v", err)
+func TestDeleteCourse(t *testing.T) {
+	if err := deleteCourse(1, false); err != nil {
+		t.Errorf("failed to delete course: %v", err)
 	}
-	t.Errorf("items: %s", c.Name)
-	// if err := db.Init(&proto.Course{}); err != nil {
-	// 	t.Errorf("initializing bucket failed: %v", err)
-	// }
 }

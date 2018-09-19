@@ -285,7 +285,7 @@ func updateBio(bio Bio, prod bool) error {
 	return nil
 }
 
-func updateCourse(course *Course, prod bool) error {
+func updateCourse(course Course, prod bool) error {
 	db, err := storm.Open(getDb(prod))
 	if err != nil {
 		return errors.New("server error")
@@ -303,7 +303,7 @@ func updateCourse(course *Course, prod bool) error {
 	return nil
 }
 
-func updateJob(job *Job, prod bool) error {
+func updateJob(job Job, prod bool) error {
 	db, err := storm.Open(getDb(prod))
 	if err != nil {
 		return errors.New("server error")
@@ -321,7 +321,7 @@ func updateJob(job *Job, prod bool) error {
 	return nil
 }
 
-func updateProject(project *Project, prod bool) error {
+func updateProject(project Project, prod bool) error {
 	db, err := storm.Open(getDb(prod))
 	if err != nil {
 		return errors.New("server error")
@@ -339,7 +339,7 @@ func updateProject(project *Project, prod bool) error {
 	return nil
 }
 
-func updateSkill(skill *Skill, prod bool) error {
+func updateSkill(skill Skill, prod bool) error {
 	db, err := storm.Open(getDb(prod))
 	if err != nil {
 		return errors.New("server error")
