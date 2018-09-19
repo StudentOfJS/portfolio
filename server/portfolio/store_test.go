@@ -86,3 +86,50 @@ func TestDeleteCourse(t *testing.T) {
 		t.Errorf("failed to delete course: %v", err)
 	}
 }
+
+func TestAddJob(t *testing.T) {
+	job := Job{
+		ID:          4,
+		Company:     "BlueBox",
+		JobTitle:    "Technical Analyst​",
+		Location:    "Perth, Australia",
+		Dates:       "10/2012 to 05/2013",
+		Description: "AWS Sharepoint farm installs.",
+		LogoUrl:     "https://media.licdn.com/dms/image/C560BAQHm3FChBd3YoA/company-logo_200_200/0?e=1545264000&v=beta&t=fnucaxUy24KjL69AuYXHclAEX7odNVovkpAGs7ZwK_c",
+	}
+	err := addJob(job, false)
+	if err != nil {
+		t.Errorf("adding job failed: %v", err)
+	}
+}
+
+func TestUpdateJob(t *testing.T) {
+	job := Job{
+		ID:          4,
+		Company:     "ByteCloud",
+		JobTitle:    "SEO consultant /web developer",
+		Location:    "Perth, WA",
+		Dates:       "​05/2013 to 02/2015",
+		Description: "Provided website performance upgrades, SEO advice, hosting setup and backup service setup",
+		LogoUrl:     "https://media.licdn.com/dms/image/C4E0BAQEfpJxTAStdZw/company-logo_200_200/0?e=1545264000&v=beta&t=F4oZkwk5x4e-_5Cwn6MTO3rrMELOOPMm_lcjESkjCmc",
+	}
+	if err := updateJob(job, false); err != nil {
+		t.Errorf("updating job failed with error: %v", err)
+	}
+}
+
+func TestGetJobs(t *testing.T) {
+	b, err := getExperience(false)
+	if err != nil {
+		t.Errorf("failed to fetch jobs: %v", err)
+	}
+	if len(b) != 1 {
+		t.Errorf("expected 1 job to be returned, got %d", len(b))
+	}
+}
+
+func TestDeleteJob(t *testing.T) {
+	if err := deleteJob(4, false); err != nil {
+		t.Errorf("failed to delete job: %v", err)
+	}
+}
