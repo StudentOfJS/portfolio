@@ -174,3 +174,46 @@ func TestDeleteSkill(t *testing.T) {
 		t.Errorf("failed to delete skill: %v", err)
 	}
 }
+
+func TestAddProject(t *testing.T) {
+	project := Project{
+		ID:          1,
+		Description: "This site! I decided to make the most complicated portfolio site I could imagine at the time. I had just finished a short tutorial on protocol buffers and wanting to learn more. Obviously, the best plan of action would be to reverse engineer an example. In order to be able to have a reasonable visual represention of my work, a frontend was required. The only gRPC web client in production at time of writting is improbable's. This limited my options to their hackernews app, for which I'm very grateful",
+		Meta:        "TypeScript, Go, gRPC, protocol buffers",
+		Title:       "portfolio",
+		Repo:        "https://github.com/StudentOfJS/portfolio",
+	}
+	err := addProject(project, false)
+	if err != nil {
+		t.Errorf("adding project failed: %v", err)
+	}
+}
+
+func TestUpdateProject(t *testing.T) {
+	project := Project{
+		ID:          1,
+		Description: "Moonrock TGE site is an ERC20 ICO site and contract. The ERC20 contract is written in Solidity and testing is achieved using the truffle framework, web3 and Jest. The website is written in TypeScript and uses React",
+		Meta:        "Ethereum, Solidity, TypeScript, React",
+		Title:       "Moonrock",
+		Repo:        "https://github.com/StudentOfJS/Moonrocks",
+	}
+	if err := updateProject(project, false); err != nil {
+		t.Errorf("updating project failed with error: %v", err)
+	}
+}
+
+func TestGetProjects(t *testing.T) {
+	b, err := getProjects(false)
+	if err != nil {
+		t.Errorf("failed to fetch projects: %v", err)
+	}
+	if len(b) != 1 {
+		t.Errorf("expected 1 project to be returned, got %d", len(b))
+	}
+}
+
+func TestDeleteProject(t *testing.T) {
+	if err := deleteProject(1, false); err != nil {
+		t.Errorf("failed to delete project: %v", err)
+	}
+}
