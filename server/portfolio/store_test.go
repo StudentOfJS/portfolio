@@ -4,38 +4,51 @@ import (
 	"testing"
 
 	"github.com/asdine/storm"
-	"github.com/asdine/storm/codec/protobuf"
 	"github.com/studentofjs/portfolio/server/proto"
 )
 
-func TestBio(t *testing.T) {
-	var bio Bio
-	bio.Description = "test"
-	bio.Title = "test"
+func TestAddBio(t *testing.T) {
+	bio := Bio{
+		ID:          1,
+		Description: "test",
+		Title:       "test",
+	}
+
 	if err := addBio(bio, false); err != nil {
 		t.Errorf("adding bio failed: %v", err)
 	}
 
-	db, err := storm.Open("test.db")
-	defer db.Close()
-	if err != nil {
-		t.Errorf("opening test db failed: %v", err)
+}
+
+func TestUpdateBio(t *testing.T) {
+	bio := Bio{
+		ID:          1,
+		Description: "test",
+		Title:       "test 2",
 	}
-	if _, err := getBio(false); err != nil {
-		t.Errorf("fetching bio failed with error: %v", err)
-	}
-	bio.Title = "test 2"
 	if err := updateBio(bio, false); err != nil {
 		t.Errorf("updating bio failed with error: %v", err)
 	}
+}
 
-	if err := deleteBio(bio.ID, false); err != nil {
+func TestGetBio(t *testing.T) {
+	b, err := getBio(false)
+	if err != nil {
+		t.Errorf("failed to fetch bio: %v", err)
+	}
+	if b.Description != "test" {
+		t.Errorf("fetched wrong bio: %v", err)
+	}
+}
+
+func TestDeleteBio(t *testing.T) {
+	if err := deleteBio(1, false); err != nil {
 		t.Errorf("failed to delete bio: %v", err)
 	}
 }
 
 func TestAddCourse(t *testing.T) {
-	course := proto.Course{
+	course := Course{
 		ID:          1,
 		Institution: "PluralSight, Udemy, CodeSchool",
 		Description: "40+ courses, 1000+hrs ",
@@ -47,7 +60,7 @@ func TestAddCourse(t *testing.T) {
 		t.Errorf("adding bio failed: %v", err)
 	}
 
-	db, err := storm.Open("test.db", storm.Codec(protobuf.Codec))
+	db, err := storm.Open("test.db")
 	defer db.Close()
 	if err != nil {
 		t.Errorf("opening test db failed: %v", err)

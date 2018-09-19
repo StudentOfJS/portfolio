@@ -17,7 +17,7 @@ func NewService() *Service {
 }
 
 func (s *Service) AddBio(ctx context.Context, req *proto.AddBioRequest) (*proto.AddBioResponse, error) {
-	err := addBio(&Bio{
+	err := addBio(Bio{
 		Description: req.Bio.GetDescription(),
 		Title:       req.Bio.GetTitle(),
 	}, true)
@@ -32,7 +32,7 @@ func (s *Service) AddBio(ctx context.Context, req *proto.AddBioRequest) (*proto.
 
 func (s *Service) AddCourse(ctx context.Context, req *proto.AddCourseRequest) (*proto.AddCourseResponse, error) {
 	newCourse := req.GetCourse()
-	course := &Course{
+	course := Course{
 		ID:          uuid.New().ID(),
 		Institution: newCourse.GetInstitution(),
 		Description: newCourse.GetDescription(),
@@ -51,7 +51,7 @@ func (s *Service) AddCourse(ctx context.Context, req *proto.AddCourseRequest) (*
 
 func (s *Service) AddJob(ctx context.Context, req *proto.AddJobRequest) (*proto.AddJobResponse, error) {
 	newJob := req.GetJob()
-	job := &Job{
+	job := Job{
 		ID:          uuid.New().ID(),
 		Company:     newJob.GetCompany(),
 		JobTitle:    newJob.GetJobTitle(),
@@ -72,7 +72,7 @@ func (s *Service) AddJob(ctx context.Context, req *proto.AddJobRequest) (*proto.
 
 func (s *Service) AddProject(ctx context.Context, req *proto.AddProjectRequest) (*proto.AddProjectResponse, error) {
 	newProject := req.GetProject()
-	project := &Project{
+	project := Project{
 		ID:          uuid.New().ID(),
 		Title:       newProject.GetTitle(),
 		Meta:        newProject.GetMeta(),
@@ -91,7 +91,7 @@ func (s *Service) AddProject(ctx context.Context, req *proto.AddProjectRequest) 
 
 func (s *Service) AddSkill(ctx context.Context, req *proto.AddSkillRequest) (*proto.AddSkillResponse, error) {
 	newSkill := req.GetSkill()
-	skill := &Skill{
+	skill := Skill{
 		ID:          uuid.New().ID(),
 		Name:        newSkill.GetName(),
 		Description: newSkill.GetDescription(),

@@ -53,20 +53,20 @@ func getDb(prod bool) string {
 	return dbName[prod]
 }
 
-func addBio(bio *Bio, prod bool) error {
+func addBio(bio Bio, prod bool) error {
 	db, err := storm.Open(getDb(prod))
 	if err != nil {
 		return errors.New("server error")
 	}
 	defer db.Close()
 
-	if err := db.Save(&bio); err == storm.ErrAlreadyExists {
-		return errors.New("bio already exists")
+	if err := db.Save(&bio); err != nil {
+		return err
 	}
 	return nil
 }
 
-func addCourse(course *Course, prod bool) error {
+func addCourse(course Course, prod bool) error {
 	db, err := storm.Open(getDb(prod))
 	if err != nil {
 		return errors.New("server error")
@@ -78,7 +78,7 @@ func addCourse(course *Course, prod bool) error {
 	return nil
 }
 
-func addJob(job *Job, prod bool) error {
+func addJob(job Job, prod bool) error {
 	db, err := storm.Open(getDb(prod))
 	if err != nil {
 		return errors.New("server error")
@@ -90,7 +90,7 @@ func addJob(job *Job, prod bool) error {
 	return nil
 }
 
-func addProject(project *Project, prod bool) error {
+func addProject(project Project, prod bool) error {
 	db, err := storm.Open(getDb(prod))
 	if err != nil {
 		return errors.New("server error")
@@ -103,7 +103,7 @@ func addProject(project *Project, prod bool) error {
 	return nil
 }
 
-func addSkill(skill *Skill, prod bool) error {
+func addSkill(skill Skill, prod bool) error {
 	db, err := storm.Open(getDb(prod))
 	if err != nil {
 		return errors.New("server error")
@@ -267,7 +267,7 @@ func getSkills(prod bool) ([]*Skill, error) {
 	return skills, nil
 }
 
-func updateBio(bio *Bio, prod bool) error {
+func updateBio(bio Bio, prod bool) error {
 	db, err := storm.Open(getDb(prod))
 	if err != nil {
 		return errors.New("server error")

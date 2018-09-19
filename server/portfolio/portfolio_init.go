@@ -10,7 +10,7 @@ func InitCV() {
 		Description: "Rod's BIO description",
 		Title:       "Rod's BIO",
 	}
-	addBio(&b, true)
+	addBio(b, true)
 
 	Courses := []Course{
 		{
@@ -99,7 +99,7 @@ func InitCV() {
 		},
 	}
 	for _, course := range Courses {
-		addCourse(&course, true)
+		addCourse(course, true)
 	}
 
 	Jobs := []Job{
@@ -159,7 +159,7 @@ func InitCV() {
 		},
 	}
 	for _, job := range Jobs {
-		addJob(&job, true)
+		addJob(job, true)
 	}
 
 	Projects := []Project{
@@ -207,7 +207,7 @@ func InitCV() {
 		},
 	}
 	for _, project := range Projects {
-		addProject(&project, true)
+		addProject(project, true)
 	}
 
 	Skills := []Skill{
@@ -274,6 +274,6 @@ func InitCV() {
 	}
 
 	for _, skill := range Skills {
-		addSkill(&skill, true)
+		addSkill(skill, true)
 	}
 }
