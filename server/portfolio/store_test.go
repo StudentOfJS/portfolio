@@ -133,3 +133,44 @@ func TestDeleteJob(t *testing.T) {
 		t.Errorf("failed to delete job: %v", err)
 	}
 }
+
+func TestAddSkill(t *testing.T) {
+	skill := Skill{
+		ID:          1,
+		Description: "JS",
+		Name:        "React",
+		Rating:      9,
+	}
+	err := addSkill(skill, false)
+	if err != nil {
+		t.Errorf("adding skill failed: %v", err)
+	}
+}
+
+func TestUpdateSkill(t *testing.T) {
+	skill := Skill{
+		ID:          1,
+		Description: "html/JSON, GraphQL, gRPC",
+		Name:        "API integration",
+		Rating:      9,
+	}
+	if err := updateSkill(skill, false); err != nil {
+		t.Errorf("updating skill failed with error: %v", err)
+	}
+}
+
+func TestGetSkills(t *testing.T) {
+	b, err := getSkills(false)
+	if err != nil {
+		t.Errorf("failed to fetch skills: %v", err)
+	}
+	if len(b) != 1 {
+		t.Errorf("expected 1 skill to be returned, got %d", len(b))
+	}
+}
+
+func TestDeleteSkill(t *testing.T) {
+	if err := deleteSkill(1, false); err != nil {
+		t.Errorf("failed to delete skill: %v", err)
+	}
+}
