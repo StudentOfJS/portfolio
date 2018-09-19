@@ -3,6 +3,8 @@ package portfolio
 import (
 	"context"
 
+	"github.com/google/uuid"
+
 	"github.com/studentofjs/portfolio/server/proto"
 )
 
@@ -15,109 +17,195 @@ func NewService() *Service {
 }
 
 func (s *Service) AddBio(ctx context.Context, req *proto.AddBioRequest) (*proto.AddBioResponse, error) {
-	err := addBio(req.Bio.GetDescription(), req.Bio.GetTitle(), true)
-	var bio *proto.AddBioResponse
+	err := addBio(&Bio{
+		Description: req.Bio.GetDescription(),
+		Title:       req.Bio.GetTitle(),
+	}, true)
+	var res *proto.AddBioResponse
 	if err != nil {
 		ctx.Err()
-		return bio, err
+		return res, err
 	}
 	ctx.Done()
-	return bio, nil
+	return res, nil
 }
 
 func (s *Service) AddCourse(ctx context.Context, req *proto.AddCourseRequest) (*proto.AddCourseResponse, error) {
-	err := addCourse(*req.Course, true)
-	var course *proto.AddCourseResponse
+	newCourse := req.GetCourse()
+	course := &Course{
+		ID:          uuid.New().ID(),
+		Institution: newCourse.GetInstitution(),
+		Description: newCourse.GetDescription(),
+		Dates:       newCourse.GetDates(),
+		Name:        newCourse.GetName(),
+	}
+	err := addCourse(course, true)
+	var res *proto.AddCourseResponse
 	if err != nil {
 		ctx.Err()
-		return course, err
+		return res, err
 	}
 	ctx.Done()
-	return course, nil
+	return res, nil
 }
 
 func (s *Service) AddJob(ctx context.Context, req *proto.AddJobRequest) (*proto.AddJobResponse, error) {
-	err := addJob(*req.Job, true)
-	var job *proto.AddJobResponse
+	newJob := req.GetJob()
+	job := &Job{
+		ID:          uuid.New().ID(),
+		Company:     newJob.GetCompany(),
+		JobTitle:    newJob.GetJobTitle(),
+		Location:    newJob.GetLocation(),
+		Dates:       newJob.GetDates(),
+		Description: newJob.GetDescription(),
+		LogoUrl:     newJob.GetLogoUrl(),
+	}
+	err := addJob(job, true)
+	var res *proto.AddJobResponse
 	if err != nil {
 		ctx.Err()
-		return job, err
+		return res, err
 	}
 	ctx.Done()
-	return job, nil
+	return res, nil
 }
 
 func (s *Service) AddProject(ctx context.Context, req *proto.AddProjectRequest) (*proto.AddProjectResponse, error) {
-	err := addProject(*req.Project, true)
-	var project *proto.AddProjectResponse
+	newProject := req.GetProject()
+	project := &Project{
+		ID:          uuid.New().ID(),
+		Title:       newProject.GetTitle(),
+		Meta:        newProject.GetMeta(),
+		Repo:        newProject.GetRepo(),
+		Description: newProject.GetDescription(),
+	}
+	err := addProject(project, true)
+	var res *proto.AddProjectResponse
 	if err != nil {
 		ctx.Err()
-		return project, err
+		return res, err
 	}
 	ctx.Done()
-	return project, nil
+	return res, nil
 }
 
 func (s *Service) AddSkill(ctx context.Context, req *proto.AddSkillRequest) (*proto.AddSkillResponse, error) {
-	err := addSkill(*req.Skill, true)
-	var skill *proto.AddSkillResponse
+	newSkill := req.GetSkill()
+	skill := &Skill{
+		ID:          uuid.New().ID(),
+		Name:        newSkill.GetName(),
+		Description: newSkill.GetDescription(),
+		Rating:      newSkill.GetRating(),
+	}
+	err := addSkill(skill, true)
+	var res *proto.AddSkillResponse
 	if err != nil {
 		ctx.Err()
-		return skill, err
+		return res, err
 	}
 	ctx.Done()
-	return skill, nil
+	return res, nil
 }
 
 func (s *Service) GetBio(ctx context.Context, req *proto.GetBioRequest) (*proto.GetBioResponse, error) {
 	b, err := getBio(true)
-	var bio *proto.GetBioResponse
+	var bio *proto.Bio
+	bio.Title = b.Title
+	bio.Description = b.Description
+
+	var res *proto.GetBioResponse
 	if err != nil {
 		ctx.Err()
-		return bio, err
+		return res, err
 	}
-	bio.Bio = b
-	ctx.Value(bio)
+	res.Bio = bio
+	ctx.Value(res)
 	ctx.Done()
-	return bio, nil
+	return res, nil
 }
 
 func (s *Service) ListProjects(ctx context.Context, req *proto.ListProjectsRequest) (*proto.ListProjectsResponse, error) {
 	p, err := getProjects(true)
-	var projects *proto.ListProjectsResponse
+	var projects *proto.Projects
+	for _, project := range p {
+		newProject := proto.Project{
+			ID:          project.ID,
+			Title:       project.Title,
+			Meta:        project.Meta,
+			Repo:        project.Repo,
+			Description: project.Description,
+		}
+		projects.Projects = append(projects.Projects, &newProject)
+	}
+	var res *proto.ListProjectsResponse
 	if err != nil {
 		ctx.Err()
-		return projects, err
+		return res, err
 	}
-	projects.Projects = p
-	ctx.Value(projects)
+	res.Projects = projects
+	ctx.Value(res)
 	ctx.Done()
-	return projects, nil
+	return res, nil
 }
 
 func (s *Service) GetCV(ctx context.Context, req *proto.GetCVRequest) (*proto.GetCVResponse, error) {
-	var cv *proto.GetCVResponse
+	var res *proto.GetCVResponse
 	edu, err := getEducation(true)
 	if err != nil {
 		ctx.Err()
-		return cv, nil
+		return res, nil
+	}
+	var courses *proto.Education
+	for _, course := range edu {
+		newCourse := proto.Course{
+			ID:          course.ID,
+			Institution: course.Institution,
+			Description: course.Description,
+			Dates:       course.Dates,
+			Name:        course.Name,
+		}
+		courses.Courses = append(courses.Courses, &newCourse)
 	}
 	exp, err := getExperience(true)
 	if err != nil {
 		ctx.Err()
-		return cv, nil
+		return res, nil
 	}
-	skills, err := getSkills(true)
+	var jobs *proto.Experience
+	for _, job := range exp {
+		newJob := proto.Job{
+			ID:          job.ID,
+			Company:     job.Company,
+			Description: job.Description,
+			Dates:       job.Dates,
+			JobTitle:    job.JobTitle,
+			Location:    job.Location,
+			LogoUrl:     job.LogoUrl,
+		}
+		jobs.Jobs = append(jobs.Jobs, &newJob)
+	}
+
+	sk, err := getSkills(true)
 	if err != nil {
 		ctx.Err()
-		return cv, nil
+		return res, nil
 	}
-	cv.Courses = edu
-	cv.Jobs = exp
-	cv.Skills = skills
+	var skills *proto.Skills
+	for _, skill := range sk {
+		newSkill := proto.Skill{
+			ID:          skill.ID,
+			Rating:      skill.Rating,
+			Description: skill.Description,
+			Name:        skill.Name,
+		}
+		skills.Skills = append(skills.Skills, &newSkill)
+	}
+	res.Courses = courses
+	res.Jobs = jobs
+	res.Skills = skills
 
-	ctx.Value(cv)
+	ctx.Value(res)
 	ctx.Done()
 
-	return cv, nil
+	return res, nil
 }

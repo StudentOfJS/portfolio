@@ -8,9 +8,11 @@ import (
 	"github.com/studentofjs/portfolio/server/proto"
 )
 
-func TestAddBio(t *testing.T) {
-	err := addBio("test", "test", false)
-	if err != nil {
+func TestBio(t *testing.T) {
+	var bio Bio
+	bio.Description = "test"
+	bio.Title = "test"
+	if err := addBio(bio, false); err != nil {
 		t.Errorf("adding bio failed: %v", err)
 	}
 
@@ -19,12 +21,16 @@ func TestAddBio(t *testing.T) {
 	if err != nil {
 		t.Errorf("opening test db failed: %v", err)
 	}
-	var bio Bio
-	if err := db.One("ID", 1, &bio); err != nil {
-		t.Errorf("dropping Bio bucket failed: %v", err)
+	if _, err := getBio(false); err != nil {
+		t.Errorf("fetching bio failed with error: %v", err)
 	}
-	if err := db.DeleteStruct(&bio); err != nil {
-		t.Errorf("failed to delete test %v", err)
+	bio.Title = "test 2"
+	if err := updateBio(bio, false); err != nil {
+		t.Errorf("updating bio failed with error: %v", err)
+	}
+
+	if err := deleteBio(bio.ID, false); err != nil {
+		t.Errorf("failed to delete bio: %v", err)
 	}
 }
 

@@ -90,7 +90,7 @@ func addJob(job *Job, prod bool) error {
 	return nil
 }
 
-func addProject(project Project, prod bool) error {
+func addProject(project *Project, prod bool) error {
 	db, err := storm.Open(getDb(prod))
 	if err != nil {
 		return errors.New("server error")
@@ -103,7 +103,7 @@ func addProject(project Project, prod bool) error {
 	return nil
 }
 
-func addSkill(skill Skill, prod bool) error {
+func addSkill(skill *Skill, prod bool) error {
 	db, err := storm.Open(getDb(prod))
 	if err != nil {
 		return errors.New("server error")
