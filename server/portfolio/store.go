@@ -1,365 +1,357 @@
 package portfolio
 
 import (
+	"errors"
+	"fmt"
+
 	"github.com/asdine/storm"
-	"github.com/google/uuid"
-	"github.com/studentofjs/portfolio/server/proto"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"
 )
 
-// API contains the methods for interacting with the database
-type API struct{}
-
-// NewPortfolioAPI returns the API
-func NewPortfolioAPI() *API {
-	return &API{}
+type Bio struct {
+	ID          int    `storm:"id,increment"`
+	Description string `storm:"unique"`
+	Title       string
 }
 
-func (a *API) addBio(bio *proto.Bio) error {
-	db, err := storm.Open("my.db")
+type Course struct {
+	ID          uint32 `storm:"id"`
+	Institution string
+	Description string
+	Dates       string
+	Name        string
+}
+
+type Job struct {
+	ID          uint32 `storm:"id"`
+	Company     string `storm:"index"`
+	JobTitle    string
+	Location    string
+	Dates       string
+	Description string
+	LogoUrl     string
+}
+
+type Project struct {
+	ID          uint32 `storm:"id"`
+	Title       string `storm:"index"`
+	Meta        string
+	Description string
+	Repo        string
+}
+
+type Skill struct {
+	ID          uint32 `storm:"id"`
+	Name        string `storm:"index"`
+	Rating      uint32 `storm:"index"`
+	Description string
+}
+
+func getDb(prod bool) string {
+	var dbName = make(map[bool]string)
+	dbName[true] = "my.db"
+	dbName[false] = "test.db"
+	return dbName[prod]
+}
+
+func addBio(bio *Bio, prod bool) error {
+	db, err := storm.Open(getDb(prod))
 	if err != nil {
-		return grpc.Errorf(codes.Internal, "server error")
+		return errors.New("server error")
 	}
 	defer db.Close()
+
 	if err := db.Save(&bio); err == storm.ErrAlreadyExists {
-		return grpc.Errorf(codes.AlreadyExists, "bio already exists")
+		return errors.New("bio already exists")
 	}
 	return nil
 }
 
-func (a *API) addCourse(course *proto.Course) error {
-	db, err := storm.Open("my.db")
+func addCourse(course *Course, prod bool) error {
+	db, err := storm.Open(getDb(prod))
 	if err != nil {
-		return grpc.Errorf(codes.Internal, "server error")
+		return errors.New("server error")
 	}
 	defer db.Close()
-	id := uuid.New().ID()
-	course.ID = id
 	if err := db.Save(&course); err == storm.ErrAlreadyExists {
-		return grpc.Errorf(codes.AlreadyExists, "course already exists")
+		return errors.New("course already exists")
 	}
 	return nil
 }
 
-func (a *API) addJob(job *proto.Job) error {
-	db, err := storm.Open("my.db")
+func addJob(job *Job, prod bool) error {
+	db, err := storm.Open(getDb(prod))
 	if err != nil {
-		return grpc.Errorf(codes.Internal, "server error")
+		return errors.New("server error")
 	}
 	defer db.Close()
-	id := uuid.New().ID()
-	job.ID = id
 	if err := db.Save(&job); err == storm.ErrAlreadyExists {
-		return grpc.Errorf(codes.AlreadyExists, "job already exists")
+		return errors.New("job already exists")
 	}
 	return nil
 }
 
-func (a *API) addProject(project *proto.Project) error {
-	db, err := storm.Open("my.db")
+func addProject(project Project, prod bool) error {
+	db, err := storm.Open(getDb(prod))
 	if err != nil {
-		return grpc.Errorf(codes.Internal, "server error")
+		return errors.New("server error")
 	}
 	defer db.Close()
-	id := uuid.New().ID()
-	project.ID = id
+
 	if err := db.Save(&project); err == storm.ErrAlreadyExists {
-		return grpc.Errorf(codes.AlreadyExists, "project already exists")
+		return errors.New("project already exists")
 	}
 	return nil
 }
 
-func (a *API) addSkill(skill *proto.Skill) error {
-	db, err := storm.Open("my.db")
+func addSkill(skill Skill, prod bool) error {
+	db, err := storm.Open(getDb(prod))
 	if err != nil {
-		return grpc.Errorf(codes.Internal, "server error")
+		return errors.New("server error")
 	}
 	defer db.Close()
-	id := uuid.New().ID()
-	skill.ID = id
+
 	if err := db.Save(&skill); err == storm.ErrAlreadyExists {
-		return grpc.Errorf(codes.AlreadyExists, "skill already exists")
+		return errors.New("skill already exists")
 	}
 	return nil
 }
 
-func (a *API) deleteBio(title string, description string) error {
-	db, err := storm.Open("my.db")
+func deleteBio(id int, prod bool) error {
+	db, err := storm.Open(getDb(prod))
 	if err != nil {
-		return grpc.Errorf(codes.Internal, "server error")
+		return errors.New("server error")
 	}
 	defer db.Close()
-	bio := proto.Bio{
-		Title:       title,
-		Description: description,
+
+	var bio Bio
+	if err := db.One("ID", id, &bio); err != nil {
+		return fmt.Errorf("bio not found: %v", err)
 	}
 	if err := db.DeleteStruct(&bio); err != nil {
-		return grpc.Errorf(codes.NotFound, "bio does not exist")
+		fmt.Errorf("failed to delete bio %v", err)
 	}
 	return nil
 }
 
-func (a *API) deleteCourse(id uint32) error {
-	db, err := storm.Open("my.db")
+func deleteCourse(id uint32, prod bool) error {
+	db, err := storm.Open(getDb(prod))
 	if err != nil {
-		return grpc.Errorf(codes.Internal, "server error")
+		return errors.New("server error")
 	}
 	defer db.Close()
-	var course proto.Course
-
-	if err := db.Find("ID", id, &course); err == storm.ErrNotFound {
-		return grpc.Errorf(codes.NotFound, "course not found")
+	var course Course
+	if err := db.One("ID", id, &course); err != nil {
+		return fmt.Errorf("failed to find course: %v", err)
 	}
 	if err := db.DeleteStruct(&course); err != nil {
-		return grpc.Errorf(codes.Internal, "course found, but can't delete")
+		fmt.Errorf("failed to delete course %v", err)
 	}
 
 	return nil
 }
 
-func (a *API) deleteJob(id uint32) error {
-	db, err := storm.Open("my.db")
+func deleteJob(id uint32, prod bool) error {
+	db, err := storm.Open(getDb(prod))
 	if err != nil {
-		return grpc.Errorf(codes.Internal, "server error")
+		return errors.New("server error")
 	}
 	defer db.Close()
-	var job proto.Job
-	if err := db.Find("ID", id, &job); err == storm.ErrNotFound {
-		return grpc.Errorf(codes.NotFound, "job not found")
+	var job Job
+	if err := db.One("ID", id, &job); err != nil {
+		return fmt.Errorf("failed to find job: %v", err)
 	}
 	if err := db.DeleteStruct(&job); err != nil {
-		return grpc.Errorf(codes.Internal, "job found, but can't delete")
+		fmt.Errorf("failed to delete job %v", err)
 	}
 	return nil
 }
 
-func (a *API) deleteProject(id uint32) error {
-	db, err := storm.Open("my.db")
+func deleteProject(id uint32, prod bool) error {
+	db, err := storm.Open(getDb(prod))
 	if err != nil {
-		return grpc.Errorf(codes.Internal, "server error")
+		return errors.New("server error")
 	}
 	defer db.Close()
-	var project proto.Project
-	if err := db.Find("ID", id, &project); err == storm.ErrNotFound {
-		return grpc.Errorf(codes.NotFound, "project not found")
+	var project Project
+	if err := db.One("ID", id, &project); err != nil {
+		return fmt.Errorf("failed to find project: %v", err)
 	}
 	if err := db.DeleteStruct(&project); err != nil {
-		return grpc.Errorf(codes.Internal, "project found, but can't delete")
+		fmt.Errorf("failed to delete project %v", err)
 	}
 	return nil
 }
 
-func (a *API) deleteSkill(id uint32) error {
-	db, err := storm.Open("my.db")
+func deleteSkill(id uint32, prod bool) error {
+	db, err := storm.Open(getDb(prod))
 	if err != nil {
-		return grpc.Errorf(codes.Internal, "server error")
+		return errors.New("server error")
 	}
 	defer db.Close()
-
-	var skill proto.Skill
-	if err := db.Find("ID", id, &skill); err == storm.ErrNotFound {
-		return grpc.Errorf(codes.NotFound, "skill not found")
+	var skill Skill
+	if err := db.One("ID", id, &skill); err != nil {
+		return fmt.Errorf("failed to find skill: %v", err)
 	}
 	if err := db.DeleteStruct(&skill); err != nil {
-		return grpc.Errorf(codes.Internal, "skill found, but can't delete")
+		fmt.Errorf("failed to delete skill %v", err)
 	}
 	return nil
 }
 
-func (a *API) getBio() (*proto.Bio, error) {
-	db, err := storm.Open("my.db")
+func getBio(prod bool) (*Bio, error) {
+	db, err := storm.Open(getDb(prod))
 	if err != nil {
-		return nil, grpc.Errorf(codes.Internal, "server error")
+		return nil, errors.New("server error")
 	}
 	defer db.Close()
-	var bio []*proto.Bio
+	var bio []*Bio
 
 	if err := db.All(&bio); err != nil {
-		return bio[0], grpc.Errorf(codes.NotFound, "bio not found")
+		return bio[0], errors.New("bio not found")
 	}
 	return bio[0], nil
 }
 
-func (a *API) getEducation() (*proto.Education, error) {
-	db, err := storm.Open("my.db")
+func getEducation(prod bool) ([]*Course, error) {
+	db, err := storm.Open(getDb(prod))
 	if err != nil {
-		return nil, grpc.Errorf(codes.Internal, "server error")
+		return nil, errors.New("server error")
 	}
 	defer db.Close()
-	var courses []*proto.Course
-	var edu *proto.Education
+	var courses []*Course
 
 	if err := db.All(&courses); err != nil {
-		return edu, grpc.Errorf(codes.NotFound, "no course found")
+		return courses, errors.New("no course found")
 	}
-	edu.Courses = courses
-	return edu, nil
+
+	return courses, nil
 }
 
-func (a *API) getExperience() (*proto.Experience, error) {
-	db, err := storm.Open("my.db")
+func getExperience(prod bool) ([]*Job, error) {
+	db, err := storm.Open(getDb(prod))
 	if err != nil {
-		return nil, grpc.Errorf(codes.Internal, "server error")
+		return nil, errors.New("server error")
 	}
 	defer db.Close()
-	var jobs []*proto.Job
-	var experience *proto.Experience
+	var jobs []*Job
 
 	if err := db.All(&jobs); err != nil {
-		return experience, grpc.Errorf(codes.NotFound, "no job found")
+		return jobs, errors.New("no job found")
 	}
-
-	experience.Jobs = jobs
-	return experience, nil
+	return jobs, nil
 }
 
-func (a *API) getProjects() (*proto.Projects, error) {
-	db, err := storm.Open("my.db")
+func getProjects(prod bool) ([]*Project, error) {
+	db, err := storm.Open(getDb(prod))
 	if err != nil {
-		return nil, grpc.Errorf(codes.Internal, "server error")
+		return nil, errors.New("server error")
 	}
 	defer db.Close()
-	var p []*proto.Project
-	var projects *proto.Projects
-	if err := db.All(&p); err != nil {
-		return projects, grpc.Errorf(codes.NotFound, "no project found")
+	var projects []*Project
+	if err := db.All(&projects); err != nil {
+		return projects, errors.New("no project found")
 	}
-
-	projects.Projects = p
 	return projects, nil
 }
 
-func (a *API) getSkills() (*proto.Skills, error) {
-	db, err := storm.Open("my.db")
+func getSkills(prod bool) ([]*Skill, error) {
+	db, err := storm.Open(getDb(prod))
 	if err != nil {
-		return nil, grpc.Errorf(codes.Internal, "server error")
+		return nil, errors.New("server error")
 	}
 	defer db.Close()
-	var s []*proto.Skill
-	var skills *proto.Skills
-	if err := db.All(&s); err != nil {
-		return skills, grpc.Errorf(codes.NotFound, "no skill found")
+	var skills []*Skill
+	if err := db.All(&skills); err != nil {
+		return skills, errors.New("no skills found")
 	}
-
-	skills.Skills = s
 	return skills, nil
 }
 
-func (a *API) updateBio(title string, description string) error {
-	db, err := storm.Open("my.db")
+func updateBio(bio *Bio, prod bool) error {
+	db, err := storm.Open(getDb(prod))
 	if err != nil {
-		return grpc.Errorf(codes.Internal, "server error")
+		return errors.New("server error")
 	}
 	defer db.Close()
-	bio := proto.Bio{
-		Title:       title,
-		Description: description,
-	}
+
 	if err := db.Update(&bio); err != nil {
 		switch err {
 		case storm.ErrNotFound:
-			return grpc.Errorf(codes.NotFound, "bio not found")
+			return errors.New("bio not found")
 		default:
-			return grpc.Errorf(codes.Internal, "server error")
+			return errors.New("server error")
 		}
 	}
 	return nil
 }
 
-func (a *API) updateCourse(id uint32, institution string, description string, dates string, name string) error {
-	db, err := storm.Open("my.db")
+func updateCourse(course *Course, prod bool) error {
+	db, err := storm.Open(getDb(prod))
 	if err != nil {
-		return grpc.Errorf(codes.Internal, "server error")
+		return errors.New("server error")
 	}
 	defer db.Close()
-	course := proto.Course{
-		ID:          id,
-		Institution: institution,
-		Description: description,
-		Dates:       dates,
-		Name:        name,
-	}
+
 	if err := db.Update(&course); err != nil {
 		switch err {
 		case storm.ErrNotFound:
-			return grpc.Errorf(codes.NotFound, "course not found")
+			return errors.New("course not found")
 		default:
-			return grpc.Errorf(codes.Internal, "server error")
+			return errors.New("server error")
 		}
 	}
 	return nil
 }
 
-func (a *API) updateJob(id uint32, company, dates, description, jobTitle, location, logoURL string) error {
-	db, err := storm.Open("my.db")
+func updateJob(job *Job, prod bool) error {
+	db, err := storm.Open(getDb(prod))
 	if err != nil {
-		return grpc.Errorf(codes.Internal, "server error")
+		return errors.New("server error")
 	}
 	defer db.Close()
-	job := proto.Job{
-		ID:          id,
-		Company:     company,
-		Dates:       dates,
-		Description: description,
-		JobTitle:    jobTitle,
-		Location:    location,
-		LogoUrl:     logoURL,
-	}
+
 	if err := db.Update(&job); err != nil {
 		switch err {
 		case storm.ErrNotFound:
-			return grpc.Errorf(codes.NotFound, "job not found")
+			return errors.New("job not found")
 		default:
-			return grpc.Errorf(codes.Internal, "server error")
+			return errors.New("server error")
 		}
 	}
 	return nil
 }
 
-func (a *API) updateProject(id uint32, description, meta, title string) error {
-	db, err := storm.Open("my.db")
+func updateProject(project *Project, prod bool) error {
+	db, err := storm.Open(getDb(prod))
 	if err != nil {
-		return grpc.Errorf(codes.Internal, "server error")
+		return errors.New("server error")
 	}
 	defer db.Close()
 
-	project := proto.Project{
-		ID:          id,
-		Title:       title,
-		Meta:        meta,
-		Description: description,
-	}
 	if err := db.Update(&project); err != nil {
 		switch err {
 		case storm.ErrNotFound:
-			return grpc.Errorf(codes.NotFound, "project not found")
+			return errors.New("project not found")
 		default:
-			return grpc.Errorf(codes.Internal, "server error")
+			return errors.New("server error")
 		}
 	}
 	return nil
 }
 
-func (a *API) updateSkill(id uint32, institution string, description string, rating uint32, name string) error {
-	db, err := storm.Open("my.db")
+func updateSkill(skill *Skill, prod bool) error {
+	db, err := storm.Open(getDb(prod))
 	if err != nil {
-		return grpc.Errorf(codes.Internal, "server error")
+		return errors.New("server error")
 	}
 	defer db.Close()
 
-	skill := proto.Skill{
-		ID:          id,
-		Description: description,
-		Rating:      rating,
-		Name:        name,
-	}
 	if err := db.Update(&skill); err != nil {
 		switch err {
 		case storm.ErrNotFound:
-			return grpc.Errorf(codes.NotFound, "skill not found")
+			return errors.New("skill not found")
 		default:
-			return grpc.Errorf(codes.Internal, "server error")
+			return errors.New("server error")
 		}
 	}
 	return nil

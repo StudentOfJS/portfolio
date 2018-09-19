@@ -61,14 +61,14 @@ message Experience {
 }
 
 service PortfolioService {
-    rpc AddBio (AddBioRequest) returns (stream AddBioResponse);
-    rpc AddCourse(AddCourseRequest) returns (stream AddCourseResponse);
-    rpc AddJob(AddJobRequest) returns (stream AddJobResponse);
-    rpc AddProject (AddProjectRequest) returns (stream AddProjectResponse);
-    rpc AddSkill(AddSkillRequest) returns (stream AddSkillResponse);
-    rpc GetBio (GetBioRequest) returns (stream GetBioResponse);
-    rpc GetCV (GetCVRequest) returns (stream GetCVResponse);
-    rpc ListProjects (ListProjectsRequest) returns (stream ListProjectsResponse);
+    rpc AddBio (AddBioRequest) returns (AddBioResponse);
+    rpc AddCourse(AddCourseRequest) returns (AddCourseResponse);
+    rpc AddJob(AddJobRequest) returns (AddJobResponse);
+    rpc AddProject (AddProjectRequest) returns (AddProjectResponse);
+    rpc AddSkill(AddSkillRequest) returns (AddSkillResponse);
+    rpc GetBio (GetBioRequest) returns (GetBioResponse);
+    rpc GetCV (GetCVRequest) returns (GetCVResponse);
+    rpc ListProjects (ListProjectsRequest) returns (ListProjectsResponse);
 }
 
 

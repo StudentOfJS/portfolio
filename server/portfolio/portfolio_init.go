@@ -7,13 +7,11 @@ import (
 
 // InitCV initializes the data in the database
 func InitCV() {
-	var a *API
-	var Bio proto.Bio
-	Bio.Description = "Rod's BIO description"
-	Bio.Title = "Rod's BIO"
-	a.addBio(&Bio)
+	d := "Rod's BIO description"
+	t := "Rod's BIO"
+	addBio(d, t, true)
 
-	Courses := []*proto.Course{
+	Courses := []proto.Course{
 		{
 			ID:          1,
 			Institution: "PluralSight, Udemy, CodeSchool",
@@ -100,10 +98,10 @@ func InitCV() {
 		},
 	}
 	for _, course := range Courses {
-		a.addCourse(course)
+		addCourse(course, true)
 	}
 
-	Jobs := []*proto.Job{
+	Jobs := []proto.Job{
 		{
 			ID:          1,
 			Company:     "Moonrock",
@@ -160,10 +158,10 @@ func InitCV() {
 		},
 	}
 	for _, job := range Jobs {
-		a.addJob(job)
+		addJob(job, true)
 	}
 
-	Projects := []*proto.Project{
+	Projects := []proto.Project{
 		{
 			ID:          1,
 			Description: "This site! I decided to make the most complicated portfolio site I could imagine at the time. I had just finished a short tutorial on protocol buffers and wanting to learn more. Obviously, the best plan of action would be to reverse engineer an example. In order to be able to have a reasonable visual represention of my work, a frontend was required. The only gRPC web client in production at time of writting is improbable's. This limited my options to their hackernews app, for which I'm very grateful",
@@ -208,10 +206,10 @@ func InitCV() {
 		},
 	}
 	for _, project := range Projects {
-		a.addProject(project)
+		addProject(project, true)
 	}
 
-	Skills := []*proto.Skill{
+	Skills := []proto.Skill{
 		{
 			ID:          uuid.New().ID(),
 			Description: "JS",
@@ -275,6 +273,6 @@ func InitCV() {
 	}
 
 	for _, skill := range Skills {
-		a.addSkill(skill)
+		addSkill(skill, true)
 	}
 }

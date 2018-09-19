@@ -1,108 +1,123 @@
 package portfolio
 
 import (
+	"context"
+
 	"github.com/studentofjs/portfolio/server/proto"
 )
 
 // Service is the portfolio service struct containing the service methods
-type Service struct {
-	api *API
+type Service struct{}
+
+// NewService returns a pointer to the Service struct
+func NewService() *Service {
+	return &Service{}
 }
 
-// NewPortfolioService returns the api
-func NewPortfolioService(api *API) *Service {
-	if api == nil {
-		api = NewPortfolioAPI()
-	}
-	return &Service{api}
-}
-
-func (s *Service) AddBio(req *proto.AddBioRequest, res proto.PortfolioService_AddBioServer) error {
-	err := s.api.addBio(req.Bio)
+func (s *Service) AddBio(ctx context.Context, req *proto.AddBioRequest) (*proto.AddBioResponse, error) {
+	err := addBio(req.Bio.GetDescription(), req.Bio.GetTitle(), true)
+	var bio *proto.AddBioResponse
 	if err != nil {
-		return err
+		ctx.Err()
+		return bio, err
 	}
-	res.Send(nil)
-	return nil
+	ctx.Done()
+	return bio, nil
 }
 
-func (s *Service) AddCourse(req *proto.AddCourseRequest, res proto.PortfolioService_AddCourseServer) error {
-	err := s.api.addCourse(req.Course)
+func (s *Service) AddCourse(ctx context.Context, req *proto.AddCourseRequest) (*proto.AddCourseResponse, error) {
+	err := addCourse(*req.Course, true)
+	var course *proto.AddCourseResponse
 	if err != nil {
-		return err
+		ctx.Err()
+		return course, err
 	}
-	res.Send(nil)
-	return nil
+	ctx.Done()
+	return course, nil
 }
 
-func (s *Service) AddJob(req *proto.AddJobRequest, res proto.PortfolioService_AddJobServer) error {
-	err := s.api.addJob(req.Job)
+func (s *Service) AddJob(ctx context.Context, req *proto.AddJobRequest) (*proto.AddJobResponse, error) {
+	err := addJob(*req.Job, true)
+	var job *proto.AddJobResponse
 	if err != nil {
-		return err
+		ctx.Err()
+		return job, err
 	}
-	res.Send(nil)
-	return nil
+	ctx.Done()
+	return job, nil
 }
 
-func (s *Service) AddProject(req *proto.AddProjectRequest, res proto.PortfolioService_AddProjectServer) error {
-	err := s.api.addProject(req.Project)
+func (s *Service) AddProject(ctx context.Context, req *proto.AddProjectRequest) (*proto.AddProjectResponse, error) {
+	err := addProject(*req.Project, true)
+	var project *proto.AddProjectResponse
 	if err != nil {
-		return nil
+		ctx.Err()
+		return project, err
 	}
-	res.Send(nil)
-	return nil
+	ctx.Done()
+	return project, nil
 }
 
-func (s *Service) AddSkill(req *proto.AddSkillRequest, res proto.PortfolioService_AddSkillServer) error {
-	err := s.api.addSkill(req.Skill)
+func (s *Service) AddSkill(ctx context.Context, req *proto.AddSkillRequest) (*proto.AddSkillResponse, error) {
+	err := addSkill(*req.Skill, true)
+	var skill *proto.AddSkillResponse
 	if err != nil {
-		return nil
+		ctx.Err()
+		return skill, err
 	}
-	res.Send(nil)
-	return nil
+	ctx.Done()
+	return skill, nil
 }
 
-func (s *Service) GetBio(req *proto.GetBioRequest, res proto.PortfolioService_GetBioServer) error {
-	b, err := s.api.getBio()
-	if err != nil {
-		return err
-	}
+func (s *Service) GetBio(ctx context.Context, req *proto.GetBioRequest) (*proto.GetBioResponse, error) {
+	b, err := getBio(true)
 	var bio *proto.GetBioResponse
+	if err != nil {
+		ctx.Err()
+		return bio, err
+	}
 	bio.Bio = b
-	res.Send(bio)
-	return nil
+	ctx.Value(bio)
+	ctx.Done()
+	return bio, nil
 }
 
-func (s *Service) ListProjects(req *proto.ListProjectsRequest, res proto.PortfolioService_ListProjectsServer) error {
-	p, err := s.api.getProjects()
-	if err != nil {
-		return nil
-	}
+func (s *Service) ListProjects(ctx context.Context, req *proto.ListProjectsRequest) (*proto.ListProjectsResponse, error) {
+	p, err := getProjects(true)
 	var projects *proto.ListProjectsResponse
+	if err != nil {
+		ctx.Err()
+		return projects, err
+	}
 	projects.Projects = p
-	res.Send(projects)
-	return nil
+	ctx.Value(projects)
+	ctx.Done()
+	return projects, nil
 }
 
-func (s *Service) GetCV(req *proto.GetCVRequest, res proto.PortfolioService_GetCVServer) error {
-	edu, err := s.api.getEducation()
-	if err != nil {
-		return nil
-	}
-	exp, err := s.api.getExperience()
-	if err != nil {
-		return nil
-	}
-	skills, err := s.api.getSkills()
-	if err != nil {
-		return nil
-	}
+func (s *Service) GetCV(ctx context.Context, req *proto.GetCVRequest) (*proto.GetCVResponse, error) {
 	var cv *proto.GetCVResponse
+	edu, err := getEducation(true)
+	if err != nil {
+		ctx.Err()
+		return cv, nil
+	}
+	exp, err := getExperience(true)
+	if err != nil {
+		ctx.Err()
+		return cv, nil
+	}
+	skills, err := getSkills(true)
+	if err != nil {
+		ctx.Err()
+		return cv, nil
+	}
 	cv.Courses = edu
 	cv.Jobs = exp
 	cv.Skills = skills
 
-	res.Send(cv)
+	ctx.Value(cv)
+	ctx.Done()
 
-	return nil
+	return cv, nil
 }

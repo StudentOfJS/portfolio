@@ -13,6 +13,7 @@ var client proto.PortfolioServiceClient
 
 func main() {
 	addBioFlag := flag.Bool("addb", false, "add bio to cv")
+	getBioFlag := flag.Bool("getb", false, "get bio from server")
 	flag.Parse()
 
 	conn, err := grpc.Dial("localhost:8900", grpc.WithInsecure())
@@ -25,11 +26,14 @@ func main() {
 	if *addBioFlag {
 		addBio()
 	}
+	if *getBioFlag {
+		getBio()
+	}
 
 }
 
 func addBio() {
-	bio, err := client.AddBio(context.Background(), &proto.AddBioRequest{
+	b, err := client.AddBio(context.Background(), &proto.AddBioRequest{
 		Bio: &proto.Bio{
 			Title:       "Rod's Bio",
 			Description: "Rod's Bio Description",
@@ -39,6 +43,17 @@ func addBio() {
 	if err != nil {
 		log.Fatalf("unable to add bio: %v", err)
 	}
+	log.Printf("added bio, %s", b.String())
+}
 
-	log.Printf("new Bio: %s\n", bio)
+func getBio() {
+	bio, err := client.GetBio(context.Background(), &proto.GetBioRequest{})
+	if err != nil {
+		log.Fatalf("unable to fetch bio: %v", err)
+	}
+	log.Printf("string of bio", bio.String())
+	msg := bio.GetBio()
+
+	log.Printf("Bio: %s\n", msg.GetTitle())
+	log.Printf("Bio: %s\n", msg.GetDescription())
 }
