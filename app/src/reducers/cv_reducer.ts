@@ -1,11 +1,12 @@
 import { RootAction } from '../actions';
-import { Bio, Education, Experience, Skills } from '../proto/portfolio_pb';
-import { ADD_BIO, ADD_EDUCATION, ADD_EXPERIENCE, ADD_SKILLS } from '../actions/portfolioActions';
+import { Bio, Education, Experience, Projects, Skills } from '../proto/portfolio_pb';
+import { ADD_CV } from '../actions/portfolioActions';
 
 export type CVState = {
   readonly bio: Bio.AsObject | null;
   readonly education: Education.AsObject | null;
   readonly experience: Experience.AsObject | null;
+  readonly projects: Projects.AsObject | null;
   readonly skills: Skills.AsObject | null;
 };
 
@@ -20,6 +21,9 @@ const initialState = {
   experience: {
     jobsList: []
   },
+  projects: {
+    projectsList: []
+  },
   skills: {
     skillsList: []
   },
@@ -30,21 +34,20 @@ export default function (
   action: RootAction
 ): CVState {
   switch (action.type) {
-    case ADD_BIO:
-      const bio = action && action.payload.toObject();
-      return { ...state, bio };
-
-    case ADD_EDUCATION:
-      const education: Education.AsObject = action.payload.toObject();
-      return { ...state, education };
-
-    case ADD_SKILLS:
-      const skills: Skills.AsObject = action.payload.toObject();
-      return { ...state, skills };
-
-    case ADD_EXPERIENCE:
-      const experience: Experience.AsObject = action.payload.toObject();
-      return { ...state, experience };
+    case ADD_CV:
+      const bio = action.payload.getBio();
+      const projects = action.payload.getProjects();
+      const education = action.payload.getCourses();
+      const experience = action.payload.getJobs();
+      const skills = action.payload.getSkills();
+      const newState: CVState = {
+        bio: bio && bio.toObject() || null,
+        education: education && education.toObject() || null,
+        experience: experience && experience.toObject() || null,
+        projects: projects && projects.toObject() || null,
+        skills: skills && skills.toObject() || null,
+      };
+      return newState;
     default:
       return state;
   }
