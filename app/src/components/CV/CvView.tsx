@@ -6,7 +6,6 @@ import ExperienceList from './ExperienceList';
 import Bio from './Bio';
 import EducationList from './EducationList';
 
-
 export default class CvView extends React.Component<RouteComponentProps> {
   public render() {
     const { path } = this.props.match;
