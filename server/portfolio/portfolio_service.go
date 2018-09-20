@@ -14,11 +14,11 @@ import (
 type Service struct{}
 
 // NewService returns a pointer to the Service struct
-func NewService() *Service {
-	return &Service{}
+func NewService() Service {
+	return Service{}
 }
 
-func (s *Service) AddBio(ctx context.Context, req *proto.AddBioRequest) (*proto.AddBioResponse, error) {
+func (s Service) AddBio(ctx context.Context, req *proto.AddBioRequest) (*proto.AddBioResponse, error) {
 	err := addBio(Bio{
 		Description: req.Bio.GetDescription(),
 		Title:       req.Bio.GetTitle(),
@@ -32,7 +32,7 @@ func (s *Service) AddBio(ctx context.Context, req *proto.AddBioRequest) (*proto.
 	return res, nil
 }
 
-func (s *Service) AddCourse(ctx context.Context, req *proto.AddCourseRequest) (*proto.AddCourseResponse, error) {
+func (s Service) AddCourse(ctx context.Context, req *proto.AddCourseRequest) (*proto.AddCourseResponse, error) {
 	newCourse := req.GetCourse()
 	course := Course{
 		ID:          uuid.New().ID(),
@@ -51,7 +51,7 @@ func (s *Service) AddCourse(ctx context.Context, req *proto.AddCourseRequest) (*
 	return res, nil
 }
 
-func (s *Service) AddJob(ctx context.Context, req *proto.AddJobRequest) (*proto.AddJobResponse, error) {
+func (s Service) AddJob(ctx context.Context, req *proto.AddJobRequest) (*proto.AddJobResponse, error) {
 	newJob := req.GetJob()
 	job := Job{
 		ID:          uuid.New().ID(),
@@ -72,7 +72,7 @@ func (s *Service) AddJob(ctx context.Context, req *proto.AddJobRequest) (*proto.
 	return res, nil
 }
 
-func (s *Service) AddProject(ctx context.Context, req *proto.AddProjectRequest) (*proto.AddProjectResponse, error) {
+func (s Service) AddProject(ctx context.Context, req *proto.AddProjectRequest) (*proto.AddProjectResponse, error) {
 	newProject := req.GetProject()
 	project := Project{
 		ID:          uuid.New().ID(),
@@ -91,7 +91,7 @@ func (s *Service) AddProject(ctx context.Context, req *proto.AddProjectRequest) 
 	return res, nil
 }
 
-func (s *Service) AddSkill(ctx context.Context, req *proto.AddSkillRequest) (*proto.AddSkillResponse, error) {
+func (s Service) AddSkill(ctx context.Context, req *proto.AddSkillRequest) (*proto.AddSkillResponse, error) {
 	newSkill := req.GetSkill()
 	skill := Skill{
 		ID:          uuid.New().ID(),

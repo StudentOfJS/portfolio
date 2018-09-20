@@ -198,27 +198,32 @@ func deleteSkill(id uint32, prod bool) error {
 	return nil
 }
 
-func getBio(prod bool) (*Bio, error) {
+func getBio(prod bool) (Bio, error) {
+	var bio []Bio
 	db, err := storm.Open(getDb(prod))
 	if err != nil {
-		return nil, errors.New("server error")
+		return Bio{}, errors.New("server error")
 	}
 	defer db.Close()
-	var bio []*Bio
 
 	if err := db.All(&bio); err != nil {
-		return bio[0], errors.New("bio not found")
+		return Bio{}, errors.New("bio not found")
 	}
-	return bio[0], nil
+	if len(bio) > 0 {
+		return bio[0], nil
+	} else {
+		return Bio{}, errors.New("bio not found")
+	}
+
 }
 
-func getEducation(prod bool) ([]*Course, error) {
+func getEducation(prod bool) ([]Course, error) {
 	db, err := storm.Open(getDb(prod))
 	if err != nil {
 		return nil, errors.New("server error")
 	}
 	defer db.Close()
-	var courses []*Course
+	var courses []Course
 
 	if err := db.All(&courses); err != nil {
 		return courses, errors.New("no course found")
@@ -227,13 +232,13 @@ func getEducation(prod bool) ([]*Course, error) {
 	return courses, nil
 }
 
-func getExperience(prod bool) ([]*Job, error) {
+func getExperience(prod bool) ([]Job, error) {
 	db, err := storm.Open(getDb(prod))
 	if err != nil {
 		return nil, errors.New("server error")
 	}
 	defer db.Close()
-	var jobs []*Job
+	var jobs []Job
 
 	if err := db.All(&jobs); err != nil {
 		return jobs, errors.New("no job found")
@@ -241,26 +246,26 @@ func getExperience(prod bool) ([]*Job, error) {
 	return jobs, nil
 }
 
-func getProjects(prod bool) ([]*Project, error) {
+func getProjects(prod bool) ([]Project, error) {
 	db, err := storm.Open(getDb(prod))
 	if err != nil {
 		return nil, errors.New("server error")
 	}
 	defer db.Close()
-	var projects []*Project
+	var projects []Project
 	if err := db.All(&projects); err != nil {
 		return projects, errors.New("no project found")
 	}
 	return projects, nil
 }
 
-func getSkills(prod bool) ([]*Skill, error) {
+func getSkills(prod bool) ([]Skill, error) {
 	db, err := storm.Open(getDb(prod))
 	if err != nil {
 		return nil, errors.New("server error")
 	}
 	defer db.Close()
-	var skills []*Skill
+	var skills []Skill
 	if err := db.All(&skills); err != nil {
 		return skills, errors.New("no skills found")
 	}
