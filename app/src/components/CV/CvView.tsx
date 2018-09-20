@@ -1,22 +1,13 @@
 import * as React from 'react';
 import { Route, NavLink, RouteComponentProps } from 'react-router-dom';
-
-import { connect, Dispatch } from 'react-redux';
-import { portfolio, RootAction } from '../../actions';
 import { Input, Menu, Segment } from 'semantic-ui-react';
 import SkillsList from './SkillsList';
 import ExperienceList from './ExperienceList';
 import Bio from './Bio';
 import EducationList from './EducationList';
 
-type ICvViewProps = {
-  fetchCV: () => Promise<void>;
-};
 
-class CvView extends React.Component<RouteComponentProps & ICvViewProps> {
-  public async componentDidMount() {
-    await this.props.fetchCV();
-  }
+export default class CvView extends React.Component<RouteComponentProps> {
   public render() {
     const { path } = this.props.match;
     return (
@@ -47,16 +38,3 @@ class CvView extends React.Component<RouteComponentProps & ICvViewProps> {
     );
   }
 }
-
-function mapDispatchToProps(dispatch: Dispatch<RootAction>) {
-  return {
-    fetchCV: async () => {
-      await dispatch(portfolio.listCV());
-    }
-  };
-}
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(CvView);
