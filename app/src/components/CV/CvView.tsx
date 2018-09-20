@@ -51,8 +51,7 @@ class CvView extends React.Component<RouteComponentProps & ICvViewProps> {
 function mapDispatchToProps(dispatch: Dispatch<RootAction>) {
   return {
     fetchCV: async () => {
-      await dispatch(portfolio.initializeBio());
-      await dispatch(portfolio.initializeCV());
+      await dispatch(portfolio.listCV());
     }
   };
 }
