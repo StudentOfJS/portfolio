@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
 import { connect, Dispatch } from 'react-redux';
 import { portfolio, RootAction } from '../../actions';
 
@@ -8,11 +7,11 @@ type WrapperState = {
 };
 
 type WrapperProps = {
-  children: React.ReactChildren;
+  children: JSX.Element[];
   fetchCV: () => Promise<void>;
 };
 
-class Wrapper extends React.Component<RouteComponentProps & WrapperProps, WrapperState> {
+class Wrapper extends React.Component<WrapperProps, WrapperState> {
   public state = { complete: false };
   public async componentDidMount() {
     await this.props.fetchCV();
