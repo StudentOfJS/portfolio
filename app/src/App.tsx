@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ProjectsView from './components/Projects/ProjectsView';
-import CvView from './components/CV/CvView';
+import CvView from './components/CV';
 import Home from './components/Home';
 import Footer from './components/Footer';
 import Nav from './components/Nav';

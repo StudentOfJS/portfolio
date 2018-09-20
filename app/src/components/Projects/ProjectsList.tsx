@@ -1,41 +1,36 @@
 import * as React from 'react';
-import { connect, Dispatch } from 'react-redux';
-import { portfolio, RootAction } from '../../actions';
+import { connect } from 'react-redux';
 import { Card, Icon, List } from 'semantic-ui-react';
 import { RootState } from '../../reducers';
-import { ProjectState } from '../../reducers/projects_reducer';
 import * as images from './images';
+import { Projects } from '../../proto/portfolio_pb';
 
-type IProjectsProps = {
-  pobj: ProjectState,
-  fetchProjects: () => Promise<void>;
-};
-
-const extra = (
+const extra = (keywords: string) => (
   <a>
-    <Icon name="user" />
-    16 Friends
+    <Icon name="tags" />
+    {keywords}
   </a>
 );
 
-class ProjectsList extends React.Component<IProjectsProps, {}> {
-  public async componentDidMount() {
-    await this.props.fetchProjects();
-  }
+interface ProjectsProps {
+  p: Projects.AsObject;
+}
+
+class ProjectsList extends React.Component<ProjectsProps, {}> {
+
   public render() {
-    const { pobj } = this.props;
+    const { p } = this.props;
 
     return (
       <List animated={true} verticalAlign="middle">
-        {pobj.projects && pobj.projects.projectsList.map(p => {
+        {p && p.projectsList.map(project => {
           return (
-            <List.Item key={p.id}>
+            <List.Item key={project.id}>
               <Card
-                image={images[p.id]}
-                header={p.title}
-                meta={p.meta}
-                description={p.description}
-                extra={extra}
+                image={images[project.id]}
+                header={project.title}
+                description={project.description}
+                extra={extra(project.meta)}
               />
             </List.Item>
           );
@@ -48,19 +43,8 @@ class ProjectsList extends React.Component<IProjectsProps, {}> {
 
 function mapStateToProps(state: RootState) {
   return {
-    pobj: state.projects
+    p: state.cv.projects
   };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<RootAction>) {
-  return {
-    fetchProjects: async () => {
-      await dispatch(portfolio.initializeProjects());
-    }
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProjectsList);
+export default connect(mapStateToProps)(ProjectsList);
