@@ -20,7 +20,7 @@ func main() {
 	portfolio.InitCV()
 	grpcServer := grpc.NewServer()
 
-	portfolioService := portfolio.NewService()
+	portfolioService := portfolio.NewPortfolioService(nil)
 	proto.RegisterPortfolioServiceServer(grpcServer, portfolioService)
 
 	wrappedGrpc := grpcweb.WrapServer(grpcServer)

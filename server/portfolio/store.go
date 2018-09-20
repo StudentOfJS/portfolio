@@ -3,8 +3,10 @@ package portfolio
 import (
 	"errors"
 	"fmt"
+	"net/http"
 
 	"github.com/asdine/storm"
+	"github.com/studentofjs/portfolio/server/proto"
 )
 
 type Bio struct {
@@ -46,15 +48,21 @@ type Skill struct {
 	Description string
 }
 
-func getDb(prod bool) string {
+type portfolioAPI struct{}
+
+func NewPortfolioAPI(client *http.Client) *portfolioAPI {
+	return &portfolioAPI{}
+}
+
+func (api *portfolioAPI) getDb(prod bool) string {
 	var dbName = make(map[bool]string)
 	dbName[true] = "my.db"
 	dbName[false] = "test.db"
 	return dbName[prod]
 }
 
-func addBio(bio Bio, prod bool) error {
-	db, err := storm.Open(getDb(prod))
+func (api *portfolioAPI) addBio(bio Bio, prod bool) error {
+	db, err := storm.Open(api.getDb(prod))
 	if err != nil {
 		return errors.New("server error")
 	}
@@ -66,8 +74,8 @@ func addBio(bio Bio, prod bool) error {
 	return nil
 }
 
-func addCourse(course Course, prod bool) error {
-	db, err := storm.Open(getDb(prod))
+func (api *portfolioAPI) addCourse(course Course, prod bool) error {
+	db, err := storm.Open(api.getDb(prod))
 	if err != nil {
 		return errors.New("server error")
 	}
@@ -78,8 +86,8 @@ func addCourse(course Course, prod bool) error {
 	return nil
 }
 
-func addJob(job Job, prod bool) error {
-	db, err := storm.Open(getDb(prod))
+func (api *portfolioAPI) addJob(job Job, prod bool) error {
+	db, err := storm.Open(api.getDb(prod))
 	if err != nil {
 		return errors.New("server error")
 	}
@@ -90,8 +98,8 @@ func addJob(job Job, prod bool) error {
 	return nil
 }
 
-func addProject(project Project, prod bool) error {
-	db, err := storm.Open(getDb(prod))
+func (api *portfolioAPI) addProject(project Project, prod bool) error {
+	db, err := storm.Open(api.getDb(prod))
 	if err != nil {
 		return errors.New("server error")
 	}
@@ -103,8 +111,8 @@ func addProject(project Project, prod bool) error {
 	return nil
 }
 
-func addSkill(skill Skill, prod bool) error {
-	db, err := storm.Open(getDb(prod))
+func (api *portfolioAPI) addSkill(skill Skill, prod bool) error {
+	db, err := storm.Open(api.getDb(prod))
 	if err != nil {
 		return errors.New("server error")
 	}
@@ -116,8 +124,8 @@ func addSkill(skill Skill, prod bool) error {
 	return nil
 }
 
-func deleteBio(id int, prod bool) error {
-	db, err := storm.Open(getDb(prod))
+func (api *portfolioAPI) deleteBio(id int, prod bool) error {
+	db, err := storm.Open(api.getDb(prod))
 	if err != nil {
 		return errors.New("server error")
 	}
@@ -133,8 +141,8 @@ func deleteBio(id int, prod bool) error {
 	return nil
 }
 
-func deleteCourse(id uint32, prod bool) error {
-	db, err := storm.Open(getDb(prod))
+func (api *portfolioAPI) deleteCourse(id uint32, prod bool) error {
+	db, err := storm.Open(api.getDb(prod))
 	if err != nil {
 		return errors.New("server error")
 	}
@@ -150,8 +158,8 @@ func deleteCourse(id uint32, prod bool) error {
 	return nil
 }
 
-func deleteJob(id uint32, prod bool) error {
-	db, err := storm.Open(getDb(prod))
+func (api *portfolioAPI) deleteJob(id uint32, prod bool) error {
+	db, err := storm.Open(api.getDb(prod))
 	if err != nil {
 		return errors.New("server error")
 	}
@@ -166,8 +174,8 @@ func deleteJob(id uint32, prod bool) error {
 	return nil
 }
 
-func deleteProject(id uint32, prod bool) error {
-	db, err := storm.Open(getDb(prod))
+func (api *portfolioAPI) deleteProject(id uint32, prod bool) error {
+	db, err := storm.Open(api.getDb(prod))
 	if err != nil {
 		return errors.New("server error")
 	}
@@ -182,8 +190,8 @@ func deleteProject(id uint32, prod bool) error {
 	return nil
 }
 
-func deleteSkill(id uint32, prod bool) error {
-	db, err := storm.Open(getDb(prod))
+func (api *portfolioAPI) deleteSkill(id uint32, prod bool) error {
+	db, err := storm.Open(api.getDb(prod))
 	if err != nil {
 		return errors.New("server error")
 	}
@@ -198,27 +206,28 @@ func deleteSkill(id uint32, prod bool) error {
 	return nil
 }
 
-func getBio(prod bool) (Bio, error) {
+func (api *portfolioAPI) getBio(prod bool) (*proto.Bio, error) {
 	var bio []Bio
-	db, err := storm.Open(getDb(prod))
+	db, err := storm.Open(api.getDb(prod))
 	if err != nil {
-		return Bio{}, errors.New("server error")
+		return nil, errors.New("server error")
 	}
 	defer db.Close()
 
 	if err := db.All(&bio); err != nil {
-		return Bio{}, errors.New("bio not found")
+		return nil, errors.New("bio not found")
 	}
 	if len(bio) > 0 {
-		return bio[0], nil
-	} else {
-		return Bio{}, errors.New("bio not found")
+		return &proto.Bio{
+			Description: bio[0].Description,
+			Title:       bio[0].Title,
+		}, nil
 	}
-
+	return nil, errors.New("bio not found")
 }
 
-func getEducation(prod bool) ([]Course, error) {
-	db, err := storm.Open(getDb(prod))
+func (api *portfolioAPI) getEducation(prod bool) (*proto.Education, error) {
+	db, err := storm.Open(api.getDb(prod))
 	if err != nil {
 		return nil, errors.New("server error")
 	}
@@ -226,14 +235,26 @@ func getEducation(prod bool) ([]Course, error) {
 	var courses []Course
 
 	if err := db.All(&courses); err != nil {
-		return courses, errors.New("no course found")
+		return nil, errors.New("no course found")
 	}
-
-	return courses, nil
+	var newCourses []*proto.Course
+	for _, c := range courses {
+		course := &proto.Course{
+			ID:          c.ID,
+			Institution: c.Institution,
+			Description: c.Description,
+			Dates:       c.Dates,
+			Name:        c.Name,
+		}
+		newCourses = append(newCourses, course)
+	}
+	return &proto.Education{
+		Courses: newCourses,
+	}, nil
 }
 
-func getExperience(prod bool) ([]Job, error) {
-	db, err := storm.Open(getDb(prod))
+func (api *portfolioAPI) getExperience(prod bool) (*proto.Experience, error) {
+	db, err := storm.Open(api.getDb(prod))
 	if err != nil {
 		return nil, errors.New("server error")
 	}
@@ -241,39 +262,79 @@ func getExperience(prod bool) ([]Job, error) {
 	var jobs []Job
 
 	if err := db.All(&jobs); err != nil {
-		return jobs, errors.New("no job found")
+		return nil, errors.New("no job found")
 	}
-	return jobs, nil
+	var newJobs []*proto.Job
+	for _, j := range jobs {
+		job := &proto.Job{
+			ID:          j.ID,
+			Company:     j.Company,
+			JobTitle:    j.JobTitle,
+			Location:    j.Location,
+			Dates:       j.Dates,
+			Description: j.Description,
+			LogoUrl:     j.LogoUrl,
+		}
+		newJobs = append(newJobs, job)
+	}
+	return &proto.Experience{
+		Jobs: newJobs,
+	}, nil
 }
 
-func getProjects(prod bool) ([]Project, error) {
-	db, err := storm.Open(getDb(prod))
+func (api *portfolioAPI) getProjects(prod bool) (*proto.Projects, error) {
+	db, err := storm.Open(api.getDb(prod))
 	if err != nil {
 		return nil, errors.New("server error")
 	}
 	defer db.Close()
 	var projects []Project
 	if err := db.All(&projects); err != nil {
-		return projects, errors.New("no project found")
+		return nil, errors.New("no project found")
 	}
-	return projects, nil
+	var newProjects []*proto.Project
+	for _, p := range projects {
+		project := &proto.Project{
+			ID:          p.ID,
+			Title:       p.Title,
+			Meta:        p.Meta,
+			Description: p.Description,
+			Repo:        p.Repo,
+		}
+		newProjects = append(newProjects, project)
+	}
+	return &proto.Projects{
+		Projects: newProjects,
+	}, nil
 }
 
-func getSkills(prod bool) ([]Skill, error) {
-	db, err := storm.Open(getDb(prod))
+func (api *portfolioAPI) getSkills(prod bool) (*proto.Skills, error) {
+	db, err := storm.Open(api.getDb(prod))
 	if err != nil {
 		return nil, errors.New("server error")
 	}
 	defer db.Close()
 	var skills []Skill
 	if err := db.All(&skills); err != nil {
-		return skills, errors.New("no skills found")
+		return nil, errors.New("no skills found")
 	}
-	return skills, nil
+	var newSkills []*proto.Skill
+	for _, s := range skills {
+		skill := &proto.Skill{
+			ID:          s.ID,
+			Name:        s.Name,
+			Description: s.Description,
+			Rating:      s.Rating,
+		}
+		newSkills = append(newSkills, skill)
+	}
+	return &proto.Skills{
+		Skills: newSkills,
+	}, nil
 }
 
-func updateBio(bio Bio, prod bool) error {
-	db, err := storm.Open(getDb(prod))
+func (api *portfolioAPI) updateBio(bio Bio, prod bool) error {
+	db, err := storm.Open(api.getDb(prod))
 	if err != nil {
 		return errors.New("server error")
 	}
@@ -290,8 +351,8 @@ func updateBio(bio Bio, prod bool) error {
 	return nil
 }
 
-func updateCourse(course Course, prod bool) error {
-	db, err := storm.Open(getDb(prod))
+func (api *portfolioAPI) updateCourse(course Course, prod bool) error {
+	db, err := storm.Open(api.getDb(prod))
 	if err != nil {
 		return errors.New("server error")
 	}
@@ -308,8 +369,8 @@ func updateCourse(course Course, prod bool) error {
 	return nil
 }
 
-func updateJob(job Job, prod bool) error {
-	db, err := storm.Open(getDb(prod))
+func (api *portfolioAPI) updateJob(job Job, prod bool) error {
+	db, err := storm.Open(api.getDb(prod))
 	if err != nil {
 		return errors.New("server error")
 	}
@@ -326,8 +387,8 @@ func updateJob(job Job, prod bool) error {
 	return nil
 }
 
-func updateProject(project Project, prod bool) error {
-	db, err := storm.Open(getDb(prod))
+func (api *portfolioAPI) updateProject(project Project, prod bool) error {
+	db, err := storm.Open(api.getDb(prod))
 	if err != nil {
 		return errors.New("server error")
 	}
@@ -344,8 +405,8 @@ func updateProject(project Project, prod bool) error {
 	return nil
 }
 
-func updateSkill(skill Skill, prod bool) error {
-	db, err := storm.Open(getDb(prod))
+func (api *portfolioAPI) updateSkill(skill Skill, prod bool) error {
+	db, err := storm.Open(api.getDb(prod))
 	if err != nil {
 		return errors.New("server error")
 	}

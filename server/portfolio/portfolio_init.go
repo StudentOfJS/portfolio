@@ -10,7 +10,8 @@ func InitCV() {
 		Description: "Rod's BIO description",
 		Title:       "Rod's BIO",
 	}
-	addBio(b, true)
+	var api *portfolioAPI
+	api.addBio(b, true)
 
 	Courses := []Course{
 		{
@@ -99,7 +100,7 @@ func InitCV() {
 		},
 	}
 	for _, course := range Courses {
-		addCourse(course, true)
+		api.addCourse(course, true)
 	}
 
 	Jobs := []Job{
@@ -159,7 +160,7 @@ func InitCV() {
 		},
 	}
 	for _, job := range Jobs {
-		addJob(job, true)
+		api.addJob(job, true)
 	}
 
 	Projects := []Project{
@@ -207,7 +208,7 @@ func InitCV() {
 		},
 	}
 	for _, project := range Projects {
-		addProject(project, true)
+		api.addProject(project, true)
 	}
 
 	Skills := []Skill{
@@ -274,6 +275,6 @@ func InitCV() {
 	}
 
 	for _, skill := range Skills {
-		addSkill(skill, true)
+		api.addSkill(skill, true)
 	}
 }
