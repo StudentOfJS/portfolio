@@ -4,6 +4,8 @@ import (
 	"context"
 
 	"github.com/google/uuid"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 
 	"github.com/studentofjs/portfolio/server/proto"
 )
@@ -107,7 +109,7 @@ func (s *Service) AddSkill(ctx context.Context, req *proto.AddSkillRequest) (*pr
 	return res, nil
 }
 
-func (s *Service) GetBio(ctx context.Context, req *proto.GetBioRequest) (*proto.GetBioResponse, error) {
+func (s Service) GetBio(ctx context.Context, req *proto.GetBioRequest) (*proto.GetBioResponse, error) {
 	b, err := getBio(true)
 	var bio *proto.Bio
 	bio.Title = b.Title
@@ -116,7 +118,7 @@ func (s *Service) GetBio(ctx context.Context, req *proto.GetBioRequest) (*proto.
 	var res *proto.GetBioResponse
 	if err != nil {
 		ctx.Err()
-		return res, err
+		return res, grpc.Errorf(codes.NotFound, err.Error())
 	}
 	res.Bio = bio
 	ctx.Value(res)
@@ -124,7 +126,7 @@ func (s *Service) GetBio(ctx context.Context, req *proto.GetBioRequest) (*proto.
 	return res, nil
 }
 
-func (s *Service) ListProjects(ctx context.Context, req *proto.ListProjectsRequest) (*proto.ListProjectsResponse, error) {
+func (s Service) ListProjects(ctx context.Context, req *proto.ListProjectsRequest) (*proto.ListProjectsResponse, error) {
 	p, err := getProjects(true)
 	var projects *proto.Projects
 	for _, project := range p {
@@ -140,7 +142,7 @@ func (s *Service) ListProjects(ctx context.Context, req *proto.ListProjectsReque
 	var res *proto.ListProjectsResponse
 	if err != nil {
 		ctx.Err()
-		return res, err
+		return res, grpc.Errorf(codes.NotFound, err.Error())
 	}
 	res.Projects = projects
 	ctx.Value(res)
@@ -148,12 +150,12 @@ func (s *Service) ListProjects(ctx context.Context, req *proto.ListProjectsReque
 	return res, nil
 }
 
-func (s *Service) GetCV(ctx context.Context, req *proto.GetCVRequest) (*proto.GetCVResponse, error) {
+func (s Service) GetCV(ctx context.Context, req *proto.GetCVRequest) (*proto.GetCVResponse, error) {
 	var res *proto.GetCVResponse
 	edu, err := getEducation(true)
 	if err != nil {
 		ctx.Err()
-		return res, nil
+		return res, grpc.Errorf(codes.NotFound, err.Error())
 	}
 	var courses *proto.Education
 	for _, course := range edu {
@@ -169,7 +171,7 @@ func (s *Service) GetCV(ctx context.Context, req *proto.GetCVRequest) (*proto.Ge
 	exp, err := getExperience(true)
 	if err != nil {
 		ctx.Err()
-		return res, nil
+		return res, grpc.Errorf(codes.NotFound, err.Error())
 	}
 	var jobs *proto.Experience
 	for _, job := range exp {
@@ -188,7 +190,7 @@ func (s *Service) GetCV(ctx context.Context, req *proto.GetCVRequest) (*proto.Ge
 	sk, err := getSkills(true)
 	if err != nil {
 		ctx.Err()
-		return res, nil
+		return res, grpc.Errorf(codes.NotFound, err.Error())
 	}
 	var skills *proto.Skills
 	for _, skill := range sk {
