@@ -60,56 +60,21 @@ message Experience {
     repeated Job jobs = 1;
 }
 
+message CV {
+    Bio bio = 1;
+    Education courses = 2;
+    Experience jobs = 3;
+    Projects projects = 4;
+    Skills skills = 5;
+
+
+}
+
 service PortfolioService {
-    rpc AddBio (AddBioRequest) returns (AddBioResponse);
-    rpc AddCourse(AddCourseRequest) returns (AddCourseResponse);
-    rpc AddJob(AddJobRequest) returns (AddJobResponse);
-    rpc AddProject (AddProjectRequest) returns (AddProjectResponse);
-    rpc AddSkill(AddSkillRequest) returns (AddSkillResponse);
-    rpc GetBio (GetBioRequest) returns (GetBioResponse);
-    rpc GetCV (GetCVRequest) returns (GetCVResponse);
-    rpc ListProjects (ListProjectsRequest) returns (ListProjectsResponse);
+    rpc GetCV (GetCVRequest) returns (stream GetCVResponse);
 }
-
-
-message AddBioResponse {}
-message AddBioRequest {
-    Bio bio = 1;
-}
-
-message AddCourseResponse {}
-message AddCourseRequest {
-    Course course = 1;
-}
-
-message AddJobResponse {}
-message AddJobRequest {
-    Job job = 1;
-}
-
-message AddProjectResponse {}
-message AddProjectRequest {
-    Project project = 1;
-}
-
-message AddSkillResponse {}
-message AddSkillRequest {
-    Skill skill = 1;
-}
-
-message GetBioResponse {
-    Bio bio = 1;
-}
-message GetBioRequest {}
 
 message GetCVResponse {
-    Skills skills = 1;
-    Experience jobs = 2;
-    Education courses = 3;
+    CV cv = 1;
 }
 message GetCVRequest {}
-
-message ListProjectsResponse {
-    Projects projects = 1;
-}
-message ListProjectsRequest {}
