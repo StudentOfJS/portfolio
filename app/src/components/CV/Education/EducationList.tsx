@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { RootState } from '../../store';
-import { Education } from '../../proto/portfolio_pb';
-import { Item } from 'semantic-ui-react';
+import { RootState } from '../../../store';
+import { Education } from '../../../proto/portfolio_pb';
+import { Item, Icon } from 'semantic-ui-react';
 
 interface EducationProps {
   courses: Education.AsObject;
@@ -17,9 +17,8 @@ class EducationList extends React.Component<EducationProps, {}> {
         <Item.Group>
           {
             courses.coursesList.map(course => (
-              <Item>
-                <Item.Image size="tiny" src={course.institution} />
-
+              <Item key={course.id}>
+                <Icon name="graduation cap" />
                 <Item.Content>
                   <Item.Header>{course.name} - {course.institution}</Item.Header>
                   <Item.Meta>

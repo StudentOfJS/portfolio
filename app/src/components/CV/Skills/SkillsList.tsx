@@ -16,7 +16,7 @@ class SkillsList extends React.Component<SkillProps, {}> {
       <List>
         {
           skills.skillsList.map(skill => (
-            <List.Item>{skill.name} - {skill.description} - <Rating rating={skill.rating} /></List.Item>
+            <List.Item key={skill.id} >{skill.name} - {skill.description}<Rating rating={skill.rating} /></List.Item>
           ))
         }
       </List>
