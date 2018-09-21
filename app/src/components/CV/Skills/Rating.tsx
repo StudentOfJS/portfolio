@@ -6,7 +6,7 @@ interface RatingProps {
 
 const Rating: React.SFC<RatingProps> = ({ rating }) => {
   const good = Array(rating).fill(<Icon name="star" size="small" color="orange" />);
-  const bad = Array(10 - rating).fill(<Icon name="star outline" size="small" />);
+  const bad = Array(10 - rating).fill(<Icon name="star outline" />);
   return (
     <div>
       {good}{bad}

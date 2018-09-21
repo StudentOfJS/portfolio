@@ -6,8 +6,8 @@ import Nav from './components/Nav';
 import Wrapper from './components/Wrapper';
 import EducationList from './components/CV/EducationList';
 import Experience from './components/CV/Experience';
-import SkillsList from './components/CV/SkillsList';
 import Bio from './components/CV/Bio';
+import Skills from './components/CV/Skills';
 
 export default () => (
   <Router>
@@ -19,7 +19,7 @@ export default () => (
           <Route path="/bio" component={Bio} />
           <Route path="/education" component={EducationList} />
           <Route path="/experience" component={Experience} />
-          <Route path="/skills" component={SkillsList} />
+          <Route path="/skills" component={Skills} />
           <Route exact={true} path="/" component={ProjectsView} />
         </Switch>
         <Footer />
