@@ -1,15 +1,13 @@
 import * as React from 'react';
 import DesktopContainer from './DesktopContainer';
 import MobileContainer from './MobileContainer';
+import { RouteProps } from 'react-router';
 
-interface RCProps {
-  children?: React.ReactNode;
-}
-
-const Nav: React.SFC<RCProps> = ({ children }) => (
+// tslint:disable-next-line:no-any
+const Nav: React.SFC<RouteProps> = (props) => (
   <div>
-    <DesktopContainer>{children}</DesktopContainer>
-    <MobileContainer>{children}</MobileContainer>
+    <DesktopContainer {...props} />
+    <MobileContainer {...props} />
   </div>
 );
 

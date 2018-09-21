@@ -16,12 +16,15 @@ type AddCV = {
   type: typeof ADD_CV,
   payload: CV,
 };
-export const addCv = (cv: CV) => ({ type: ADD_CV, payload: cv });
+
+export const addCv = (cv: CV) => {
+  return ({ type: ADD_CV, payload: cv });
+};
 
 type ListCVInit = {
-  type: typeof CV_INIT,
+  type: typeof CV_INIT
 };
-export const listCVInit = (): ListCVInit => ({ type: CV_INIT });
+export const listCVInit = () => ({ type: CV_INIT });
 
 export const listCV = () => {
   return grpcRequest<GetCVRequest, GetCVResponse>({
@@ -40,7 +43,7 @@ export const listCV = () => {
     onMessage: message => {
       const cv = message.getCv();
       if (cv) {
-        addCv(cv);
+        return addCv(cv);
       }
       return;
     }

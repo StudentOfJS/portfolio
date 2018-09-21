@@ -1,36 +1,27 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { RootState } from '../../reducers';
-import { Bio } from '../../proto/portfolio_pb';
+import { RootState } from '../../store';
 import { Item } from 'semantic-ui-react';
 
-interface EducationProps {
-  bio: Bio.AsObject;
-}
-
-class BioList extends React.Component<EducationProps, {}> {
+class Bio extends React.Component<RootState, {}> {
   public render() {
-    const { bio } = this.props;
-    if (bio) {
-      return (
-        <Item>
-          <Item.Content>
-            <Item.Header>{bio.title}</Item.Header>
-            <Item.Description>{bio.description}</Item.Description>
-          </Item.Content>
-        </Item>
-      );
-    }
-    return;
+    const { cv: { bio } } = this.props;
+    console.log(bio);
+    return (
+      <Item>
+        <Item.Content>
+          <Item.Header>{bio && bio.title}</Item.Header>
+          <Item.Description>{bio && bio.description}</Item.Description>
+        </Item.Content>
+      </Item>
+    );
   }
 }
 
 function mapStateToProps(state: RootState) {
-  return {
-    bio: state.cv.bio,
-  };
+  return state;
 }
 
 export default connect(
   mapStateToProps,
-)(BioList);
+)(Bio);

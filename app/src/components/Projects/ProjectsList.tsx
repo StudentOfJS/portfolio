@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Card, Icon, List } from 'semantic-ui-react';
-import { RootState } from '../../reducers';
+import { RootState } from '../../store';
 import * as images from './images';
 import { Projects } from '../../proto/portfolio_pb';
 

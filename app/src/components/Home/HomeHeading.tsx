@@ -43,7 +43,7 @@ const HomeHeading: React.SFC<HeadingProps> = ({ mobile }) => (
       }}
     >
       Get Started
-      <Icon name="angle double down" primary={true} size="massive" />
+      <Icon name="angle double down" size="massive" />
     </div>
   </Container>
 );

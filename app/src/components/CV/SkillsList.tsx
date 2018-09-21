@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { RootState } from '../../reducers';
+import { RootState } from '../../store';
 import { Skills } from '../../proto/portfolio_pb';
 import { List } from 'semantic-ui-react';
 import Rating from './Rating';

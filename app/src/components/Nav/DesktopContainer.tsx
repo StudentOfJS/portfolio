@@ -10,6 +10,7 @@ import {
 import HomeHeading from '../Home/HomeHeading';
 import { NavLink, Link, RouteProps } from 'react-router-dom';
 
+// tslint:disable-next-line:no-any
 export default class DesktopContainer extends React.Component<RouteProps> {
   public state = {
     fixed: true
@@ -19,9 +20,9 @@ export default class DesktopContainer extends React.Component<RouteProps> {
   showFixedMenu = () => this.setState({ fixed: true });
 
   render() {
-    const { children, path } = this.props;
+    const { children, location } = this.props;
     const { fixed } = this.state;
-
+    const path = location && location.pathname;
     return (
       <Responsive minWidth={Responsive.onlyTablet.minWidth}>
         <Visibility
@@ -43,12 +44,15 @@ export default class DesktopContainer extends React.Component<RouteProps> {
               size="large"
             >
               <Container>
-                <NavLink to="/"><Menu.Item as="a" name="Home" active={path === '/'} /></NavLink>
-                <NavLink to="/cv"><Menu.Item as="a" name="CV" active={path ? path.includes('/cv') : false} /></NavLink>
-                <NavLink to="/projects"><Menu.Item as="a" name="Projects" active={path === '/projects'} /></NavLink>
+                <NavLink to="/"><Menu.Item name="Home" active={path === '/'} /></NavLink>
+                <NavLink to="/bio"><Menu.Item name="bio" active={path === '/bio'} /></NavLink>
+                <NavLink to="/education"><Menu.Item name="education" active={path === '/education'} /></NavLink>
+                <NavLink to="/experience"><Menu.Item name="experience" active={path === '/experience'} /></NavLink>
+                <NavLink to="/skills"><Menu.Item name="skills" active={path === '/skills'} /></NavLink>
+                <NavLink to="/projects"><Menu.Item name="Projects" active={path === '/projects'} /></NavLink>
                 <Menu.Item position="right">
                   <Link to="/hire">
-                    <Button as="a" inverted={!fixed}>
+                    <Button inverted={!fixed}>
                       Hire
                     </Button>
                   </Link>
