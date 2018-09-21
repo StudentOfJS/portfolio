@@ -13,6 +13,7 @@
     "react-scripts-ts": "2.10.0",
     "redux": "^3.7.2",
     "semantic-ui-react": "^0.82.5",
+    "styled-components": "^3.4.9",
     "typesafe-actions": "^2.0.4"
   },
   "scripts": {
@@ -29,6 +30,7 @@
     "@types/react-dom": "^16.0.3",
     "@types/react-redux": "^5.0.14",
     "@types/react-router-dom": "^4.3.1",
+    "@types/styled-components": "^3.0.1",
     "ts-protoc-gen": "^0.4.0"
   }
 }
