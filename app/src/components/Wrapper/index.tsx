@@ -3,8 +3,13 @@ import { connect, Dispatch } from 'react-redux';
 import { PortfolioActionTypes } from '../../actions/portfolioActions';
 import { listCV } from '../../actions/portfolioActions';
 import { RootState } from '../../store';
+import { withRouter, match } from 'react-router';
+import { History, Location } from 'history';
 
 type WrapperProps = {
+  history: History;
+  location: Location;
+  match: match;
   loading: boolean,
   fetchCV: () => void,
 };
@@ -37,7 +42,7 @@ function mapDispatchToProps(dispatch: Dispatch<PortfolioActionTypes>) {
   };
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Wrapper);
+)(Wrapper));

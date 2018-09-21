@@ -11,18 +11,19 @@ import Bio from './components/CV/Bio';
 
 export default () => (
   <Router>
-    <Switch>
-      <Nav>
-        <Wrapper>
+    <Wrapper>
+      <div>
+        <Nav />
+        <Switch>
           <Route path="/projects" component={ProjectsView} />
           <Route path="/bio" component={Bio} />
           <Route path="/education" component={EducationList} />
           <Route path="/experience" component={ExperienceList} />
           <Route path="/skills" component={SkillsList} />
           <Route exact={true} path="/" component={ProjectsView} />
-        </Wrapper>
-      </Nav>
-      <Footer />
-    </Switch>
+        </Switch>
+        <Footer />
+      </div>
+    </Wrapper>
   </Router>
 );

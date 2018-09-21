@@ -25,7 +25,7 @@ export default class MobileContainer extends React.Component<RouteProps> {
   handleToggle = () => this.setState({ sidebarOpened: !this.state.sidebarOpened });
 
   render() {
-    const { children, location } = this.props;
+    const { location } = this.props;
     const { sidebarOpened } = this.state;
     const path = location && location.pathname;
     return (
@@ -67,8 +67,6 @@ export default class MobileContainer extends React.Component<RouteProps> {
               </Container>
               <HomeHeading mobile={true} />
             </Segment>
-
-            {children}
           </Sidebar.Pusher>
         </Sidebar.Pushable>
       </Responsive>
