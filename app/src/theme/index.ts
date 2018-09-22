@@ -24,7 +24,7 @@ export const theme = {
   fontFamily: `medium-content-sans-serif-font,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif`,
   primaryTextColor: 'white',
   radius: '30px',
-  secondaryTextColor: 'gray'
+  secondaryTextColor: 'grey'
 };
 
 export default styled;
