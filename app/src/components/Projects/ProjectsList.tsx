@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Card, Icon, Modal, Image } from 'semantic-ui-react';
+import { Card, Icon, Modal, Image, Button } from 'semantic-ui-react';
 import { RootState } from '../../store';
 import images from './images';
 import { Projects } from '../../proto/portfolio_pb';
@@ -86,6 +86,8 @@ class ProjectsList extends React.Component<ProjectsProps, {}> {
           {p && p.projectsList.map(project => {
             return (
               <Modal
+                basic={true}
+                size="small"
                 key={project.id}
                 trigger={
                   <CardContainer>
@@ -101,11 +103,18 @@ class ProjectsList extends React.Component<ProjectsProps, {}> {
               >
                 <Modal.Header>{project.title}</Modal.Header>
                 <Modal.Content image={true}>
-                  <Image wrapped={true} size="medium" src={images[project.id]} />
+                  <Image wrapped={true} size="large" src={images[project.id]} />
                   <Modal.Description>
                     <p>{project.description}</p>
                   </Modal.Description>
                 </Modal.Content>
+                <Modal.Actions>
+                  <a href={project.repo} target="_blank">
+                    <Button color="green" as="a" inverted={true}>
+                      <Icon name="github" />View Code
+                    </Button>
+                  </a>
+                </Modal.Actions>
               </Modal>
 
             );
