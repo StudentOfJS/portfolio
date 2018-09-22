@@ -8,7 +8,6 @@ import styled, { keyframes } from '../../theme';
 
 const ProjectsContainer = styled.div`
   align-items: center;
-  background-color: #666666;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -44,7 +43,7 @@ const CardContainer = styled.div`
   animation-name: ${fadeIn};
   background-color: white;
   border-radius: 3px;
-  box-shadow: 2px 2px 10px black;
+  box-shadow: 1px 1px 5px black;
   height: 310px;
   margin: 10px;
   padding: 1px;
@@ -55,7 +54,7 @@ const CardContainer = styled.div`
 `;
 
 const ProjectsTitle = styled.h2`
-  color: white;
+  color: ${props => props.theme.secondaryTextColor};
   font-family: ${props => props.theme.fontFamily};
   font-size: 50px;
   font-weight: 700;
