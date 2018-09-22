@@ -7,23 +7,13 @@ import { Projects } from '../../proto/portfolio_pb';
 import styled, { keyframes } from '../../theme';
 
 const ProjectsContainer = styled.div`
-  @media (max-width: 500px) {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-evenly;
-    width: 100vw;
-  }
-  @media (min-width: 500px) {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    justify-content: space-evenly;
-    width: 100vw;
-  }
-
+  align-items: center;
+  display: flex;
+  padding-bottom: 10px;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-evenly;
+  width: 100vw;
 `;
 
 const ProjectsDisplay = styled.div`
@@ -108,7 +98,7 @@ class ProjectList extends React.Component<ProjectsProps, {}> {
               <Modal
                 basic={true}
                 key={project.id}
-                style={{ top: 0 }}
+                style={{ top: 0, paddingTop: 40 }}
                 trigger={
                   <CardContainer>
                     <Card
