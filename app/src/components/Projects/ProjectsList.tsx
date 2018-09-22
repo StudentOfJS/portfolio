@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Card, Icon } from 'semantic-ui-react';
+import { Card, Icon, Modal, Image } from 'semantic-ui-react';
 import { RootState } from '../../store';
 import images from './images';
 import { Projects } from '../../proto/portfolio_pb';
-import styled from '../../theme';
+import styled, { keyframes } from '../../theme';
 
 const ProjectsContainer = styled.div`
   align-items: center;
   background-color: #666666;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
   justify-content: space-evenly;
   width: 100vw;
 `;
@@ -26,12 +26,32 @@ const ProjectsDisplay = styled.div`
   max-width: 1000px;
   width: 100%;
 `;
+
+const fadeIn = keyframes`
+{
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+`;
+
 const CardContainer = styled.div`
+  animation-duration: 5s;
+  animation-name: ${fadeIn};
   background-color: white;
-  border-radius: 5px;
-  height: 380px;
+  border-radius: 3px;
+  box-shadow: 2px 2px 10px black;
+  height: 310px;
   margin: 10px;
   padding: 1px;
+  &:hover{
+    box-shadow: none;
+    cursor: pointer;
+  }
 `;
 
 const ProjectsTitle = styled.h2`
@@ -65,15 +85,29 @@ class ProjectsList extends React.Component<ProjectsProps, {}> {
         <ProjectsDisplay>
           {p && p.projectsList.map(project => {
             return (
-              <CardContainer key={project.id}>
-                <Card
-                  style={{ height: '100%' }}
-                  image={images[project.id]}
-                  header={project.title}
-                  description={project.description}
-                  extra={extra(project.meta)}
-                />
-              </CardContainer>
+              <Modal
+                key={project.id}
+                trigger={
+                  <CardContainer>
+                    <Card
+                      style={{ height: '100%' }}
+                      image={images[project.id]}
+                      header={project.title}
+                      description={`${project.description.slice(0, 50)}...`}
+                      extra={extra(project.meta)}
+                    />
+                  </CardContainer>
+                }
+              >
+                <Modal.Header>{project.title}</Modal.Header>
+                <Modal.Content image={true}>
+                  <Image wrapped={true} size="medium" src={images[project.id]} />
+                  <Modal.Description>
+                    <p>{project.description}</p>
+                  </Modal.Description>
+                </Modal.Content>
+              </Modal>
+
             );
           })}
         </ProjectsDisplay>
