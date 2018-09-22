@@ -73,7 +73,7 @@ interface ProjectsProps {
   p: Projects.AsObject;
 }
 
-class ProjectsList extends React.Component<ProjectsProps, {}> {
+class ProjectList extends React.Component<ProjectsProps, {}> {
 
   public render() {
     const { p } = this.props;
@@ -130,4 +130,4 @@ function mapStateToProps(state: RootState) {
   };
 }
 
-export default connect(mapStateToProps)(ProjectsList);
+export default connect(mapStateToProps)(ProjectList);

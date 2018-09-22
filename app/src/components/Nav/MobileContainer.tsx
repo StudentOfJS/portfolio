@@ -5,7 +5,7 @@ import Wrapper from '../Wrapper';
 import Education from '../CV/Education';
 import Experience from '../CV/Experience';
 import Bio from '../CV/Bio';
-import ProjectsView from '../Projects/ProjectsView';
+import Projects from '../Projects';
 import styled, { keyframes } from '../../theme';
 
 const up = keyframes`
@@ -72,7 +72,7 @@ export default class MobileContainer extends React.Component {
             </Move>
           </Up>
           <Element name="projects">
-            <ProjectsView />
+            <Projects />
           </Element>
           <Element name="education">
             <Experience />

@@ -47,9 +47,6 @@ export default class DesktopContainer extends React.Component<RouteProps> {
               >
                 <Menu.Item link={true}><MenuLink to="/">Home</MenuLink></Menu.Item>
                 <Menu.Item link={true}>
-                  <MenuLink activeStyle={activeStyle} to="/bio">Bio</MenuLink>
-                </Menu.Item>
-                <Menu.Item link={true}>
                   <MenuLink activeStyle={activeStyle} to="/education">Education</MenuLink>
                 </Menu.Item>
                 <Menu.Item link={true}>

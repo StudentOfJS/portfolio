@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import ProjectsView from './components/Projects/ProjectsView';
+import Projects from './components/Projects';
 import Footer from './components/Footer';
 import Nav from './components/Nav';
 import Wrapper from './components/Wrapper';
@@ -15,12 +15,11 @@ export default () => (
       <div>
         <Nav />
         <Switch>
-          <Route path="/projects" component={ProjectsView} />
-          <Route path="/bio" component={Bio} />
+          <Route path="/projects" component={Projects} />
           <Route path="/education" component={Education} />
           <Route path="/experience" component={Experience} />
           <Route path="/skills" component={Skills} />
-          <Route exact={true} path="/" component={ProjectsView} />
+          <Route exact={true} path="/" component={Bio} />
         </Switch>
         <Footer />
       </div>
