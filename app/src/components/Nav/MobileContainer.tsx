@@ -1,74 +1,86 @@
 import * as React from 'react';
-import { NavLink, Link, RouteProps } from 'react-router-dom';
-import {
-  Button,
-  Container,
-  Icon,
-  Menu,
-  Responsive,
-  Segment,
-  Sidebar,
-} from 'semantic-ui-react';
-import HomeHeading from '../Home/HomeHeading';
+import { Icon, Responsive } from 'semantic-ui-react';
+import { Element, animateScroll as scroll, scrollSpy } from 'react-scroll';
+import Wrapper from '../Wrapper';
+import Education from '../CV/Education';
+import Experience from '../CV/Experience';
+import Bio from '../CV/Bio';
+import ProjectsView from '../Projects/ProjectsView';
+import styled, { keyframes } from '../../theme';
+
+const up = keyframes`
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    transform: translateY(-8px);
+  }
+  20%,
+  40%,
+  60% {
+    transform: translateY(8px);
+  }
+  80% {
+    transform: translateY(6.4px);
+  }
+  90% {
+    transform: translateY(-6.4px);
+  }
+`;
+
+const Move = styled.div`
+  animation: ${up} 4s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+  height: 100px;
+  padding: 10px 5px;
+  width: 100px;
+`;
+
+const Up = styled.div`
+  align-items: center;
+  display: inline-flex;
+  justify-content: flex-end;
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  z-index: 10;
+`;
 
 // tslint:disable-next-line:no-any
-export default class MobileContainer extends React.Component<RouteProps> {
-
+export default class MobileContainer extends React.Component {
   state = { sidebarOpened: false };
-
-  handlePusherClick = () => {
-    const { sidebarOpened } = this.state;
-
-    if (sidebarOpened) { this.setState({ sidebarOpened: false }); }
+  public componentDidMount() {
+    scrollSpy.update();
   }
 
-  handleToggle = () => this.setState({ sidebarOpened: !this.state.sidebarOpened });
-
+  public scrollToTop = () => {
+    scroll.scrollToTop();
+  }
   render() {
-    const { location } = this.props;
-    const { sidebarOpened } = this.state;
-    const path = location && location.pathname;
     return (
       <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
-        <Sidebar.Pushable>
-          <Sidebar as={Menu} animation="uncover" inverted={true} vertical={true} visible={sidebarOpened}>
-            <NavLink to="/"><Menu.Item name="Home" active={path === '/'} /></NavLink>
-            <NavLink to="/bio"><Menu.Item name="bio" active={path === '/bio'} /></NavLink>
-            <NavLink to="/education"><Menu.Item name="education" active={path === '/education'} /></NavLink>
-            <NavLink to="/experience"><Menu.Item name="experience" active={path === '/experience'} /></NavLink>
-            <NavLink to="/skills"><Menu.Item name="skills" active={path === '/skills'} /></NavLink>
-            <NavLink to="/projects"><Menu.Item name="Projects" active={path === '/projects'} /></NavLink>
-          </Sidebar>
-
-          <Sidebar.Pusher
-            dimmed={sidebarOpened}
-            onClick={this.handlePusherClick}
-            style={{ minHeight: '100vh' }}
-          >
-            <Segment
-              inverted={true}
-              textAlign="center"
-              style={{ minHeight: 350, padding: '1em 0em' }}
-              vertical={true}
-            >
-              <Container>
-                <Menu inverted={true} pointing={true} secondary={true} size="large">
-                  <Menu.Item onClick={this.handleToggle}>
-                    <Icon name="sidebar" />
-                  </Menu.Item>
-                  <Menu.Item position="right">
-                    <Link to="/hire">
-                      <Button inverted={true}>
-                        Hire
-                    </Button>
-                    </Link>
-                  </Menu.Item>
-                </Menu>
-              </Container>
-              <HomeHeading mobile={true} />
-            </Segment>
-          </Sidebar.Pusher>
-        </Sidebar.Pushable>
+        <Wrapper>
+          <Element name="bio">
+            <Bio />
+          </Element>
+          <Up>
+            <Move>
+              <Icon onClick={this.scrollToTop} name="angle double up" size="huge" color="yellow" />
+            </Move>
+          </Up>
+          <Element name="projects">
+            <ProjectsView />
+          </Element>
+          <Element name="education">
+            <Experience />
+          </Element>
+          <Element name="experience">
+            <Education />
+          </Element>
+        </Wrapper>
       </Responsive>
     );
   }

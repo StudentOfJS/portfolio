@@ -8,7 +8,7 @@ import {
 import { NavLink, Link, RouteProps } from 'react-router-dom';
 import styled from '../../theme';
 
-const MenuLink = styled(NavLink)`
+export const MenuLink = styled(NavLink)`
   height: 100%;
   padding-top: 10px;
   text-align: center;
@@ -16,7 +16,7 @@ const MenuLink = styled(NavLink)`
   width: 100%;
 `;
 
-const activeStyle = {
+export const activeStyle = {
   boxShadow: 'inset 0 -2px 0 yellow',
 };
 
