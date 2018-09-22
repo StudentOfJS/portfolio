@@ -6,7 +6,8 @@ import { RootState } from '../../../store';
 import styled from '../../../theme';
 
 const EListItem = styled.li`
-  box-shadow: 1px 1px 10px grey;
+  background-color: white;
+  box-shadow: 1px 1px 10px black;
   border-radius: 5px
   height: 180px;
   list-style: none;

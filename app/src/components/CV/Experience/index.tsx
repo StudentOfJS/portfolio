@@ -4,6 +4,7 @@ import styled from '../../../theme';
 
 const EContainer = styled.div`
   align-items: center;
+  background-color: #666666;
   color: ${props => props.theme.secondaryTextColor};
   display: flex;
   flex-direction: column;
@@ -13,8 +14,9 @@ const EContainer = styled.div`
 `;
 
 const ETitle = styled.h2`
+  color: white;
   font-family: ${props => props.theme.fontFamily};
-  font-size: 34px;
+  font-size: 50px;
   font-weight: 700;
   padding-top: 30px; 
 `;
