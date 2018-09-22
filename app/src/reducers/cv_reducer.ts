@@ -35,7 +35,6 @@ export default function (
   state: CVState = initialState,
   action: PortfolioActionTypes
 ) {
-  console.log(action);
   switch (action.type) {
     case CV_INIT:
       return { ...state, loading: true };

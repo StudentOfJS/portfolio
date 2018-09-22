@@ -29,11 +29,10 @@ const BioContent = styled.div`
 
 const BioTitle = styled.h2`
   font-family: ${props => props.theme.fontFamily};
-  font-size: 60px;
+  font-size: 50px;
   font-weight: 700;
   margin: 0;
   padding: 0;
-  filter: drop-shadow(0 0 0.2rem black);
 `;
 
 class Bio extends React.Component<RootState, {}> {
