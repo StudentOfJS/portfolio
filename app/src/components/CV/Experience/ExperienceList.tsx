@@ -22,7 +22,7 @@ const ElistContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  min-height: 80vh;
+  min-height: 100vh;
   justify-content: space-evenly;
   width: 100vw;
 `;
