@@ -17,7 +17,7 @@ const MenuLink = styled(NavLink)`
 `;
 
 const activeStyle = {
-  boxShadow: 'inset 0 -4px 0 yellow',
+  boxShadow: 'inset 0 -2px 0 yellow',
 };
 
 // tslint:disable-next-line:no-any
