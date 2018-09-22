@@ -20,7 +20,8 @@ const SkillsContainer = styled.div`
   flex-direction: column;
   height: 100vh;
   justify-content: space-evenly;
-  width: 100vw;
+  min-width: 320px;
+  width: 70%;
 `;
 
 const SkillImage = styled.img`
@@ -41,9 +42,6 @@ const ImageContainer = styled.div`
   height: 140px;
   justify-content: center;
   width: 140px;
-  &:hover{
-    border: solid 1px white;
-  }
 `;
 
 const STitle = styled.h2`
@@ -54,9 +52,10 @@ const STitle = styled.h2`
   padding: 0;
 `;
 interface SkillsBoardProps {
+  filter: (f: string) => void;
 }
 
-const SkillsBoard: React.SFC<SkillsBoardProps> = (props) => {
+const SkillsBoard: React.SFC<SkillsBoardProps> = ({ filter }) => {
   return (
     <SkillsContainer>
       <STitle>Skills</STitle>
@@ -64,13 +63,13 @@ const SkillsBoard: React.SFC<SkillsBoardProps> = (props) => {
         {
           // tslint:disable-next-line:no-any
           images.slice(0, images.length / 2).map((im: any, i: number) =>
-            <ImageContainer key={i}><SkillImage src={im} /></ImageContainer>)}
+            <ImageContainer key={i} onClick={() => filter(im.name)}><SkillImage src={im.image} /></ImageContainer>)}
       </SkillsImagesContainer>
       <SkillsImagesContainer>
         {
           // tslint:disable-next-line:no-any
           images.slice(images.length / 2).map((im: any, i: number) =>
-            <ImageContainer key={i}><SkillImage src={im} /></ImageContainer>)}
+            <ImageContainer key={i} onClick={() => filter(im.name)}><SkillImage src={im.image} /></ImageContainer>)}
       </SkillsImagesContainer>
     </SkillsContainer>
   );

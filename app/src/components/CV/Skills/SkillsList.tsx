@@ -1,35 +1,32 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
 import { List } from 'semantic-ui-react';
 import Rating from './Rating';
-import { Skills } from '../../../proto/portfolio_pb';
-import { RootState } from '../../../store';
+import { SkillState } from '.';
+import styled from '../../../theme';
 
-interface SkillProps {
-  skills: Skills.AsObject;
-}
+const SkillsListContainer = styled.div`
+  align-items: center;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 100vh;
+  justify-content: space-evenly;
+  min-width: 320px;
+  padding: 10px;
+  width: 30%;
+`;
 
-class SkillsList extends React.Component<SkillProps, {}> {
-  public render() {
-    const { skills } = this.props;
-    return (
-      <List>
-        {
-          skills.skillsList.map(skill => (
-            <List.Item key={skill.id} >{skill.name} - {skill.description}<Rating rating={skill.rating} /></List.Item>
-          ))
-        }
-      </List>
-    );
-  }
-}
+const SkillsList: React.SFC<SkillState> = ({ skills }) => console.log(skills) || (
+  <SkillsListContainer>
+    <List>
+      {
+        skills.map(skill => (
+          <List.Item key={skill.id} >{skill.description}<Rating rating={skill.rating} /></List.Item>
+        ))
+      }
+    </List>
+  </SkillsListContainer>
+);
 
-function mapStateToProps(state: RootState) {
-  return {
-    skills: state.cv.skills,
-  };
-}
-
-export default connect(
-  mapStateToProps,
-)(SkillsList);
+export default SkillsList;
