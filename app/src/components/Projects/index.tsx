@@ -7,23 +7,44 @@ import { Projects } from '../../proto/portfolio_pb';
 import styled, { keyframes } from '../../theme';
 
 const ProjectsContainer = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  justify-content: space-evenly;
-  width: 100vw;
+  @media (max-width: 500px) {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-evenly;
+    width: 100vw;
+  }
+  @media (min-width: 500px) {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-evenly;
+    width: 100vw;
+  }
+
 `;
 
 const ProjectsDisplay = styled.div`
-  align-items: space-evenly;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  height: 100%;
-  justify-content: space-evenly;
-  max-width: 1000px;
-  width: 100%;
+  @media (max-width: 500px) {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+  @media (min-width: 500px) {
+    align-items: space-evenly;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 100%;
+    justify-content: space-evenly;
+    max-width: 1000px;
+    width: 100%;
+  }
 `;
 
 const fadeIn = keyframes`
@@ -59,7 +80,7 @@ const ProjectsTitle = styled.h2`
   font-size: 50px;
   font-weight: 700;
   margin: 0;
-  padding: 0;
+  padding: 20px;
 `;
 
 const extra = (keywords: string) => (
@@ -86,8 +107,8 @@ class ProjectList extends React.Component<ProjectsProps, {}> {
             return (
               <Modal
                 basic={true}
-                size="small"
                 key={project.id}
+                style={{ top: 0 }}
                 trigger={
                   <CardContainer>
                     <Card
