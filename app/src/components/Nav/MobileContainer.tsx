@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Icon, Responsive } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 import { Element, animateScroll as scroll, scrollSpy } from 'react-scroll';
 import Wrapper from '../Wrapper';
 import Education from '../CV/Education';
@@ -61,27 +61,25 @@ export default class MobileContainer extends React.Component {
   }
   render() {
     return (
-      <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
-        <Wrapper>
-          <Element name="bio">
-            <Bio />
-          </Element>
-          <Up>
-            <Move>
-              <Icon onClick={this.scrollToTop} name="angle double up" size="huge" color="yellow" />
-            </Move>
-          </Up>
-          <Element name="projects">
-            <Projects />
-          </Element>
-          <Element name="education">
-            <Experience />
-          </Element>
-          <Element name="experience">
-            <Education />
-          </Element>
-        </Wrapper>
-      </Responsive>
+      <Wrapper>
+        <Element name="bio">
+          <Bio />
+        </Element>
+        <Up>
+          <Move>
+            <Icon onClick={this.scrollToTop} name="angle double up" size="huge" color="yellow" />
+          </Move>
+        </Up>
+        <Element name="projects">
+          <Projects />
+        </Element>
+        <Element name="education">
+          <Experience />
+        </Element>
+        <Element name="experience">
+          <Education />
+        </Element>
+      </Wrapper>
     );
   }
 }

@@ -11,7 +11,7 @@ import Skills from './components/CV/Skills';
 import styled from './theme';
 
 const RoutesContainer = styled.div`
-  @media(max-width: 500px) {
+  @media(max-width: 680px) {
     display: none;
   }
 `;

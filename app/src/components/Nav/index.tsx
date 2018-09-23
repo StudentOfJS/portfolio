@@ -1,14 +1,23 @@
 import * as React from 'react';
 import DesktopContainer from './DesktopContainer';
 import MobileContainer from './MobileContainer';
-import { RouteProps } from 'react-router';
+import styled from '../../theme';
 
-// tslint:disable-next-line:no-any
-const Nav: React.SFC<RouteProps> = (props) => (
+const Desktop = styled.div`
+  @media(max-width: 680px){
+    display: none;
+  }
+`;
+
+const Mobile = styled.div`
+  @media(min-width: 680px){
+    display:none;
+  }
+`;
+
+export default () => (
   <div>
-    <DesktopContainer {...props} />
-    <MobileContainer {...props} />
+    <Desktop><DesktopContainer /></Desktop>
+    <Mobile><MobileContainer /></Mobile>
   </div>
 );
-
-export default Nav;
