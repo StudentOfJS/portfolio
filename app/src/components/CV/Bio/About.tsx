@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from '../../../theme';
 import rod from './images/rod.jpg';
+import Button, { SelectedBtn } from './Button';
 
 const Avatar = styled.img`
   border-radius: 100%;
@@ -11,18 +12,19 @@ const Avatar = styled.img`
 const AboutGrid = styled.div`
   color: darkgrey;
   display: grid;
-  height: 100vh;
   justify-content: stretch;
   width: 100vw;
   @media(min-width: 680px){
-    grid: 2fr 5fr / 200px auto;
+    grid: 2fr 5fr 2fr / 200px auto;
+    height: 100vh;
   }
   @media(max-width: 680px){
     grid: 2fr 5fr / 120px auto;
+    height: 100%;
   }
 `;
 
-const AboutSidebar = styled.div`
+const SidebarAvatar = styled.div`
   align-items: center;
   background-color: darkgray;
   color: white;
@@ -30,7 +32,37 @@ const AboutSidebar = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   grid-column: 1 / 2;
-  grid-row: 1 / 3
+  grid-row: 1 / 2;
+  height: 100%;
+  justify-content: flex-start;
+  padding: 40px 0;
+  width: 100%;
+`;
+
+const SidebarNav = styled.div`
+  align-items: center;
+  background-color: darkgray;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  height: 100%;
+  justify-content: flex-start;
+  padding: 40px 0;
+  width: 100%;
+`;
+
+const SidebarFooter = styled.div`
+  align-items: center;
+  background-color: darkgray;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  grid-column: 1 / 2;
+  grid-row: 3 / 4;
   height: 100%;
   justify-content: flex-start;
   padding: 40px 0;
@@ -42,7 +74,7 @@ const AboutContent = styled.div`
   display: flex;
   flex-wrap: wrap;
   grid-column: 2 / 3;
-  grid-row: 1 / 3;
+  grid-row: 1 / 4;
   height: 100%;
   justify-content: center;
   min-height: 320px;
@@ -84,16 +116,19 @@ const Site = () => (
     <Keywords>Go, gRPC, Protocol Buffers, TypeScript, React, Redux, Styled Components</Keywords>
     <AboutH4>background</AboutH4>
     <p>
-      I started my journey of discovery and hacking with
-      this site to try and reverse engineer Improbable's hackernews clone.
+      I started by hacking Improbable's hackernews clone to reverse engineer what's required to use gRPC for web.
       The goals were simple, learn more about gRPC and figure out how to connect from a server to an app.
-      But like all best laid plans, this evolved and what I have now is a timely replacement for my portfolio.
-  </p>
-    <p>I started by writing a proto file with the services and
-    messages I would require and using this as the base for the rest of the project.</p>
+      However, at the same time, I was faced with the reality that my neglected portfolio needed some serious love.
+      With an impending move back to Australia, I didn't have time for both, so here we are...
+    </p>
     <p>
-      <AboutH4>server</AboutH4>
-      I chose Go for the server, as it is performant and because it's my favorite server side language.
+      First step after messing with the hackernews app, was writing a proto file with the services and
+      messages I would require and using this as the base for the rest of the project.
+      Next time I'll spend longer at this stage. I can't overstate how critical it is to the whole project.
+    </p>
+    <AboutH4>server</AboutH4>
+    <p>
+      I chose Go for the server, as it is fast and easy to use.
       Keeping it relatively simple, while leaving scope for future hacking, I added BoltDB and the storm library,
       for easy CRUD operations.
     </p>
@@ -106,22 +141,70 @@ const Site = () => (
   </AboutContentBox>
 );
 
-interface AboutProps {
+const Me = () => (
+  <AboutContentBox>
+    <AboutH3>About Rod Lewis</AboutH3>
+    <Keywords>Surfer, Dad, Developer</Keywords>
+    <AboutH4>background</AboutH4>
+    <p>
+      Developer, entrepreneur, technical, I've worn all these hats and more.
+      I've worked at several successful startups at key points in their timeline.
+      I've ran a SEO business and a
+    </p>
+    <AboutH4>freetime</AboutH4>
+    <p>
+      I'm a little obsessed with learning, perhaps forgetting more than I learn, but enjoying the process.
+      When I take a break, I like to go to the beach with my wife and son,
+      with the hope of sneaking out for a quick surf.
+    </p>
+  </AboutContentBox>
+);
+
+interface AboutState {
+  site: boolean;
 }
 
-class About extends React.Component<AboutProps> {
-  public state = {};
+class About extends React.Component<{}, AboutState> {
+  public state = {
+    site: true,
+  };
+  public handleClick = () => this.setState(prevProps => ({ site: !prevProps.site }));
   public render() {
-    return (
+    const { site } = this.state;
+    return site ? (
       <AboutGrid>
-        <AboutSidebar><Avatar src={rod} alt="Rod's profile picture" /></AboutSidebar>
+        <SidebarAvatar>
+          <Avatar src={rod} alt="Rod's profile picture" />
+        </SidebarAvatar>
+        <SidebarNav>
+          <SelectedBtn disabled={true}>About Site</SelectedBtn>
+          <Button onClick={this.handleClick}>About Rod</Button>
+        </SidebarNav>
+        <SidebarFooter>
+          Rod Lewis ©2018
+        </SidebarFooter>
         <AboutContent>
           <Site />
         </AboutContent>
-      </AboutGrid>
-    );
+      </AboutGrid >
+    ) : (
+        <AboutGrid>
+          <SidebarAvatar>
+            <Avatar src={rod} alt="Rod's profile picture" />
+          </SidebarAvatar>
+          <SidebarNav>
+            <Button onClick={this.handleClick}>About Site</Button>
+            <SelectedBtn disabled={true}>About Rod</SelectedBtn>
+          </SidebarNav>
+          <SidebarFooter>
+            Rod Lewis ©2018
+          </SidebarFooter>
+          <AboutContent>
+            <Me />
+          </AboutContent>
+        </AboutGrid>
+      );
   }
-
 }
 
 export default About;
