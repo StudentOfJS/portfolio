@@ -15,7 +15,7 @@ export const images = [
   { name: 'GQL', image: graphql },
   { name: 'JS', image: react },
   { name: 'TS', image: ts },
-  { name: 'Node', image: node },
+  { name: 'N', image: node },
   { name: 'S', image: aws },
   { name: 'CSS', image: css },
   { name: 'SC', image: bash },

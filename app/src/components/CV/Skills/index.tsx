@@ -29,7 +29,6 @@ export interface SkillState {
 class SkillsView extends React.Component<SkillProps, SkillState> {
   public state = { skills: [] };
   public filter: ((f: string) => void) = (f) => {
-    console.log(f);
     const skills = this.props.skills.skillsList.filter(s => s.name === f);
     this.setState({ skills });
   }

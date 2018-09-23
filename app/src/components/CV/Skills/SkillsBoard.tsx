@@ -1,9 +1,21 @@
 import * as React from 'react';
 import { images } from './images';
-import styled from '../../../theme';
+import styled, { keyframes } from '../../../theme';
+
+const SlideIn = keyframes`
+  0% {
+    transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+`;
 
 const SkillsImagesContainer = styled.div`
   align-items: center;
+  animation: ${SlideIn} 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

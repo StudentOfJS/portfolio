@@ -9,22 +9,45 @@ const EListItem = styled.li`
   background-color: white;
   box-shadow: 1px 1px 10px black;
   border-radius: 5px
-  height: 180px;
+  height: 300px;
   list-style: none;
   margin: 20px;
-  min-width: 300px;
   padding: 10px;
-  width: 30%;
+  text-align: center;
+  width: 260px;
 `;
 
 const ElistContainer = styled.div`
-  align-items: flex-start;
+  align-items: space-evenly;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  min-height: 100vh;
+  height: 100%;
   justify-content: space-evenly;
-  width: 100vw;
+  max-width: 900px;
+  min-height: 80vh;
+  width: 100%;
+`;
+
+const Span = styled.span`
+  font-family: ${props => props.theme.fontFamily};
+  font-weight: 600;
+  font-size: 12px;
+`;
+const BlueSpan = styled(Span)`
+  color: darkblue;
+`;
+const H3 = styled.h3`
+  color: darkgrey;
+  font-family: ${props => props.theme.fontFamily};
+  font-weight: 700;
+  font-size: 18px;
+  padding: 10px;
+`;
+
+const InnerBox = styled.div`
+  padding: 20px;
+  text-align: left;
 `;
 
 interface ExperienceProps {
@@ -41,16 +64,21 @@ class ExperienceList extends React.Component<ExperienceProps, {}> {
             jobs.jobsList.map(job => (
               <EListItem key={job.id}>
                 <Item>
-                  <Item.Image size="tiny" src={job.logoUrl} />
-
+                  <Item.Header>
+                    <Item.Image size="tiny" src={job.logoUrl} />
+                  </Item.Header>
                   <Item.Content>
-                    <Item.Header>{job.jobTitle}</Item.Header>
+                    <Item.Header><H3>{job.jobTitle}</H3></Item.Header>
                     <Item.Meta>
-                      <span className="price">{job.company}</span>
-                      <span className="stay">{job.location}</span>
-                      <span className="stay">{job.dates}</span>
+                      <BlueSpan>{job.company}, </BlueSpan>
+                      <Span>{job.location}</Span>
                     </Item.Meta>
-                    <Item.Description>{job.description}</Item.Description>
+                    <Item.Meta>
+                      <Span>{job.dates}</Span>
+                    </Item.Meta>
+                    <InnerBox>
+                      <Item.Description>{job.description}</Item.Description>
+                    </InnerBox>
                   </Item.Content>
                 </Item>
               </EListItem>
