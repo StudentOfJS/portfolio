@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { Icon } from 'semantic-ui-react';
-import { Element, animateScroll as scroll, scrollSpy } from 'react-scroll';
+import { animateScroll as scroll, scrollSpy } from 'react-scroll';
 import Wrapper from '../Wrapper';
 import Education from '../CV/Education';
 import Experience from '../CV/Experience';
 import Bio from '../CV/Bio';
 import Projects from '../Projects';
 import styled, { keyframes } from '../../theme';
+import Skills from '../CV/Skills';
 
 const up = keyframes`
   0%,
@@ -62,23 +63,16 @@ export default class MobileContainer extends React.Component {
   render() {
     return (
       <Wrapper>
-        <Element name="bio">
-          <Bio />
-        </Element>
+        <Bio />
         <Up>
           <Move>
             <Icon onClick={this.scrollToTop} name="angle double up" size="huge" color="yellow" />
           </Move>
         </Up>
-        <Element name="projects">
-          <Projects />
-        </Element>
-        <Element name="education">
-          <Experience />
-        </Element>
-        <Element name="experience">
-          <Education />
-        </Element>
+        <Projects />
+        <Experience />
+        <Education />
+        <Skills />
       </Wrapper>
     );
   }

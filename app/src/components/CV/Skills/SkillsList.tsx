@@ -22,11 +22,17 @@ const SkillsListContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  height: 100vh;
   justify-content: space-evenly;
   min-width: 320px;
   padding: 10px;
   width: 30%;
+  @media(max-width: 680px) {
+    height: 100%;
+    margin: 20px 0;
+  }
+  @media(min-width: 680px) {
+    height: 100vh;
+  }
 `;
 
 const SkillsList: React.SFC<SkillState> = ({ skills }) => console.log(skills) || (
