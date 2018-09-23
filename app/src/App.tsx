@@ -8,19 +8,28 @@ import Education from './components/CV/Education';
 import Experience from './components/CV/Experience';
 import Bio from './components/CV/Bio';
 import Skills from './components/CV/Skills';
+import styled from './theme';
+
+const RoutesContainer = styled.div`
+  @media(max-width: 500px) {
+    display: none;
+  }
+`;
 
 export default () => (
   <Router>
     <Wrapper>
       <div>
         <Nav />
-        <Switch>
-          <Route path="/projects" component={Projects} />
-          <Route path="/education" component={Education} />
-          <Route path="/experience" component={Experience} />
-          <Route path="/skills" component={Skills} />
-          <Route exact={true} path="/" component={Bio} />
-        </Switch>
+        <RoutesContainer>
+          <Switch>
+            <Route path="/projects" component={Projects} />
+            <Route path="/education" component={Education} />
+            <Route path="/experience" component={Experience} />
+            <Route path="/skills" component={Skills} />
+            <Route exact={true} path="/" component={Bio} />
+          </Switch>
+        </RoutesContainer>
         <Footer />
       </div>
     </Wrapper>
