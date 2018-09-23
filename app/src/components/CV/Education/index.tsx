@@ -10,6 +10,7 @@ const EduContainer = styled.div`
   flex-direction: column;
   height: 100%;
   justify-content: space-evenly;
+  padding: 10px;
   width: 100vw;
 `;
 
