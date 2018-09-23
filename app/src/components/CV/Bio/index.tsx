@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { RootState } from '../../../store';
 import { Icon } from 'semantic-ui-react';
+import { Element, Link } from 'react-scroll';
 import styled, { keyframes } from '../../../theme';
 import * as dev from './images/dev.jpg';
 import About from './About';
@@ -87,11 +88,16 @@ const down = keyframes`
   }
 `;
 
-const Move = styled.div`
+const Move = styled(Link)`
   animation: ${down} 4s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+  color: white;
+  cursor: pointer;
   height: 100px;
   padding: 10px 5px;
   width: 100px;
+  &:hover{
+    color: orange;
+  }
 `;
 
 const Down = styled.div`
@@ -144,7 +150,7 @@ class Bio extends React.Component<RootState, {}> {
         <BioContainer>
           <BioFilter>
             <Down>
-              <Move>
+              <Move to="about">
                 <Icon name="angle double down" size="massive" />
               </Move>
             </Down>
@@ -154,7 +160,9 @@ class Bio extends React.Component<RootState, {}> {
             </BioContent>
           </BioFilter>
         </BioContainer>
-        <About />
+        <Element name="about">
+          <About />
+        </Element>
       </div>
     );
   }
