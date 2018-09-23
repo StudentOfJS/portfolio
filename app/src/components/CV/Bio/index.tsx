@@ -38,7 +38,6 @@ const BioTitle = styled.h2`
 class Bio extends React.Component<RootState, {}> {
   public render() {
     const { cv: { bio } } = this.props;
-    console.log(bio);
     return (
       <BioContainer>
         <BioTitle>{bio && bio.title}</BioTitle>

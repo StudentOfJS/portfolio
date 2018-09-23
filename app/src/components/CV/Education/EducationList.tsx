@@ -11,7 +11,6 @@ interface EducationProps {
 class EducationList extends React.Component<EducationProps, {}> {
   public render() {
     const { courses } = this.props;
-    console.log(courses);
     if (courses) {
       return (
         <Item.Group>

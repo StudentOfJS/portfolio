@@ -35,7 +35,7 @@ const SkillsListContainer = styled.div`
   }
 `;
 
-const SkillsList: React.SFC<SkillState> = ({ skills }) => console.log(skills) || (
+const SkillsList: React.SFC<SkillState> = ({ skills }) => (
   <SkillsListContainer>
     <List>
       {

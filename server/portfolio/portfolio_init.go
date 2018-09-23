@@ -1,9 +1,5 @@
 package portfolio
 
-import (
-	"github.com/google/uuid"
-)
-
 // InitCV initializes the data in the database
 func InitCV() {
 	b := Bio{
@@ -111,7 +107,7 @@ func InitCV() {
 			Location:    "Bonn Germany",
 			Dates:       "09/2017 to 09/2018",
 			Description: "Created PoC React based apps. Production HR software.",
-			LogoUrl:     "https://www.linkedin.com/company/rocketship-wp/?lipi=urn%3Ali%3Apage%3Ad_flagship3_showcase%3B0zcyIurxTkyieDgwd7W%2FGg%3D%3D",
+			LogoUrl:     "https://pbs.twimg.com/profile_images/795188378132160512/qcn9gKEs_400x400.jpg",
 		},
 		{
 			ID:          2,
@@ -213,121 +209,121 @@ func InitCV() {
 
 	Skills := []Skill{
 		{
-			ID:          uuid.New().ID(),
+			ID:          1,
 			Description: "React",
 			Name:        "JS",
 			Rating:      9,
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          2,
 			Description: "Redux",
 			Name:        "JS",
 			Rating:      9,
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          3,
 			Description: "Es5, ES6, ES7",
 			Name:        "JS",
 			Rating:      9,
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          4,
 			Description: "API - html/JSON, GraphQL, gRPC",
 			Name:        "N",
 			Rating:      7,
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          5,
 			Description: "HTML, CSS",
 			Name:        "CSS",
 			Rating:      9,
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          6,
 			Description: "Styled Components",
 			Name:        "CSS",
 			Rating:      10,
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          7,
 			Description: "MongoDB",
 			Name:        "DB",
 			Rating:      9,
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          7,
 			Description: "BoltDB",
 			Name:        "DB",
 			Rating:      9,
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          8,
 			Description: "SQL",
 			Name:        "DB",
 			Rating:      5,
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          9,
 			Description: "PostgreSQL",
 			Name:        "DB",
 			Rating:      6,
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          10,
 			Description: "TypeOrm",
 			Name:        "DB",
 			Rating:      5,
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          11,
 			Description: "API - JSON/ HTML",
 			Name:        "GO",
 			Rating:      8,
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          12,
 			Description: "Gin-Go",
 			Name:        "GO",
 			Rating:      9,
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          13,
 			Description: "gRPC, protocol buffers",
 			Name:        "GO",
 			Rating:      6,
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          14,
 			Description: "Express, API",
 			Name:        "N",
 			Rating:      6,
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          15,
 			Description: "Experience with truffle, web3 and solidity",
 			Name:        "SC",
 			Rating:      6,
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          16,
 			Description: "Experience using TypeScript with React/Redux/GraphQL and Express/Apollo server experience",
 			Name:        "TS",
 			Rating:      8,
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          17,
 			Description: "Apollo Client /React",
 			Name:        "GQL",
 			Rating:      10,
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          18,
 			Description: "Apollo server",
 			Name:        "GQL",
 			Rating:      8,
 		},
 		{
-			ID:          uuid.New().ID(),
+			ID:          19,
 			Description: "Sys Ops",
 			Name:        "S",
 			Rating:      8,
