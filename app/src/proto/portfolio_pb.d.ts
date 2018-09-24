@@ -309,6 +309,62 @@ export namespace CV {
   }
 }
 
+export class ContactForm extends jspb.Message {
+  getFirst(): string;
+  setFirst(value: string): void;
+
+  getEmail(): string;
+  setEmail(value: string): void;
+
+  getLast(): string;
+  setLast(value: string): void;
+
+  getMobile(): string;
+  setMobile(value: string): void;
+
+  getText(): string;
+  setText(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ContactForm.AsObject;
+  static toObject(includeInstance: boolean, msg: ContactForm): ContactForm.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ContactForm, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ContactForm;
+  static deserializeBinaryFromReader(message: ContactForm, reader: jspb.BinaryReader): ContactForm;
+}
+
+export namespace ContactForm {
+  export type AsObject = {
+    first: string,
+    email: string,
+    last: string,
+    mobile: string,
+    text: string,
+  }
+}
+
+export class FormConfirmation extends jspb.Message {
+  getConfirmed(): boolean;
+  setConfirmed(value: boolean): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): FormConfirmation.AsObject;
+  static toObject(includeInstance: boolean, msg: FormConfirmation): FormConfirmation.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: FormConfirmation, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): FormConfirmation;
+  static deserializeBinaryFromReader(message: FormConfirmation, reader: jspb.BinaryReader): FormConfirmation;
+}
+
+export namespace FormConfirmation {
+  export type AsObject = {
+    confirmed: boolean,
+  }
+}
+
 export class GetCVResponse extends jspb.Message {
   hasCv(): boolean;
   clearCv(): void;
@@ -344,6 +400,50 @@ export class GetCVRequest extends jspb.Message {
 
 export namespace GetCVRequest {
   export type AsObject = {
+  }
+}
+
+export class ContactResponse extends jspb.Message {
+  hasFormaccepted(): boolean;
+  clearFormaccepted(): void;
+  getFormaccepted(): FormConfirmation | undefined;
+  setFormaccepted(value?: FormConfirmation): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ContactResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: ContactResponse): ContactResponse.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ContactResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ContactResponse;
+  static deserializeBinaryFromReader(message: ContactResponse, reader: jspb.BinaryReader): ContactResponse;
+}
+
+export namespace ContactResponse {
+  export type AsObject = {
+    formaccepted?: FormConfirmation.AsObject,
+  }
+}
+
+export class ContactRequest extends jspb.Message {
+  hasForm(): boolean;
+  clearForm(): void;
+  getForm(): ContactForm | undefined;
+  setForm(value?: ContactForm): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ContactRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: ContactRequest): ContactRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ContactRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ContactRequest;
+  static deserializeBinaryFromReader(message: ContactRequest, reader: jspb.BinaryReader): ContactRequest;
+}
+
+export namespace ContactRequest {
+  export type AsObject = {
+    form?: ContactForm.AsObject,
   }
 }
 

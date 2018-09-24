@@ -57,3 +57,16 @@ func (s *portfolioService) GetCV(req *proto.GetCVRequest, res proto.PortfolioSer
 	})
 	return nil
 }
+
+func (s *portfolioService) Contact(req *proto.ContactRequest, res proto.PortfolioService_ContactServer) error {
+	f := req.GetForm()
+	c, err := s.api.formRequest(f, true)
+	if err != nil {
+		return grpc.Errorf(codes.Internal, err.Error())
+	}
+	r := &proto.ContactResponse{
+		FormAccepted: c,
+	}
+	res.Send(r)
+	return nil
+}

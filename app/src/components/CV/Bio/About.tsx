@@ -1,7 +1,8 @@
 import * as React from 'react';
 import styled from '../../../theme';
 import rod from './images/rod.jpg';
-import Button, { SelectedBtn } from './Button';
+import Buttons from './Buttons';
+import ContactForm from '../../Contact/ContactForm';
 
 const Avatar = styled.img`
   border-radius: 100%;
@@ -15,7 +16,7 @@ const AboutGrid = styled.div`
   justify-content: stretch;
   width: 100vw;
   @media(min-width: 680px){
-    grid: 3fr 5fr 2fr / 200px auto;
+    grid: 3fr 3fr 4fr / 200px auto;
     height: 100vh;
   }
   @media(max-width: 680px){
@@ -41,10 +42,10 @@ const SidebarAvatar = styled(Sidebar)`
   justify-content: center;
 `;
 
-const SidebarNav = styled(Sidebar)`
+export const SidebarNav = styled(Sidebar)`
   grid-column: 1 / 2;
   grid-row: 2 / 3;
-  justify-content: flex-start;
+  justify-content: space-evenly;
 `;
 
 const SidebarFooter = styled(Sidebar)`
@@ -145,49 +146,33 @@ const Me = () => (
 );
 
 interface AboutState {
-  site: boolean;
+  page: string;
 }
 
 class About extends React.Component<{}, AboutState> {
   public state = {
-    site: true,
+    page: 'site',
   };
-  public handleClick = () => this.setState(prevProps => ({ site: !prevProps.site }));
+  public handleClick = (page: string) => {
+    this.setState({ page });
+  }
   public render() {
-    const { site } = this.state;
-    return site ? (
+    return (
       <AboutGrid>
         <SidebarAvatar>
           <Avatar src={rod} alt="Rod's profile picture" />
         </SidebarAvatar>
-        <SidebarNav>
-          <SelectedBtn disabled={true}>About Site</SelectedBtn>
-          <Button onClick={this.handleClick}>About Rod</Button>
-        </SidebarNav>
+        <Buttons handleClick={this.handleClick} page={this.state.page} />
         <SidebarFooter>
           Rod Lewis ©2018
         </SidebarFooter>
         <AboutContent>
-          <Site />
+          {this.state.page === 'site' && <Site />}
+          {this.state.page === 'rod' && <Me />}
+          {this.state.page === 'contact' && <ContactForm />}
         </AboutContent>
       </AboutGrid >
-    ) : (
-        <AboutGrid>
-          <SidebarAvatar>
-            <Avatar src={rod} alt="Rod's profile picture" />
-          </SidebarAvatar>
-          <SidebarNav>
-            <Button onClick={this.handleClick}>About Site</Button>
-            <SelectedBtn disabled={true}>About Rod</SelectedBtn>
-          </SidebarNav>
-          <SidebarFooter>
-            Rod Lewis ©2018
-          </SidebarFooter>
-          <AboutContent>
-            <Me />
-          </AboutContent>
-        </AboutGrid>
-      );
+    );
   }
 }
 

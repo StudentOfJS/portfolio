@@ -11,9 +11,13 @@ var global = Function('return this')();
 
 goog.exportSymbol('proto.proto.Bio', null, global);
 goog.exportSymbol('proto.proto.CV', null, global);
+goog.exportSymbol('proto.proto.ContactForm', null, global);
+goog.exportSymbol('proto.proto.ContactRequest', null, global);
+goog.exportSymbol('proto.proto.ContactResponse', null, global);
 goog.exportSymbol('proto.proto.Course', null, global);
 goog.exportSymbol('proto.proto.Education', null, global);
 goog.exportSymbol('proto.proto.Experience', null, global);
+goog.exportSymbol('proto.proto.FormConfirmation', null, global);
 goog.exportSymbol('proto.proto.GetCVRequest', null, global);
 goog.exportSymbol('proto.proto.GetCVResponse', null, global);
 goog.exportSymbol('proto.proto.Job', null, global);
@@ -2377,6 +2381,434 @@ proto.proto.CV.prototype.hasSkills = function() {
  * @extends {jspb.Message}
  * @constructor
  */
+proto.proto.ContactForm = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.proto.ContactForm, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.proto.ContactForm.displayName = 'proto.proto.ContactForm';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.proto.ContactForm.prototype.toObject = function(opt_includeInstance) {
+  return proto.proto.ContactForm.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.proto.ContactForm} msg The msg instance to transform.
+ * @return {!Object}
+ */
+proto.proto.ContactForm.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    first: msg.getFirst(),
+    email: msg.getEmail(),
+    last: msg.getLast(),
+    mobile: msg.getMobile(),
+    text: msg.getText()
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.proto.ContactForm}
+ */
+proto.proto.ContactForm.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.proto.ContactForm;
+  return proto.proto.ContactForm.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.proto.ContactForm} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.proto.ContactForm}
+ */
+proto.proto.ContactForm.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setFirst(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setEmail(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setLast(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMobile(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setText(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Class method variant: serializes the given message to binary data
+ * (in protobuf wire format), writing to the given BinaryWriter.
+ * @param {!proto.proto.ContactForm} message
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.proto.ContactForm.serializeBinaryToWriter = function(message, writer) {
+  message.serializeBinaryToWriter(writer);
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.proto.ContactForm.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  this.serializeBinaryToWriter(writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format),
+ * writing to the given BinaryWriter.
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.proto.ContactForm.prototype.serializeBinaryToWriter = function (writer) {
+  var f = undefined;
+  f = this.getFirst();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = this.getEmail();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = this.getLast();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = this.getMobile();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
+  f = this.getText();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
+      f
+    );
+  }
+};
+
+
+/**
+ * Creates a deep clone of this proto. No data is shared with the original.
+ * @return {!proto.proto.ContactForm} The clone.
+ */
+proto.proto.ContactForm.prototype.cloneMessage = function() {
+  return /** @type {!proto.proto.ContactForm} */ (jspb.Message.cloneMessage(this));
+};
+
+
+/**
+ * optional string first = 1;
+ * @return {string}
+ */
+proto.proto.ContactForm.prototype.getFirst = function() {
+  return /** @type {string} */ (jspb.Message.getFieldProto3(this, 1, ""));
+};
+
+
+/** @param {string} value  */
+proto.proto.ContactForm.prototype.setFirst = function(value) {
+  jspb.Message.setField(this, 1, value);
+};
+
+
+/**
+ * optional string email = 2;
+ * @return {string}
+ */
+proto.proto.ContactForm.prototype.getEmail = function() {
+  return /** @type {string} */ (jspb.Message.getFieldProto3(this, 2, ""));
+};
+
+
+/** @param {string} value  */
+proto.proto.ContactForm.prototype.setEmail = function(value) {
+  jspb.Message.setField(this, 2, value);
+};
+
+
+/**
+ * optional string last = 3;
+ * @return {string}
+ */
+proto.proto.ContactForm.prototype.getLast = function() {
+  return /** @type {string} */ (jspb.Message.getFieldProto3(this, 3, ""));
+};
+
+
+/** @param {string} value  */
+proto.proto.ContactForm.prototype.setLast = function(value) {
+  jspb.Message.setField(this, 3, value);
+};
+
+
+/**
+ * optional string mobile = 4;
+ * @return {string}
+ */
+proto.proto.ContactForm.prototype.getMobile = function() {
+  return /** @type {string} */ (jspb.Message.getFieldProto3(this, 4, ""));
+};
+
+
+/** @param {string} value  */
+proto.proto.ContactForm.prototype.setMobile = function(value) {
+  jspb.Message.setField(this, 4, value);
+};
+
+
+/**
+ * optional string text = 5;
+ * @return {string}
+ */
+proto.proto.ContactForm.prototype.getText = function() {
+  return /** @type {string} */ (jspb.Message.getFieldProto3(this, 5, ""));
+};
+
+
+/** @param {string} value  */
+proto.proto.ContactForm.prototype.setText = function(value) {
+  jspb.Message.setField(this, 5, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.proto.FormConfirmation = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.proto.FormConfirmation, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.proto.FormConfirmation.displayName = 'proto.proto.FormConfirmation';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.proto.FormConfirmation.prototype.toObject = function(opt_includeInstance) {
+  return proto.proto.FormConfirmation.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.proto.FormConfirmation} msg The msg instance to transform.
+ * @return {!Object}
+ */
+proto.proto.FormConfirmation.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    confirmed: msg.getConfirmed()
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.proto.FormConfirmation}
+ */
+proto.proto.FormConfirmation.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.proto.FormConfirmation;
+  return proto.proto.FormConfirmation.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.proto.FormConfirmation} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.proto.FormConfirmation}
+ */
+proto.proto.FormConfirmation.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setConfirmed(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Class method variant: serializes the given message to binary data
+ * (in protobuf wire format), writing to the given BinaryWriter.
+ * @param {!proto.proto.FormConfirmation} message
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.proto.FormConfirmation.serializeBinaryToWriter = function(message, writer) {
+  message.serializeBinaryToWriter(writer);
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.proto.FormConfirmation.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  this.serializeBinaryToWriter(writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format),
+ * writing to the given BinaryWriter.
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.proto.FormConfirmation.prototype.serializeBinaryToWriter = function (writer) {
+  var f = undefined;
+  f = this.getConfirmed();
+  if (f) {
+    writer.writeBool(
+      1,
+      f
+    );
+  }
+};
+
+
+/**
+ * Creates a deep clone of this proto. No data is shared with the original.
+ * @return {!proto.proto.FormConfirmation} The clone.
+ */
+proto.proto.FormConfirmation.prototype.cloneMessage = function() {
+  return /** @type {!proto.proto.FormConfirmation} */ (jspb.Message.cloneMessage(this));
+};
+
+
+/**
+ * optional bool confirmed = 1;
+ * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
+ * You should avoid comparisons like {@code val === true/false} in those cases.
+ * @return {boolean}
+ */
+proto.proto.FormConfirmation.prototype.getConfirmed = function() {
+  return /** @type {boolean} */ (jspb.Message.getFieldProto3(this, 1, false));
+};
+
+
+/** @param {boolean} value  */
+proto.proto.FormConfirmation.prototype.setConfirmed = function(value) {
+  jspb.Message.setField(this, 1, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
 proto.proto.GetCVResponse = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
@@ -2672,6 +3104,358 @@ proto.proto.GetCVRequest.prototype.serializeBinaryToWriter = function (writer) {
  */
 proto.proto.GetCVRequest.prototype.cloneMessage = function() {
   return /** @type {!proto.proto.GetCVRequest} */ (jspb.Message.cloneMessage(this));
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.proto.ContactResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.proto.ContactResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.proto.ContactResponse.displayName = 'proto.proto.ContactResponse';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.proto.ContactResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.proto.ContactResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.proto.ContactResponse} msg The msg instance to transform.
+ * @return {!Object}
+ */
+proto.proto.ContactResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    formaccepted: (f = msg.getFormaccepted()) && proto.proto.FormConfirmation.toObject(includeInstance, f)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.proto.ContactResponse}
+ */
+proto.proto.ContactResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.proto.ContactResponse;
+  return proto.proto.ContactResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.proto.ContactResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.proto.ContactResponse}
+ */
+proto.proto.ContactResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.proto.FormConfirmation;
+      reader.readMessage(value,proto.proto.FormConfirmation.deserializeBinaryFromReader);
+      msg.setFormaccepted(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Class method variant: serializes the given message to binary data
+ * (in protobuf wire format), writing to the given BinaryWriter.
+ * @param {!proto.proto.ContactResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.proto.ContactResponse.serializeBinaryToWriter = function(message, writer) {
+  message.serializeBinaryToWriter(writer);
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.proto.ContactResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  this.serializeBinaryToWriter(writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format),
+ * writing to the given BinaryWriter.
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.proto.ContactResponse.prototype.serializeBinaryToWriter = function (writer) {
+  var f = undefined;
+  f = this.getFormaccepted();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.proto.FormConfirmation.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * Creates a deep clone of this proto. No data is shared with the original.
+ * @return {!proto.proto.ContactResponse} The clone.
+ */
+proto.proto.ContactResponse.prototype.cloneMessage = function() {
+  return /** @type {!proto.proto.ContactResponse} */ (jspb.Message.cloneMessage(this));
+};
+
+
+/**
+ * optional FormConfirmation formAccepted = 1;
+ * @return {proto.proto.FormConfirmation}
+ */
+proto.proto.ContactResponse.prototype.getFormaccepted = function() {
+  return /** @type{proto.proto.FormConfirmation} */ (
+    jspb.Message.getWrapperField(this, proto.proto.FormConfirmation, 1));
+};
+
+
+/** @param {proto.proto.FormConfirmation|undefined} value  */
+proto.proto.ContactResponse.prototype.setFormaccepted = function(value) {
+  jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+proto.proto.ContactResponse.prototype.clearFormaccepted = function() {
+  this.setFormaccepted(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return{!boolean}
+ */
+proto.proto.ContactResponse.prototype.hasFormaccepted = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.proto.ContactRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.proto.ContactRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.proto.ContactRequest.displayName = 'proto.proto.ContactRequest';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.proto.ContactRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.proto.ContactRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.proto.ContactRequest} msg The msg instance to transform.
+ * @return {!Object}
+ */
+proto.proto.ContactRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    form: (f = msg.getForm()) && proto.proto.ContactForm.toObject(includeInstance, f)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.proto.ContactRequest}
+ */
+proto.proto.ContactRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.proto.ContactRequest;
+  return proto.proto.ContactRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.proto.ContactRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.proto.ContactRequest}
+ */
+proto.proto.ContactRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.proto.ContactForm;
+      reader.readMessage(value,proto.proto.ContactForm.deserializeBinaryFromReader);
+      msg.setForm(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Class method variant: serializes the given message to binary data
+ * (in protobuf wire format), writing to the given BinaryWriter.
+ * @param {!proto.proto.ContactRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.proto.ContactRequest.serializeBinaryToWriter = function(message, writer) {
+  message.serializeBinaryToWriter(writer);
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.proto.ContactRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  this.serializeBinaryToWriter(writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format),
+ * writing to the given BinaryWriter.
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.proto.ContactRequest.prototype.serializeBinaryToWriter = function (writer) {
+  var f = undefined;
+  f = this.getForm();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.proto.ContactForm.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * Creates a deep clone of this proto. No data is shared with the original.
+ * @return {!proto.proto.ContactRequest} The clone.
+ */
+proto.proto.ContactRequest.prototype.cloneMessage = function() {
+  return /** @type {!proto.proto.ContactRequest} */ (jspb.Message.cloneMessage(this));
+};
+
+
+/**
+ * optional ContactForm form = 1;
+ * @return {proto.proto.ContactForm}
+ */
+proto.proto.ContactRequest.prototype.getForm = function() {
+  return /** @type{proto.proto.ContactForm} */ (
+    jspb.Message.getWrapperField(this, proto.proto.ContactForm, 1));
+};
+
+
+/** @param {proto.proto.ContactForm|undefined} value  */
+proto.proto.ContactRequest.prototype.setForm = function(value) {
+  jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+proto.proto.ContactRequest.prototype.clearForm = function() {
+  this.setForm(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return{!boolean}
+ */
+proto.proto.ContactRequest.prototype.hasForm = function() {
+  return jspb.Message.getField(this, 1) != null;
 };
 
 

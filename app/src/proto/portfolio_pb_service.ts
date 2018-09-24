@@ -14,4 +14,12 @@ export namespace PortfolioService {
     static readonly requestType = proto_portfolio_pb.GetCVRequest;
     static readonly responseType = proto_portfolio_pb.GetCVResponse;
   }
+  export class Contact {
+    static readonly methodName = "Contact";
+    static readonly service = PortfolioService;
+    static readonly requestStream = false;
+    static readonly responseStream = true;
+    static readonly requestType = proto_portfolio_pb.ContactRequest;
+    static readonly responseType = proto_portfolio_pb.ContactResponse;
+  }
 }

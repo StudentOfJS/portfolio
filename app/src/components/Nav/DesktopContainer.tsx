@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {
-  Button,
   Menu,
   Visibility,
 } from 'semantic-ui-react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from '../../theme';
+import Contact from '../Contact';
 
 export const MenuLink = styled(NavLink)`
   height: 100%;
@@ -57,11 +57,7 @@ export default class DesktopContainer extends React.Component {
                 <MenuLink activeStyle={activeStyle} to="/projects">Projects
                   </MenuLink></Menu.Item>
               <Menu.Item position="right" link={true}>
-                <Link to="/hire">
-                  <Button inverted={true} size="small" >
-                    Hire
-                    </Button>
-                </Link>
+                <Contact button={false} />
               </Menu.Item>
             </Menu>
           )

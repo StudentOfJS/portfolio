@@ -66,15 +66,33 @@ message CV {
     Experience jobs = 3;
     Projects projects = 4;
     Skills skills = 5;
+}
 
+message ContactForm {
+    string first = 1;
+    string email = 2;
+    string last = 3;
+    string mobile = 4;
+    string text = 5;
+}
 
+message FormConfirmation {
+    bool confirmed = 1;
 }
 
 service PortfolioService {
     rpc GetCV (GetCVRequest) returns (stream GetCVResponse);
+    rpc Contact (ContactRequest) returns (stream ContactResponse);
 }
 
 message GetCVResponse {
     CV cv = 1;
 }
 message GetCVRequest {}
+
+message ContactResponse {
+    FormConfirmation formAccepted = 1;
+}
+message ContactRequest {
+    ContactForm form = 1; 
+}

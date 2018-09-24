@@ -1,7 +1,7 @@
 import * as React from 'react';
-import styled, { ThemeInterface } from '../../../../theme';
+import styled, { ThemeInterface } from '../../theme';
 
-interface ButtonProps {
+export interface ButtonProps {
   className?: string;
   type?: string;
   theme: ThemeInterface;
@@ -25,14 +25,14 @@ export const NonStyledBtn: React.SFC<ButtonProps> = props => (
 export default styled(NonStyledBtn)`
   background: transparent;
   color: white;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: 700;
   font-family: ${props => props.theme.fontFamily};
   border: 2px solid white;
   border-radius: 5px;
-  margin: 20px 0 0 0;
+  min-width: 110px;
   outline: none;
-  padding: 10px;
+  padding: 8px 15px;
   transition: transform 800ms ease-in-out;
   @media print {
     display: none;
@@ -51,9 +51,9 @@ export const SelectedBtn = styled(NonStyledBtn)`
   border-radius: 5px;
   color: darkgrey;
   font-family: ${props => props.theme.fontFamily};
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: 700;
-  margin: 20px 0 0 0;
+  min-width: 110px;
   outline: none;
-  padding: 10px;
+  padding: 8px 15px;
 `;
