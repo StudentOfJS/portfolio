@@ -1,4 +1,4 @@
-import { minLength, safeLength } from './ContactForm';
+import { minLength, safeLength } from './FormContact';
 
 describe('validation works', () => {
   it('should return false if length is less than supplied minimum', () => {

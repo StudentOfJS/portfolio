@@ -10,8 +10,6 @@ import {
 import { GrpcAction, grpcRequest } from '../middleware/grpc';
 import { Code, Metadata } from 'grpc-web-client';
 import { PortfolioService } from '../proto/portfolio_pb_service';
-import Contact from '../components/Contact';
-
 export const ADD_CV = 'ADD_CV';
 export const CV_INIT = 'CV_INIT';
 export const CONFIRM_FORM = 'CONFIRM_FORM';
@@ -66,7 +64,7 @@ type ConfirmForm = {
 };
 export const confirmForm = (confirmed: boolean) => ({ type: CONFIRM_FORM, payload: confirmed });
 
-export const submitHandlerForm = (form: ContactForm) => {
+export const submitForm = (form: ContactForm) => {
   const contactRequest = new ContactRequest();
   contactRequest.setForm(form);
   return grpcRequest<ContactRequest, ContactResponse>({

@@ -1,12 +1,24 @@
 import * as React from 'react';
+import { connect, Dispatch } from 'react-redux';
 import { Button, Checkbox, Form } from 'semantic-ui-react';
 import styled from '../../theme';
+import { RootState } from '../../store';
+import { PortfolioActionTypes, submitForm } from '../../actions/portfolioActions';
+import { ContactForm } from '../../proto/portfolio_pb';
 
-const ErrorMessage = styled.h4`
-  color: orange;
+const Message = styled.h4`
+  color: #666666;
   font-family: ${props => props.theme.fontFamily};
   font-size: 14px;
   font-weight: 700;
+`;
+
+const ErrorMessage = styled(Message)`
+  color: orange;
+`;
+
+const SuccessMessage = styled(Message)`
+  color: #56CBFF;
 `;
 
 interface FormState {
@@ -18,6 +30,12 @@ interface FormState {
   error: boolean;
   checked: boolean;
   [x: string]: string | boolean;
+}
+
+interface FormProps {
+  form_confirmed: boolean;
+  loading: boolean;
+  submit: (form: ContactForm) => void;
 }
 
 const initialState = {
@@ -35,7 +53,7 @@ const initialState = {
 export const safeLength = (s: string, max: number) => s.slice(0, max).length !== max;
 export const minLength = (s: string, min: number) => s.length > min;
 
-export default class ContactForm extends React.Component<{}, FormState> {
+class FormContact extends React.Component<FormProps, FormState> {
   state = initialState;
 
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void = event => {
@@ -67,16 +85,22 @@ export default class ContactForm extends React.Component<{}, FormState> {
     event.preventDefault();
     const isValid = this.validate(this.state);
     if (isValid) {
-      console.log(this.state);
-      // clear form
+      const c = new ContactForm();
+      c.setEmail(this.state.email);
+      c.setFirst(this.state.first);
+      c.setLast(this.state.last);
+      c.setMobile(this.state.mobile);
+      c.setText(this.state.text);
+      this.props.submit(c);
       this.setState(initialState);
     }
   }
 
   render() {
     const { checked, error, touched } = this.state;
+    const { form_confirmed, loading } = this.props;
     return (
-      <Form onSubmit={this.handleSubmit} style={{ maxWidth: 680, padding: 5, width: '100%' }}>
+      <Form loading={loading} onSubmit={this.handleSubmit} style={{ maxWidth: 680, padding: 5, width: '100%' }}>
         <Form.Group widths="equal">
           <Form.Input
             fluid={true}
@@ -127,8 +151,22 @@ export default class ContactForm extends React.Component<{}, FormState> {
         </Form.Field>
         {error && <ErrorMessage>check form and try again...</ErrorMessage>}
         {!checked && touched && <ErrorMessage>confirm conditions</ErrorMessage>}
+        {form_confirmed && <SuccessMessage>successfully submitted</SuccessMessage>}
         <Button type="submit">Submit</Button>
       </Form>
     );
   }
 }
+
+const mapStateToProps = (state: RootState) => ({
+  form_confirmed: state.form.form_confirmed,
+  loading: state.form.loading,
+});
+const mapDispatchToProps = (dispatch: Dispatch<PortfolioActionTypes>) => {
+  return {
+    submit: (form: ContactForm) => {
+      dispatch(submitForm(form));
+    }
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(FormContact);

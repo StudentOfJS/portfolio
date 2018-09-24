@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from '../../../theme';
 import rod from './images/rod.jpg';
 import Buttons from './Buttons';
-import ContactForm from '../../Contact/ContactForm';
+import FormContact from '../../Contact/FormContact';
 
 const Avatar = styled.img`
   border-radius: 100%;
@@ -169,7 +169,7 @@ class About extends React.Component<{}, AboutState> {
         <AboutContent>
           {this.state.page === 'site' && <Site />}
           {this.state.page === 'rod' && <Me />}
-          {this.state.page === 'contact' && <ContactForm />}
+          {this.state.page === 'contact' && <FormContact />}
         </AboutContent>
       </AboutGrid >
     );

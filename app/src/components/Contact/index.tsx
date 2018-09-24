@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Modal } from 'semantic-ui-react';
 import Button from '../Button';
-import ContactForm from './ContactForm';
+import FormContact from './FormContact';
 
 interface ContactModalProps {
   button: boolean;
@@ -20,7 +20,7 @@ export default class Contact extends React.Component<ContactModalProps> {
             ? <Button>Contact</Button>
             : <Button>Hire</Button>}
       >
-        <ContactForm />
+        <FormContact />
       </Modal>
     );
   }
