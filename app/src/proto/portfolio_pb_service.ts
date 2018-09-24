@@ -18,7 +18,7 @@ export namespace PortfolioService {
     static readonly methodName = "Contact";
     static readonly service = PortfolioService;
     static readonly requestStream = false;
-    static readonly responseStream = true;
+    static readonly responseStream = false;
     static readonly requestType = proto_portfolio_pb.ContactRequest;
     static readonly responseType = proto_portfolio_pb.ContactResponse;
   }

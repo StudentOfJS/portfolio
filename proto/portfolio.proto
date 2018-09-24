@@ -82,7 +82,7 @@ message FormConfirmation {
 
 service PortfolioService {
     rpc GetCV (GetCVRequest) returns (stream GetCVResponse);
-    rpc Contact (ContactRequest) returns (stream ContactResponse);
+    rpc Contact (ContactRequest) returns (ContactResponse);
 }
 
 message GetCVResponse {
