@@ -65,12 +65,19 @@ const CardContainer = styled.div`
 `;
 
 const ProjectsTitle = styled.h2`
-  color: ${props => props.theme.secondaryTextColor};
   font-family: ${props => props.theme.fontFamily};
   font-size: 50px;
   font-weight: 700;
   margin: 0;
   padding: 20px;
+  @media(max-width: 680px){
+    color: ${props => props.theme.secondaryTextColor};
+
+  }
+  @media(min-width: 680px){
+    color: white;
+  }
+
 `;
 
 const extra = (keywords: string) => (
@@ -98,7 +105,7 @@ class ProjectList extends React.Component<ProjectsProps, {}> {
               <Modal
                 basic={true}
                 key={project.id}
-                style={{ top: 0, paddingTop: 40 }}
+                style={{ top: 0, paddingTop: '20%' }}
                 trigger={
                   <CardContainer>
                     <Card
@@ -120,7 +127,7 @@ class ProjectList extends React.Component<ProjectsProps, {}> {
                 </Modal.Content>
                 <Modal.Actions>
                   <a href={project.repo} target="_blank">
-                    <Button color="green" as="a" inverted={true}>
+                    <Button color="green" inverted={true}>
                       <Icon name="github" />View Code
                     </Button>
                   </a>

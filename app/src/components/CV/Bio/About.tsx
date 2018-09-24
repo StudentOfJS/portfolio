@@ -10,7 +10,7 @@ const Avatar = styled.img`
 `;
 
 const AboutGrid = styled.div`
-  color: darkgrey;
+  color: #6B6B6B;
   display: grid;
   justify-content: stretch;
   width: 100vw;
@@ -103,7 +103,7 @@ const AboutH4 = styled.h4`
 `;
 
 const Keywords = styled.div`
-  color: #6495ED;
+  color: orange;
   margin: -10px 0 40px 0;
   ::before {
     content: '🚀 ';
