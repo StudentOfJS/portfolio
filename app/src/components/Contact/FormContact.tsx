@@ -55,7 +55,6 @@ export const minLength = (s: string, min: number) => s.length > min;
 
 class FormContact extends React.Component<FormProps, FormState> {
   state = initialState;
-
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void = event => {
     const key: string = event.currentTarget.name;
     const value: string = event.currentTarget.value;
@@ -91,7 +90,9 @@ class FormContact extends React.Component<FormProps, FormState> {
       c.setLast(this.state.last);
       c.setMobile(this.state.mobile);
       c.setText(this.state.text);
+      console.log('submitting');
       this.props.submit(c);
+      console.log('submitted');
       this.setState(initialState);
     }
   }

@@ -7,10 +7,7 @@ import (
 
 	"github.com/asdine/storm"
 	"github.com/studentofjs/portfolio/server/proto"
-	"gopkg.in/go-playground/validator.v9"
 )
-
-var validate *validator.Validate
 
 type Bio struct {
 	ID          int    `storm:"id,increment"`
@@ -51,12 +48,12 @@ type Skill struct {
 	Description string
 }
 type ContactForm struct {
-	ID     uint32 `storm:"id, increment"`
-	First  string `storm:"index"  validate:"required"`
-	Email  string `storm:"unique" validate:"required,email"`
+	ID     int    `storm:"id,increment"`
+	First  string `storm:"index"`
+	Email  string
 	Last   string `storm:"index"`
 	Mobile string
-	Text   string ` validate:"required,email"`
+	Text   string
 }
 
 type portfolioAPI struct{}
@@ -73,17 +70,12 @@ func (api *portfolioAPI) getDb(prod bool) string {
 }
 
 func (api *portfolioAPI) formRequest(c *proto.ContactForm, prod bool) (*proto.FormConfirmation, error) {
-	form := &ContactForm{
+	form := ContactForm{
 		First:  c.GetFirst(),
 		Last:   c.GetLast(),
 		Email:  c.GetEmail(),
 		Mobile: c.GetMobile(),
 		Text:   c.GetText(),
-	}
-	if err := validate.Struct(form); err != nil {
-		return &proto.FormConfirmation{
-			Confirmed: false,
-		}, err
 	}
 	db, err := storm.Open(api.getDb(prod))
 	if err != nil {
@@ -93,6 +85,7 @@ func (api *portfolioAPI) formRequest(c *proto.ContactForm, prod bool) (*proto.Fo
 	}
 	defer db.Close()
 	if err := db.Save(&form); err != nil {
+		fmt.Println("issue saving: ", err)
 		return &proto.FormConfirmation{
 			Confirmed: false,
 		}, err
