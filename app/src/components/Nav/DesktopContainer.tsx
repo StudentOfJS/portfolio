@@ -16,7 +16,7 @@ export const MenuLink = styled(NavLink)`
 `;
 
 export const activeStyle = {
-  borderBottom: '2px solid yellow'
+  borderBottom: '2px solid orange'
 };
 
 // tslint:disable-next-line:no-any

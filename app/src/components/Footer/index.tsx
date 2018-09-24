@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styled from '../../theme';
 import {
   Container,
   Grid,
@@ -6,6 +7,23 @@ import {
   List,
   Segment,
 } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+
+const FooterLink = styled(Link)`
+  color: white;
+  font-family: ${props => props.theme.fontFamily};
+  font-size: 12px;
+  &:hover{
+    color: orange;
+  }
+`;
+
+const LinksContainer = styled.div`
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+`;
 
 export default () => (
   <Segment inverted={true} vertical={true} style={{ padding: '5em 0em' }}>
@@ -15,17 +33,21 @@ export default () => (
           <Grid.Column width={3}>
             <Header inverted={true} as="h4" content="About" />
             <List link={true} inverted={true}>
-              <List.Item as="a">CV</List.Item>
-              <List.Item as="a">Projects</List.Item>
-              <List.Item as="a">Contact</List.Item>
+              <LinksContainer>
+                <FooterLink to="/">This Site</FooterLink>
+                <FooterLink to="/">Rod Lewis</FooterLink>
+                <FooterLink to="/contact">Contact</FooterLink>
+              </LinksContainer>
             </List>
           </Grid.Column>
           <Grid.Column width={3}>
             <Header inverted={true} as="h4" content="Services" />
             <List link={true} inverted={true}>
-              <List.Item as="a">Frontend</List.Item>
-              <List.Item as="a">Backend</List.Item>
-              <List.Item as="a">Other</List.Item>
+              <LinksContainer>
+                <FooterLink to="/projects">Projects</FooterLink>
+                <FooterLink to="/skills">Skills</FooterLink>
+                <FooterLink to="/education">Education</FooterLink>
+              </LinksContainer>
             </List>
           </Grid.Column>
           <Grid.Column width={7}>
