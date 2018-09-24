@@ -15,7 +15,7 @@ const AboutGrid = styled.div`
   justify-content: stretch;
   width: 100vw;
   @media(min-width: 680px){
-    grid: 2fr 5fr 2fr / 200px auto;
+    grid: 3fr 5fr 2fr / 200px auto;
     height: 100vh;
   }
   @media(max-width: 680px){
@@ -24,49 +24,33 @@ const AboutGrid = styled.div`
   }
 `;
 
-const SidebarAvatar = styled.div`
+const Sidebar = styled.div`
   align-items: center;
   background-color: darkgray;
   color: white;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  height: 100%;
+  padding: 40px 0;
+  width: 100%;
+`;
+
+const SidebarAvatar = styled(Sidebar)`
   grid-column: 1 / 2;
   grid-row: 1 / 2;
-  height: 100%;
-  justify-content: flex-start;
-  padding: 40px 0;
-  width: 100%;
+  justify-content: center;
 `;
 
-const SidebarNav = styled.div`
-  align-items: center;
-  background-color: darkgray;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+const SidebarNav = styled(Sidebar)`
   grid-column: 1 / 2;
   grid-row: 2 / 3;
-  height: 100%;
   justify-content: flex-start;
-  padding: 40px 0;
-  width: 100%;
 `;
 
-const SidebarFooter = styled.div`
-  align-items: center;
-  background-color: darkgray;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+const SidebarFooter = styled(Sidebar)`
   grid-column: 1 / 2;
   grid-row: 3 / 4;
-  height: 100%;
-  justify-content: flex-start;
-  padding: 40px 0;
-  width: 100%;
+  justify-content: flex-end;
 `;
 
 const AboutContent = styled.div`
