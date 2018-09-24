@@ -7,14 +7,14 @@ import styled from '../../../theme';
 
 const EListItem = styled.li`
   background-color: white;
-  box-shadow: 1px 1px 10px black;
+  box-shadow: 2px 2px 8px #666666;
   border-radius: 5px
   height: 300px;
   list-style: none;
   margin: 20px;
   padding: 10px;
   text-align: center;
-  width: 260px;
+  width: 300px;
 `;
 
 const ElistContainer = styled.div`
@@ -24,7 +24,7 @@ const ElistContainer = styled.div`
   flex-wrap: wrap;
   height: 100%;
   justify-content: space-evenly;
-  max-width: 900px;
+  max-width: 1100px;
   min-height: 80vh;
   width: 100%;
 `;
