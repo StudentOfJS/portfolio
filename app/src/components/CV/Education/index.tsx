@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Element } from 'react-scroll';
 import EducationList from './EducationList';
 import styled from '../../../theme';
 import EducationBoard from './EducationBoard';
@@ -17,6 +18,8 @@ const EduContainer = styled.div`
 export default () => (
   <EduContainer>
     <EducationBoard />
-    <EducationList />
+    <Element name="edu">
+      <EducationList />
+    </Element>
   </EduContainer>
 );

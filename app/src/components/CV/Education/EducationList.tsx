@@ -13,7 +13,7 @@ class EducationList extends React.Component<EducationProps, {}> {
     const { courses } = this.props;
     if (courses) {
       return (
-        <Item.Group>
+        <Item.Group style={{ padding: '60px 5px' }}>
           {
             courses.coursesList.map(course => (
               <Item key={course.id}>

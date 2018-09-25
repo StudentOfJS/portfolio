@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { RootState } from '../../../store';
-import { Icon } from 'semantic-ui-react';
-import { Element, Link } from 'react-scroll';
+import { Element } from 'react-scroll';
 import styled, { keyframes } from '../../../theme';
 import * as dev from './images/dev.jpg';
 import About from './About';
-
+import DownButton from '../DownButton';
 const BioContainer = styled.div`
   background-color: #666666;
   background-image: url(${dev});
@@ -64,56 +63,6 @@ const Italic = styled.i`
   font-weight: 900;
 `;
 
-const down = keyframes`
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  10%,
-  30%,
-  50%,
-  70% {
-    transform: translateY(-8px);
-  }
-  20%,
-  40%,
-  60% {
-    transform: translateY(8px);
-  }
-  80% {
-    transform: translateY(6.4px);
-  }
-  90% {
-    transform: translateY(-6.4px);
-  }
-`;
-
-const Move = styled(Link)`
-  animation: ${down} 4s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
-  color: white;
-  cursor: pointer;
-  height: 100px;
-  padding: 10px 5px;
-  width: 100px;
-  &:hover{
-    color: orange;
-  }
-`;
-
-const Down = styled.div`
-  align-items: center;
-  bottom: 0;
-  display: inline-flex;
-  justify-content: center;
-  padding: 10px;
-  position: absolute;
-  width: 100vw;
-  z-index: 10;
-  @media(max-width: 680px) {
-    display: none;
-  }
-`;
-
 const type = keyframes`
   from { width: 0 }
   to { width: 100% }
@@ -143,35 +92,31 @@ const Tagline = styled.div`
 `;
 
 class Bio extends React.Component<RootState, {}> {
-  public render() {
-    // const { cv: { bio } } = this.props;
-    return (
-      <div>
-        <BioContainer>
-          <BioFilter>
-            <Down>
-              <Move to="about">
-                <Icon name="angle double down" size="massive" />
-              </Move>
-            </Down>
-            <BioContent>
-              <BioTitle>ROD<Italic>/ </Italic>LEWIS</BioTitle>
-              <Tagline><Type>specializing in React and Go </Type></Tagline>
-            </BioContent>
-          </BioFilter>
-        </BioContainer>
-        <Element name="about">
-          <About />
-        </Element>
-      </div>
-    );
-  }
+    public render() {
+        // const { cv: { bio } } = this.props;
+        return (
+            <div>
+                <BioContainer>
+                    <BioFilter>
+                        <DownButton location="about" />
+                        <BioContent>
+                            <BioTitle>ROD<Italic>/ </Italic>LEWIS</BioTitle>
+                            <Tagline><Type>specializing in React and Go </Type></Tagline>
+                        </BioContent>
+                    </BioFilter>
+                </BioContainer>
+                <Element name="about">
+                    <About />
+                </Element>
+            </div>
+        );
+    }
 }
 
 function mapStateToProps(state: RootState) {
-  return state;
+    return state;
 }
 
 export default connect(
-  mapStateToProps,
+    mapStateToProps,
 )(Bio);

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import DownButton from '../DownButton';
 import styled from '../../../theme';
 import { Icon } from 'semantic-ui-react';
 import * as bg from './images/ts-screenshot.png';
@@ -39,6 +40,7 @@ const EduTitle = styled.h2`
 export default () => {
   return (
     <EducationContainer>
+      <DownButton location="edu" />
       <EduTitle><Icon name="cubes" /> Education</EduTitle>
     </EducationContainer>
   );
