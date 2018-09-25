@@ -1,4 +1,4 @@
 FROM scratch
 ADD ca-certificates.crt /etc/ssl/certs/
-ADD server/main /
-CMD ["/main"]
+ADD server/gRPC-server /
+CMD ["/gRPC-server]
