@@ -3,6 +3,7 @@ import styled from '../../../theme';
 import rod from './images/rod.jpg';
 import Buttons from './Buttons';
 import FormContact from '../../Contact/FormContact';
+import Social from './Social';
 
 const Avatar = styled.img`
   border-radius: 100%;
@@ -178,6 +179,7 @@ class About extends React.Component<{}, AboutState> {
       <AboutGrid>
         <SidebarAvatar>
           <Avatar src={rod} alt="Rod's profile picture" />
+          <Social />
         </SidebarAvatar>
         <Buttons handleClick={this.handleClick} page={this.state.page} />
         <SidebarFooter>
