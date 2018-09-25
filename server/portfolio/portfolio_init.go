@@ -162,7 +162,7 @@ func InitCV() {
 	Projects := []Project{
 		{
 			ID:          1,
-			Description: "This site! So gRPC is a little overkill for a porfolio site, but I wanted a challenge. Aside from a little extra configuration, there aren't any other negatives compared to a RESTapi. Frontend - React/TypeScript/Redux. Backend - Go. Database - boltDB/storm",
+			Description: "This site! So gRPC is a little overkill for a portfolio site, but I wanted a challenge. Aside from a little extra configuration, there aren't any other negatives compared to a RESTful API. Frontend - React/TypeScript/Redux. Backend - Go. Database - boltDB/storm",
 			Meta:        "TypeScript, Go, gRPC, protocol buffers",
 			Title:       "portfolio",
 			Repo:        "https://github.com/StudentOfJS/portfolio",

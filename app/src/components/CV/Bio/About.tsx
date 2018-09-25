@@ -138,12 +138,16 @@ const Me = () => (
       I took a breather, did the usual travel and made some hard decisions. Returned home, enrolled in a
       network infrastructure bootcamp, followed up with enough certificates to make my head spin and
       landed my dream job...
+      </p>
+    <p>
       Well not quite, my dream job was substituted with running tech support at a PC manufacturer.
       My next move to work for an Aussie tech startup (since ASX listed), gave me leverage to wrangle a
       systems infrastructure role. A few more tech startups and country hops later, complemented by a
       big shift in the scope of that role, back to something closer to when I started
       and I'm yearning for the next challenge.
-      I wanted to get back to what excited me about tech in the first place
+      I wanted to get back to what excited me about tech in the first place.
+      </p>
+    <p>
       My partner had just accepted a position in Germany, so I decided to move with her and take a year to catch up
       on modern frontend development. I wasn't quite prepared for the sheer volume of options, it's awesome. Really,
       there is never a reason to get bored, as there is always something new to learn. Anyway, from there to now,
