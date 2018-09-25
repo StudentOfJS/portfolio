@@ -18,6 +18,15 @@ const FooterLink = styled(Link)`
   }
 `;
 
+const MailTo = styled.a`
+  color: white;
+  font-family: ${props => props.theme.fontFamily};
+  font-size: 12px;
+  &:hover{
+    color: orange;
+  }
+`;
+
 const LinksContainer = styled.div`
   align-items: flex-start;
   display: flex;
@@ -36,7 +45,12 @@ export default () => (
               <LinksContainer>
                 <FooterLink to="/">This Site</FooterLink>
                 <FooterLink to="/">Rod Lewis</FooterLink>
-                <FooterLink to="/contact">Contact</FooterLink>
+                <MailTo
+                  href="mailto:rodlewis45@gmail.com?subject=Enquiry from Portfolio Site"
+                  target="_blank"
+                >
+                  Contact
+                </MailTo>
               </LinksContainer>
             </List>
           </Grid.Column>
