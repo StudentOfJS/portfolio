@@ -101,15 +101,11 @@ const Site = () => (
     <Keywords>Go, gRPC, Protocol Buffers, TypeScript, React, Redux, Styled Components</Keywords>
     <AboutH4>background</AboutH4>
     <p>
+      This site is built TypeScript, React and Go. The Frontend communicates with the Go server over gRPC.
       I started by hacking Improbable's hackernews clone to reverse engineer what's required to use gRPC for web.
       The goals were simple, learn more about gRPC and figure out how to connect from a server to an app.
       However, at the same time, I was faced with the reality that my neglected portfolio needed some serious love.
       With an impending move back to Australia, I didn't have time for both, so here we are...
-    </p>
-    <p>
-      First step after messing with the hackernews app, was writing a proto file with the services and
-      messages I would require and using this as the base for the rest of the project.
-      Next time I'll spend longer at this stage. I can't overstate how critical it is to the whole project.
     </p>
     <AboutH4>server</AboutH4>
     <p>
@@ -131,10 +127,27 @@ const Me = () => (
     <AboutH3>About Rod Lewis</AboutH3>
     <Keywords>Surfer, Dad, Developer</Keywords>
     <AboutH4>background</AboutH4>
+    <p>Developer, entrepreneur, technical.</p>
     <p>
-      Developer, entrepreneur, technical, I've worn all these hats and more.
-      I've worked at several successful startups at key points in their timeline.
-      I've ran a SEO business and a
+      My first real interest in development was at the end of 1997 after the release of GTA.
+      I was creating custom cars, bikes and maps for the PC game with my brother and we had a GeoCities site with some
+      awesome (*cough) flash animations.
+      A few years later, I'm preparing to start University and my life gets flipped upside down,
+      by serious family issues. Opting to stay at home, I started my first business.
+      Roll on a couple of years, contractor mistakes are costing profitability and I've had enough.
+      I took a breather, did the usual travel and made some hard decisions. Returned home, enrolled in a
+      network infrastructure bootcamp, followed up with enough certificates to make my head spin and
+      landed my dream job...
+      Well not quite, my dream job was substituted with running tech support at a PC manufacturer.
+      My next move to work for an Aussie tech startup (since ASX listed), gave me leverage to wrangle a
+      systems infrastructure role. A few more tech startups and country hops later, complemented by a
+      big shift in the scope of that role, back to something closer to when I started
+      and I'm yearning for the next challenge.
+      I wanted to get back to what excited me about tech in the first place
+      My partner had just accepted a position in Germany, so I decided to move with her and take a year to catch up
+      on modern frontend development. I wasn't quite prepared for the sheer volume of options, it's awesome. Really,
+      there is never a reason to get bored, as there is always something new to learn. Anyway, from there to now,
+      I'm working freelance and we have moved back to Australia.
     </p>
     <AboutH4>freetime</AboutH4>
     <p>
