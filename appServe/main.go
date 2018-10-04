@@ -25,6 +25,7 @@ func main() {
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 	r.LoadHTMLGlob("build/index.html")
+	r.StaticFile("/favicon.ico", "./build/favicon.ico")
 	r.Use(static.Serve("/", static.LocalFile("./build", false)))
 	r.Run(GetPort())
 }
