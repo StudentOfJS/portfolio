@@ -5,6 +5,7 @@ import './index.css';
 import store from './store';
 import App from './App';
 import { theme, ThemeProvider } from './theme';
+import register from './registerServiceWorker';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -14,3 +15,4 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root') as HTMLElement
 );
+register();

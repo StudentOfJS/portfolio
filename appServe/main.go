@@ -1,10 +1,23 @@
 package main
 
 import (
+	"fmt"
+	"os"
+
 	"github.com/gin-contrib/gzip"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 )
+
+func GetPort() string {
+	var port = os.Getenv("PORT")
+	// Set a default port if there is nothing in the environment
+	if port == "" {
+		port = "8080"
+		fmt.Println("INFO: No PORT environment variable detected, defaulting to " + port)
+	}
+	return ":" + port
+}
 
 func main() {
 	r := gin.Default()
@@ -13,5 +26,5 @@ func main() {
 	r.Use(gin.Recovery())
 	r.LoadHTMLGlob("build/index.html")
 	r.Use(static.Serve("/", static.LocalFile("./build", false)))
-	r.Run(":8080")
+	r.Run(GetPort())
 }

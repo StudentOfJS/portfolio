@@ -41,6 +41,7 @@ export default class DesktopContainer extends React.Component {
             <Menu
               fixed={fixed ? 'top' : undefined}
               inverted={true}
+              style={{ backgroundColor: 'hsla(0, 0%, 0%, 0.6)' }}
               size="small"
             >
               <Menu.Item link={true}><MenuLink to="/">Home</MenuLink></Menu.Item>

@@ -5,7 +5,7 @@ import {
   CV,
   ContactRequest,
   ContactResponse,
-  ContactForm,
+  ContactForm
 } from '../proto/portfolio_pb';
 import { GrpcAction, grpcRequest } from '../middleware/grpc';
 import { Code, Metadata } from 'grpc-web-client';
@@ -16,16 +16,16 @@ export const CONFIRM_FORM = 'CONFIRM_FORM';
 export const FORM_INIT = 'FORM_INIT';
 
 type AddCV = {
-  type: typeof ADD_CV,
-  payload: CV,
+  type: typeof ADD_CV;
+  payload: CV;
 };
 
 export const addCv = (cv: CV) => {
-  return ({ type: ADD_CV, payload: cv });
+  return { type: ADD_CV, payload: cv };
 };
 
 type ListCVInit = {
-  type: typeof CV_INIT
+  type: typeof CV_INIT;
 };
 export const listCVInit = () => ({ type: CV_INIT });
 
@@ -41,7 +41,7 @@ export const listCV = () => {
       console.log(code, message, trailers);
       return;
     },
-    host: 'http://localhost:8900',
+    host: 'https://portfolio-rod-server.herokuapp.com',
     methodDescriptor: PortfolioService.GetCV,
     onMessage: message => {
       const cv = message.getCv();
@@ -54,7 +54,7 @@ export const listCV = () => {
 };
 
 type FormInit = {
-  type: typeof FORM_INIT
+  type: typeof FORM_INIT;
 };
 export const formInit = () => ({ type: FORM_INIT });
 
@@ -62,7 +62,10 @@ type ConfirmForm = {
   payload: boolean;
   type: typeof CONFIRM_FORM;
 };
-export const confirmForm = (confirmed: boolean) => ({ type: CONFIRM_FORM, payload: confirmed });
+export const confirmForm = (confirmed: boolean) => ({
+  type: CONFIRM_FORM,
+  payload: confirmed
+});
 
 export const submitForm = (form: ContactForm) => {
   const contactRequest = new ContactRequest();

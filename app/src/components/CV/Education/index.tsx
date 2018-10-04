@@ -3,6 +3,7 @@ import { Element } from 'react-scroll';
 import EducationList from './EducationList';
 import styled from '../../../theme';
 import EducationBoard from './EducationBoard';
+import { Helmet } from 'react-helmet';
 
 const EduContainer = styled.div`
   align-items: center;
@@ -16,10 +17,16 @@ const EduContainer = styled.div`
 `;
 
 export default () => (
-  <EduContainer>
-    <EducationBoard />
-    <Element name="edu">
-      <EducationList />
-    </Element>
-  </EduContainer>
+  <div>
+    <Helmet>
+      <title>Rod's Education</title>
+      <meta name="description" content="Rod Lewis's Education and Software Development Courses" />
+    </Helmet>
+    <EduContainer>
+      <EducationBoard />
+      <Element name="edu">
+        <EducationList />
+      </Element>
+    </EduContainer>
+  </div>
 );

@@ -18,12 +18,15 @@ const SlideOut = keyframes`
 const SkillsListContainer = styled.div`
   align-items: center;
   animation: ${SlideOut} 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-  background-color: white;
+  background-color: hsla(0, 0%, 0%, 0.6);
+  color: white;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  font-family: ${props => props.theme.fontFamily};
+  font-size: 14px;
   justify-content: space-evenly;
-  min-width: 320px;
+  min-width: 300px;
   padding: 10px;
   width: 30%;
   @media(max-width: 680px) {
@@ -40,7 +43,7 @@ const SkillsList: React.SFC<SkillState> = ({ skills }) => (
     <List>
       {
         skills.map(skill => (
-          <List.Item key={skill.id} >{skill.description}<Rating rating={skill.rating} /></List.Item>
+          <List.Item key={skill.id}>{skill.description}<Rating rating={skill.rating} /></List.Item>
         ))
       }
     </List>

@@ -1,6 +1,8 @@
 {
   "short_name": "Portfolio",
-  "name": "Rod's TypeScript React Redux gRPC web app Portfolio",
+  "name": "Rod's Portfolio",
+  "Scope": "/",
+  "start_url": "/",
   "icons": [
     {
       "src": "windows10/Square71x71Logo.scale-400.png",
@@ -415,8 +417,8 @@
       "sizes": "16x16"
     }
   ],
-  "start_url": "./index.html",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "splash_pages": null
 }

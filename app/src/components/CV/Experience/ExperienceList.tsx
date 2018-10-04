@@ -4,8 +4,9 @@ import { Item } from 'semantic-ui-react';
 import { Experience } from '../../../proto/portfolio_pb';
 import { RootState } from '../../../store';
 import styled from '../../../theme';
+import FlipDiv from '../FlipDiv';
 
-const EListItem = styled.li`
+const EListItem = styled(FlipDiv)`
   background-color: white;
   box-shadow: 2px 2px 8px #666666;
   border-radius: 5px

@@ -2,7 +2,7 @@ import * as React from 'react';
 import DownButton from '../DownButton';
 import styled from '../../../theme';
 import { Icon } from 'semantic-ui-react';
-import * as bg from './images/ts-screenshot.png';
+import edu from './images/edu.svg';
 
 const EducationContainer = styled.div`
   align-items: center;
@@ -12,12 +12,13 @@ const EducationContainer = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   width: 100vw;
-  @media(max-width: 500px){
+  @media(max-width: 680px){
     height: 50vh;
   }
 
-  @media(min-width: 500px){
-    background-image: url(${bg});
+  @media(min-width: 680px){
+    background-image: url(${edu});
+    background-size: 100% 100%;
     height: 100vh;
   }
 `;
@@ -28,10 +29,10 @@ const EduTitle = styled.h2`
   margin: 0;
   padding: 0;
 
-  @media(max-width: 500px){
+  @media(max-width: 680px){
     font-size: 50px;
   }
-  @media(min-width: 500px){
+  @media(min-width: 680px){
     filter: drop-shadow(0 0 0.2rem black);
     font-size: 60px;
   }

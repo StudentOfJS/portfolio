@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import { Button, Checkbox, Form } from 'semantic-ui-react';
+import { Button, Checkbox, Form, Segment } from 'semantic-ui-react';
 import styled from '../../theme';
 import { RootState } from '../../store';
 import { PortfolioActionTypes, submitForm } from '../../actions/portfolioActions';
@@ -101,60 +101,66 @@ class FormContact extends React.Component<FormProps, FormState> {
     const { checked, error, touched } = this.state;
     const { form_confirmed, loading } = this.props;
     return (
-      <Form loading={loading} onSubmit={this.handleSubmit} style={{ maxWidth: 680, padding: 5, width: '100%' }}>
-        <Form.Group widths="equal">
-          <Form.Input
-            fluid={true}
-            label="First name"
-            type="text"
-            placeholder="First name"
-            name="first"
-            onChange={this.handleChange}
+      <Segment inverted={true} style={{ padding: 10, maxWidth: 680, width: '100%' }}>
+        <Form
+          loading={loading}
+          onSubmit={this.handleSubmit}
+          inverted={true}
+        >
+          <Form.Group widths="equal">
+            <Form.Input
+              fluid={true}
+              label="First name"
+              type="text"
+              placeholder="First name"
+              name="first"
+              onChange={this.handleChange}
+              required={true}
+            />
+            <Form.Input
+              fluid={true}
+              label="Last name"
+              type="text"
+              placeholder="Last name"
+              name="last"
+              onChange={this.handleChange}
+              required={true}
+            />
+          </Form.Group>
+          <Form.Group widths="equal">
+            <Form.Input
+              fluid={true}
+              label="Email"
+              type="email"
+              placeholder="Email"
+              name="email"
+              onChange={this.handleChange}
+              required={true}
+            />
+            <Form.Input
+              fluid={true}
+              label="Mobile"
+              type="text"
+              placeholder="Mobile"
+              name="mobile"
+              onChange={this.handleChange}
+            />
+          </Form.Group>
+          <Form.TextArea
+            label="About"
+            placeholder="Let me know  how I can help..."
             required={true}
+            onChange={this.handleTextArea}
           />
-          <Form.Input
-            fluid={true}
-            label="Last name"
-            type="text"
-            placeholder="Last name"
-            name="last"
-            onChange={this.handleChange}
-            required={true}
-          />
-        </Form.Group>
-        <Form.Group widths="equal">
-          <Form.Input
-            fluid={true}
-            label="Email"
-            type="email"
-            placeholder="Email"
-            name="email"
-            onChange={this.handleChange}
-            required={true}
-          />
-          <Form.Input
-            fluid={true}
-            label="Mobile"
-            type="text"
-            placeholder="Mobile"
-            name="mobile"
-            onChange={this.handleChange}
-          />
-        </Form.Group>
-        <Form.TextArea
-          label="About"
-          placeholder="Let me know  how I can help..."
-          required={true}
-          onChange={this.handleTextArea}
-        />
-        <Form.Field>
-          <Checkbox label="I agree to the Terms and Conditions" onChange={this.handleCheck} />
-        </Form.Field>
-        {error && <ErrorMessage>check form and try again...</ErrorMessage>}
-        {!checked && touched && <ErrorMessage>confirm conditions</ErrorMessage>}
-        {form_confirmed && <SuccessMessage>successfully submitted</SuccessMessage>}
-        <Button type="submit">Submit</Button>
-      </Form>
+          <Form.Field>
+            <Checkbox label="I agree to the Terms and Conditions" onChange={this.handleCheck} />
+          </Form.Field>
+          {error && <ErrorMessage>check form and try again...</ErrorMessage>}
+          {!checked && touched && <ErrorMessage>confirm conditions</ErrorMessage>}
+          {form_confirmed && <SuccessMessage>successfully submitted</SuccessMessage>}
+          <Button type="submit">Submit</Button>
+        </Form>
+      </Segment>
     );
   }
 }

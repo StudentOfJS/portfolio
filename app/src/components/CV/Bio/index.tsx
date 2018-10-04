@@ -3,25 +3,27 @@ import { connect } from 'react-redux';
 import { RootState } from '../../../store';
 import { Element } from 'react-scroll';
 import styled, { keyframes } from '../../../theme';
-import * as dev from './images/dev.jpg';
+import bg from './images/bg.svg';
 import About from './About';
 import DownButton from '../DownButton';
+import { Helmet } from 'react-helmet';
 const BioContainer = styled.div`
   background-color: #666666;
-  background-image: url(${dev});
+  background-image: url(${bg});
+  background-size: cover;
+  background-blend-mode: multiply;
   height: 100vh;
   width: 100vw;
 `;
 
 const BioFilter = styled.div`
   align-items: center;
-  background-color: black;
+  background-color: transparent;
   color: white;
   display: flex;
   flex-direction: column;
   height: 100vh;
   justify-content: space-evenly;
-  opacity: 0.7;
   width: 100vw;
 `;
 
@@ -50,11 +52,17 @@ const blur = keyframes`
 const BioTitle = styled.h1`
   animation: ${blur} 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
   font-family: ${props => props.theme.fontFamily};
-  font-size: 60px;
   font-weight: 700;
   letter-spacing: 3px;
   margin-bottom: 20px;
   padding: 0;
+  @media(min-width: 680px){
+    font-size: 60px;
+  }
+  @media(max-width: 680px){
+    font-size: 50px;
+    padding: 5px;
+  }
 `;
 
 const Italic = styled.i`
@@ -81,6 +89,10 @@ const Type = styled.h2`
   margin: 10 auto;
   overflow: hidden;
   white-space: nowrap;
+  @media(max-width: 680px){
+    font-size: 18px;
+  }
+
 `;
 
 const Tagline = styled.div`
@@ -89,34 +101,41 @@ const Tagline = styled.div`
   flex-wrap: wrap;
   justify-content: flex-start;
   max-width: 420px;
+  @media(max-width: 680px){
+    padding: 5px;
+  }
 `;
 
 class Bio extends React.Component<RootState, {}> {
-    public render() {
-        // const { cv: { bio } } = this.props;
-        return (
-            <div>
-                <BioContainer>
-                    <BioFilter>
-                        <DownButton location="about" />
-                        <BioContent>
-                            <BioTitle>ROD<Italic>/ </Italic>LEWIS</BioTitle>
-                            <Tagline><Type>specializing in React and Go </Type></Tagline>
-                        </BioContent>
-                    </BioFilter>
-                </BioContainer>
-                <Element name="about">
-                    <About />
-                </Element>
-            </div>
-        );
-    }
+  public render() {
+    return (
+      <div>
+        <Helmet>
+          <title>About Rod's Portfolio</title>
+          <meta name="description" content="Rod Lewis's React and Go Portfolio" />
+        </Helmet>
+
+        <BioContainer>
+          <BioFilter>
+            <DownButton location="about" />
+            <BioContent>
+              <BioTitle>ROD<Italic>/ </Italic>LEWIS</BioTitle>
+              <Tagline><Type>specializing in React and Go </Type></Tagline>
+            </BioContent>
+          </BioFilter>
+        </BioContainer>
+        <Element name="about">
+          <About />
+        </Element>
+      </div>
+    );
+  }
 }
 
 function mapStateToProps(state: RootState) {
-    return state;
+  return state;
 }
 
 export default connect(
-    mapStateToProps,
+  mapStateToProps,
 )(Bio);

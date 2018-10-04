@@ -13,9 +13,19 @@ const SlideIn = keyframes`
   }
 `;
 
+const slideInBottom = keyframes`
+  0% {
+    transform: translateY(1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
+
 const SkillsImagesContainer = styled.div`
   align-items: center;
-  animation: ${SlideIn} 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -26,7 +36,7 @@ const SkillsImagesContainer = styled.div`
 
 const SkillsContainer = styled.div`
   align-items: center;
-  background-color: #666666;
+  background: transparent;
   color: white;
   display: flex;
   flex-direction: column;
@@ -36,7 +46,9 @@ const SkillsContainer = styled.div`
   width: 70%;
 `;
 
-const SkillImage = styled.img`
+const SkillImage = styled<{ isTop?: boolean, delay?: number }, 'img'>('img')`
+  animation: ${props => props.isTop ? SlideIn : slideInBottom} 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation-delay: ${props => props.delay ? props.delay : 0}s;
   border-radius: 5px;
   height: 100px;
   width: 100px;
@@ -75,13 +87,17 @@ const SkillsBoard: React.SFC<SkillsBoardProps> = ({ filter }) => {
         {
           // tslint:disable-next-line:no-any
           images.slice(0, images.length / 2).map((im: any, i: number) =>
-            <ImageContainer key={i} onClick={() => filter(im.name)}><SkillImage src={im.image} /></ImageContainer>)}
+            <ImageContainer key={i} onClick={() => filter(im.name)}>
+              <SkillImage isTop={true} src={im.image} delay={((images.length / 2) - i) / 5} />
+            </ImageContainer>)}
       </SkillsImagesContainer>
       <SkillsImagesContainer>
         {
           // tslint:disable-next-line:no-any
           images.slice(images.length / 2).map((im: any, i: number) =>
-            <ImageContainer key={i} onClick={() => filter(im.name)}><SkillImage src={im.image} /></ImageContainer>)}
+            <ImageContainer key={i} onClick={() => filter(im.name)}>
+              <SkillImage src={im.image} delay={i / 10} />
+            </ImageContainer>)}
       </SkillsImagesContainer>
     </SkillsContainer>
   );

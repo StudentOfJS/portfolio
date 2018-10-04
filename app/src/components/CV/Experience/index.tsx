@@ -2,12 +2,13 @@ import * as React from 'react';
 import ExperienceList from './ExperienceList';
 import styled from '../../../theme';
 import { Icon } from 'semantic-ui-react';
-import perth from './perth.jpg';
+import perthLowQuality from './perthLowQuality.svg';
+import { Helmet } from 'react-helmet';
 
 const EContainer = styled.div`
   align-items: center;
   background-color: #666666;
-  background-image: url(${perth});
+  background-image: url(${perthLowQuality});
   background-size: cover;
   color: ${props => props.theme.secondaryTextColor};
   display: flex;
@@ -34,8 +35,14 @@ const ETitle = styled.h2`
 `;
 
 export default () => (
-  <EContainer>
-    <ETitle><Icon name="react" /> Experience</ETitle>
-    <ExperienceList />
-  </EContainer>
+  <div>
+    <Helmet>
+      <title>Rod's Experience</title>
+      <meta name="description" content="Rod Lewis's Career History" />
+    </Helmet>
+    <EContainer>
+      <ETitle><Icon name="react" /> Experience</ETitle>
+      <ExperienceList />
+    </EContainer>
+  </div>
 );

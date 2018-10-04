@@ -5,10 +5,13 @@ import { RootState } from '../../../store';
 import SkillsBoard from './SkillsBoard';
 import SkillsList from './SkillsList';
 import styled from '../../../theme';
+import { Helmet } from 'react-helmet';
+import bg from './images/bg.svg';
 
 const Container = styled.div`
   align-items: center;
-  background-color: #666666;
+  background-image: url(${bg});
+  background-size: cover;
   color: ${props => props.theme.secondaryTextColor};
   display: flex;
   flex-direction: row;
@@ -66,18 +69,24 @@ class SkillsView extends React.Component<SkillProps, SkillState> {
   public render() {
     const { skills } = this.state;
     return (
-      <Container>
-        <Desktop>
-          <SkillsBoard filter={this.filter} />
-          {skills.length > 0 && <SkillsList skills={skills} />}
-        </Desktop>
-        <Mobile>
-          <MobileHeader>
-            <MobileTitle>Skills</MobileTitle>
-          </MobileHeader>
-          <SkillsList skills={this.props.skills.skillsList} />
-        </Mobile>
-      </Container>
+      <div>
+        <Helmet>
+          <title>Rod's Programming Skills</title>
+          <meta name="description" content="Software Development Skills, including React, Go, JavaScript..." />
+        </Helmet>
+        <Container>
+          <Desktop>
+            <SkillsBoard filter={this.filter} />
+            {skills.length > 0 && <SkillsList skills={skills} />}
+          </Desktop>
+          <Mobile>
+            <MobileHeader>
+              <MobileTitle>Skills</MobileTitle>
+            </MobileHeader>
+            <SkillsList skills={this.props.skills.skillsList} />
+          </Mobile>
+        </Container>
+      </div>
     );
   }
 }

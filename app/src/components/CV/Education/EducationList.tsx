@@ -18,7 +18,8 @@ class EducationList extends React.Component<EducationProps, {}> {
             courses.coursesList.map(course => (
               <Item key={course.id}>
                 <Item.Content>
-                  <Item.Header><Icon name="graduation cap" /> {course.institution}</Item.Header>
+                  <Item.Header><Icon name="graduation cap" />{' '}{course.institution}</Item.Header>
+                  {' '}
                   <Item.Header>{course.name}</Item.Header>
                   <Item.Meta>
                     <span className="stay">{course.dates}</span>

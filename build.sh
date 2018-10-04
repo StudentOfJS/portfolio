@@ -6,7 +6,7 @@ echo "Installing NPM dependencies with yarn"
 (cd app && yarn install) &
 
 echo "Building frontend application and copying to app server"
-(cd app && yarn build && cp /build ../appServe/build) &
+(cd app && yarn build && cp /build ../appServe/) &
 
 echo "Building app server"
 (cd appServe && go build -o app-server) &
