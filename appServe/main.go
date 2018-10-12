@@ -7,6 +7,7 @@ import (
 	"github.com/gin-contrib/gzip"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
+	"github.com/unrolled/secure"
 )
 
 func GetPort() string {
@@ -20,7 +21,25 @@ func GetPort() string {
 }
 
 func main() {
+
+	secureFunc := func() gin.HandlerFunc {
+		return func(c *gin.Context) {
+			secureMiddleware := secure.New(secure.Options{
+				SSLRedirect: true,
+				SSLHost:     "www.rodfolio.com",
+			})
+			err := secureMiddleware.Process(c.Writer, c.Request)
+
+			// If there was an error, do not continue.
+			if err != nil {
+				return
+			}
+
+			c.Next()
+		}
+	}()
 	r := gin.Default()
+	r.Use(secureFunc)
 	r.Use(gzip.Gzip(9))
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
