@@ -9,7 +9,7 @@ import Experience from './components/CV/Experience';
 import Bio from './components/CV/Bio';
 import Skills from './components/CV/Skills';
 import styled from './theme';
-import ScrollToTop from './ScrollToTop';
+import ScrollToTop from './components/ScrollToTop';
 
 const RoutesContainer = styled.div`
   @media(max-width: 680px) {
@@ -18,20 +18,21 @@ const RoutesContainer = styled.div`
 `;
 
 export default () => (
+
   <Router>
     <Wrapper>
       <div>
         <Nav />
         <RoutesContainer>
-          <ScrollToTop>
-            <Switch>
+          <Switch>
+            <ScrollToTop>
               <Route path="/projects" component={Projects} />
               <Route path="/education" component={Education} />
               <Route path="/experience" component={Experience} />
               <Route path="/skills" component={Skills} />
               <Route exact={true} path="/" component={Bio} />
-            </Switch>
-          </ScrollToTop>
+            </ScrollToTop>
+          </Switch>
         </RoutesContainer>
         <Footer />
       </div>

@@ -28,7 +28,7 @@ const AboutGrid = styled.div`
 
 const Sidebar = styled.div`
   align-items: center;
-  background-color: ${props => props.theme.primaryColor};
+  background-color: grey;
   color: white;
   display: flex;
   flex-direction: column;
@@ -120,7 +120,7 @@ const AboutH4 = styled.h4`
 
 const AboutP = styled.p`
   font-family: ${props => props.theme.fontFamily};
-  font-size: 18px;
+  font-size: 14px;
 `;
 
 const Keywords = styled.div`

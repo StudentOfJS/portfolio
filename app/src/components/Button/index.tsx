@@ -49,7 +49,7 @@ export const SelectedBtn = styled(NonStyledBtn)`
   background: white;
   border: 2px solid white;
   border-radius: 5px;
-  color: darkgrey;
+  color: orange;
   font-family: ${props => props.theme.fontFamily};
   font-size: 1em;
   font-weight: 700;

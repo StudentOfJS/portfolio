@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled, { theme } from '../../theme';
+import styled from '../../theme';
 import {
   Container,
   Grid,
@@ -44,7 +44,7 @@ export default () => (
   <Visible>
     <Segment
       inverted={true}
-      style={{ backgroundColor: theme.primaryColor, padding: '5em 0em' }}
+      style={{ backgroundColor: 'grey', borderTop: 'solid 3px orange', padding: '5em 0em' }}
       vertical={true}
     >
       <Container>
