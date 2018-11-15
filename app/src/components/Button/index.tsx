@@ -22,38 +22,35 @@ export const NonStyledBtn: React.SFC<ButtonProps> = props => (
   </button>
 );
 
-export default styled(NonStyledBtn)`
+const BaseButton = styled(NonStyledBtn)`
   background: transparent;
-  color: white;
   font-size: 1em;
   font-weight: 700;
   font-family: ${props => props.theme.fontFamily};
-  border: 2px solid white;
-  border-radius: 5px;
+  margin: 5px;
   min-width: 110px;
   outline: none;
-  padding: 8px 15px;
+  padding: 4px 15px;
+`;
+
+export default styled(BaseButton)`
+  color: white;
+  border: 2px solid white;
+  border-radius: 5px;
   transition: transform 800ms ease-in-out;
   @media print {
     display: none;
   }
   &:hover {
     transition: transform 800ms ease-in-out;
+    border: 2px solid orange;
     cursor: pointer;
-    background: white;
-    color: darkgrey;
+    color: orange;
   }
 `;
 
-export const SelectedBtn = styled(NonStyledBtn)`
-  background: white;
-  border: 2px solid white;
+export const SelectedBtn = styled(BaseButton)`
+  border: 2px solid orange;
   border-radius: 5px;
   color: orange;
-  font-family: ${props => props.theme.fontFamily};
-  font-size: 1em;
-  font-weight: 700;
-  min-width: 110px;
-  outline: none;
-  padding: 8px 15px;
 `;

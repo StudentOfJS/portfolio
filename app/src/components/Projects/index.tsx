@@ -20,7 +20,7 @@ const ProjectsContainer = styled.div`
 `;
 
 const ProjectsDisplay = styled.div`
-  @media (max-width: 500px) {
+  @media (max-width: 680px) {
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -28,7 +28,7 @@ const ProjectsDisplay = styled.div`
     justify-content: space-evenly;
     width: 100%;
   }
-  @media (min-width: 500px) {
+  @media (min-width: 680px) {
     align-items: space-evenly;
     display: flex;
     flex-direction: row;
@@ -80,12 +80,10 @@ const CardContainer = styled<{ isTop: boolean }, 'div'>('div')`
 `;
 
 const ProjectsTitle = styled.h2`
-  color: ${props => props.theme.secondaryTextColor};
+  color: white;
   font-family: ${props => props.theme.fontFamily};
   font-size: 50px;
   font-weight: 700;
-  margin: 0;
-  padding: 20px;
   @media(min-width: 680px){
     display: none;
   }
@@ -133,6 +131,7 @@ class ProjectList extends React.Component<ProjectsProps, {}> {
                         extra={extra(project.meta)}
                       />
                     </CardContainer>}
+                  closeIcon={true}
                 >
                   <Modal.Header>{project.title}</Modal.Header>
                   <Modal.Content image={true}>

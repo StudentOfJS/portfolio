@@ -27,7 +27,6 @@ const SkillsListContainer = styled.div`
   font-size: 14px;
   justify-content: space-evenly;
   min-width: 300px;
-  padding: 10px;
   width: 30%;
   @media(max-width: 680px) {
     height: 100%;
@@ -35,6 +34,7 @@ const SkillsListContainer = styled.div`
   }
   @media(min-width: 680px) {
     height: 100vh;
+    padding: 10px;
   }
 `;
 

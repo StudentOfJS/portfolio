@@ -28,12 +28,12 @@ const AboutGrid = styled.div`
 
 const Sidebar = styled.div`
   align-items: center;
-  background-color: grey;
+  background-color: #6B6B6B;
   color: white;
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 40px 0;
+  padding: 100px 0 20px 0;
   width: 100%;
 `;
 
@@ -98,7 +98,7 @@ const AboutContent = styled.div`
 `;
 const AboutContentBox = styled.div`
   min-width: 300px;
-  max-width: 800px;
+  max-width: 1000px;
   @media(min-width: 680px){
     padding: 0;
   }
@@ -120,7 +120,7 @@ const AboutH4 = styled.h4`
 
 const AboutP = styled.p`
   font-family: ${props => props.theme.fontFamily};
-  font-size: 14px;
+  font-size: 18px;
 `;
 
 const Keywords = styled.div`
@@ -204,7 +204,7 @@ interface AboutState {
 
 class About extends React.Component<{}, AboutState> {
   public state = {
-    page: 'site',
+    page: 'rod',
   };
   public handleClick = (page: string) => {
     this.setState({ page });

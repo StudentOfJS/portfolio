@@ -1,7 +1,6 @@
 import * as React from 'react';
 import ExperienceList from './ExperienceList';
 import styled from '../../../theme';
-import { Icon } from 'semantic-ui-react';
 import perthLowQuality from './perthLowQuality.svg';
 import { Helmet } from 'react-helmet';
 
@@ -24,13 +23,13 @@ const ETitle = styled.h2`
   font-family: ${props => props.theme.fontFamily};
   font-weight: 700;
   margin: 0;
-  padding: 50px;
 
-  @media(max-width: 500px){
+  @media(max-width: 680px){
     font-size: 50px;
   }
-  @media(min-width: 500px){
+  @media(min-width: 680px){
     font-size: 60px;
+    padding: 50px;
   }
 `;
 
@@ -41,7 +40,7 @@ export default () => (
       <meta name="description" content="Rod Lewis's Career History" />
     </Helmet>
     <EContainer>
-      <ETitle><Icon name="react" /> Experience</ETitle>
+      <ETitle>Experience</ETitle>
       <ExperienceList />
     </EContainer>
   </div>

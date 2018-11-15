@@ -6,19 +6,18 @@ import edu from './images/edu.svg';
 
 const EducationContainer = styled.div`
   align-items: center;
-  background-color: #666666;
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   width: 100vw;
   @media(max-width: 680px){
-    height: 50vh;
+    background-color: white;
+    height: 20vh;
   }
 
   @media(min-width: 680px){
     background-image: url(${edu});
-    background-size: 100% 100%;
     height: 100vh;
   }
 `;
@@ -30,6 +29,7 @@ const EduTitle = styled.h2`
   padding: 0;
 
   @media(max-width: 680px){
+    color: black;
     font-size: 50px;
   }
   @media(min-width: 680px){

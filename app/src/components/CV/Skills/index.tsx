@@ -33,18 +33,8 @@ const Desktop = styled(Container)`
   }
 `;
 
-const MobileHeader = styled.div`
-    align-items: center;
-    background-color: #666666;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    width: 100vw;
-    height: 50vh;
-`;
-
 const MobileTitle = styled.h2`
+  color: white;
   font-family: ${props => props.theme.fontFamily};
   font-weight: 700;
   font-size: 50px;
@@ -80,9 +70,7 @@ class SkillsView extends React.Component<SkillProps, SkillState> {
             {skills.length > 0 && <SkillsList skills={skills} />}
           </Desktop>
           <Mobile>
-            <MobileHeader>
-              <MobileTitle>Skills</MobileTitle>
-            </MobileHeader>
+            <MobileTitle>Skills</MobileTitle>
             <SkillsList skills={this.props.skills.skillsList} />
           </Mobile>
         </Container>

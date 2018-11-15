@@ -55,10 +55,10 @@ export default function (
       const newState: CVState = {
         loading: false,
         bio,
-        education: !!education && education.toObject() || null,
-        experience: !!experience && experience.toObject() || null,
-        projects: !!projects && projects.toObject() || null,
-        skills: !!skills && skills.toObject() || null,
+        education: education && education.toObject() || null,
+        experience: experience && experience.toObject() || null,
+        projects: projects && projects.toObject() || null,
+        skills: skills && skills.toObject() || null,
       };
       return newState;
     default:
